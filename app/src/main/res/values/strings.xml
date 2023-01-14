@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">Carpooling</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Bottom bar strings -->
+    <string name="bottomBarTitleSearch">Ricerca</string>
+    <string name="bottomBarTitlePublish">Pubblica</string>
+    <string name="bottomBarTitleRides">Viaggi</string>
+    <string name="bottomBarTitleHistory">Cronologia</string>
+    <string name="bottomBarTitleProfile">Profilo</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="remember_me">Remember me</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid email</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <!-- Publish -->
+    <string name="titlePublishStart">Inserisci partenza e destinazione</string>
+    <string name="titlePublishDatetime">Inserisci la data e l\'ora</string>
+    <string name="titlePublishSeats">Quanti posti sono disponibili?</string>
+    <string name="titlePublishOptions">Inserisci le tue preferenze</string>
+    <string name="titlePublishNotes">Se c\'è altro da sapere scrivilo qui</string>
+    <string name="titlePublishPrice">Inserisci il prezzo del viaggio</string>
+    <string name="titlePublishSummary">Rivedi il tuo viaggio prima di pubblicarlo</string>
+    <string name="titlePublishSuccess">Viaggio pubblicato con successo</string>
+    <string name="btnMinus">-</string>
+    <string name="btnPlus">+</string>
+    <string name="btnPublish">Pubblica</string>
+    <string name="labelPublishPrice">Prezzo</string>
+
+    <!-- My Rides -->
+    <string name="tabItemPublished">Pubblicati</string>
+    <string name="tabItemBooked">Prenotati</string>
+    <string name="btnCancelBooking">Cancella prenotazione</string>
+    <string name="btnDeleteRide">Cancella pubblicazione</string>
+    <string name="titleDeleteRide">Sei sicuro di voler cancellare la tua pubblicazione?</string>
+    <string name="titleCancelBooking">Sei sicuro di voler cancellare la tua prenotazione?</string>
+
+    <!-- Others -->
+    <string name="btnNext">Avanti</string>
+    <string name="from">Partenza</string>
+    <string name="to">Destinazione</string>
+    <string name="btnSearch">Cerca</string>
+    <string name="btnDate">Data</string>
+    <string name="btnTime">Ora</string>
+    <string name="luggage">Bagagli</string>
+    <string name="silent">Silenzio</string>
+    <string name="smoking">Fumatori</string>
+    <string name="resultsTitle">Risultati</string>
+    <string name="activeRideTitle">Riepilogo viaggio</string>
+    <string name="btnBook">Prenota</string>
+    <string name="bookRideTitle">Prenota</string>
+    <string name="successBookingTitle">Prenotazione effettuata con successo</string>
+    <string name="labelBookingConfirmation">Procedere con la prenotazione?</string>
+    <string name="hintFieldPublishPrice">Per esempio 5,50</string>
+
+    <!-- Profile -->
+    <string name="titleProfile">Profilo</string>
+    <string name="labelProfileUsername">Username</string>
+    <string name="email">Email</string>
+    <string name="driverRating">Voto Guidatore</string>
+    <string name="passengerRating">Voto Passeggero</string>
+    <string name="labelProfileBio">Biografia</string>
+    <string name="btnLogout">Logout</string>
+    <string name="btnModifyProfile">Modifica profilo</string>
+    <string name="btnHistory">Cronologia</string>
+    <string name="btnSettings">Impostazioni</string>
+    <string name="btnStartLogin">Accedi</string>
+    <string name="titleCarpooling">CARPOOLING</string>
+    <string name="titleModifyProfile">Modifica profilo</string>
+    <string name="labelModifyBio">Bio</string>
+    <string name="btnModify">Modifica</string>
+    <string name="titleModifyProfileSuccess">Profilo modificato con successo</string>
+</resources>

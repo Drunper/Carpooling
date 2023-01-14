@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/baseline_search_white_24dp"
+        android:title="@string/bottomBarTitleSearch" />
+    <item
+        android:id="@+id/publish"
+        android:icon="@drawable/baseline_publish_white_24dp"
+        android:title="@string/bottomBarTitlePublish" />
+    <item
+        android:id="@+id/myRides"
+        android:icon="@drawable/baseline_directions_car_white_24dp"
+        android:title="@string/bottomBarTitleRides" />
+    <item
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/bottomBarTitleHistory" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/baseline_account_circle_white_24dp"
+        android:title="@string/bottomBarTitleProfile" />
+</menu>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/publish"
+    app:startDestination="@id/publishFragment">
+    <dialog
+        android:id="@+id/publishDatePickerFragment"
+        android:name="com.example.carpooling.ui.publish.PublishDatePickerFragment"
+        android:label="PublishDatePickerFragment" />
+    <dialog
+        android:id="@+id/publishTimePickerFragment"
+        android:name="com.example.carpooling.ui.publish.PublishTimePickerFragment"
+        android:label="PublishTimePickerFragment" />
+    <fragment
+        android:id="@+id/publishPriceFragment"
+        android:name="com.example.carpooling.ui.publish.PublishPriceFragment"
+        android:label="fragment_publish_price"
+        tools:layout="@layout/fragment_publish_price">
+        <action
+            android:id="@+id/toPublishSummary"
+            app:destination="@id/publishSummaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishSeatsFragment"
+        android:name="com.example.carpooling.ui.publish.PublishSeatsFragment"
+        android:label="fragment_publish_seats"
+        tools:layout="@layout/fragment_publish_seats">
+        <action
+            android:id="@+id/toPublishOptions"
+            app:destination="@id/publishOptionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishSuccessFragment"
+        android:name="com.example.carpooling.ui.publish.PublishSuccessFragment"
+        android:label="fragment_publish_success"
+        tools:layout="@layout/fragment_publish_success" />
+    <fragment
+        android:id="@+id/publishSummaryFragment"
+        android:name="com.example.carpooling.ui.publish.PublishSummaryFragment"
+        android:label="fragment_publish_summary"
+        tools:layout="@layout/fragment_publish_summary">
+        <action
+            android:id="@+id/toPublishSuccess"
+            app:destination="@id/publishSuccessFragment"
+            app:popUpTo="@id/publishFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishFragment"
+        android:name="com.example.carpooling.ui.publish.PublishFragment"
+        android:label="fragment_publish"
+        tools:layout="@layout/fragment_publish">
+        <action
+            android:id="@+id/toPublishDatetime"
+            app:destination="@id/publishDatetimeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishNotesFragment"
+        android:name="com.example.carpooling.ui.publish.PublishNotesFragment"
+        android:label="fragment_publish_notes"
+        tools:layout="@layout/fragment_publish_notes">
+        <action
+            android:id="@+id/toPublishPrice"
+            app:destination="@id/publishPriceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishDatetimeFragment"
+        android:name="com.example.carpooling.ui.publish.PublishDatetimeFragment"
+        android:label="fragment_publish_datetime"
+        tools:layout="@layout/fragment_publish_datetime">
+        <action
+            android:id="@+id/toPublishSeats"
+            app:destination="@id/publishSeatsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishOptionsFragment"
+        android:name="com.example.carpooling.ui.publish.PublishOptionsFragment"
+        android:label="fragment_publish_options"
+        tools:layout="@layout/fragment_publish_options">
+        <action
+            android:id="@+id/toPublishNotes"
+            app:destination="@id/publishNotesFragment" />
+    </fragment>
+</navigation>

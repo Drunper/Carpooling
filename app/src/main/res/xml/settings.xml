@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:key="notifications_category"
+        app:title="Notifiche">
+
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Abilita le notifiche"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

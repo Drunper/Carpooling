@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myRides"
+    app:startDestination="@id/myRidesFragment" >
+    <fragment
+        android:id="@+id/riderRideFragment"
+        android:name="com.example.carpooling.ui.myrides.RiderRideFragment"
+        tools:layout="@layout/fragment_rider_ride"
+        android:label="fragment_rider_ride">
+        <argument
+            android:name="rideId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+        <action
+            android:id="@+id/cancelRide"
+            app:destination="@id/cancelRideFragment">
+            <argument
+                android:name="rideID"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/myRidesFragment"
+        android:name="com.example.carpooling.ui.myrides.MyRidesFragment"
+        tools:layout="@layout/fragment_my_rides"
+        android:label="fragment_my_rides">
+        <action
+            android:id="@+id/toRiderRide"
+            app:destination="@id/riderRideFragment">
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+        </action>
+        <action
+            android:id="@+id/toParticipantRide"
+            app:destination="@id/participantRideFragment">
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/cancelRideFragment"
+        android:name="com.example.carpooling.ui.myrides.CancelRideFragment"
+        tools:layout="@layout/fragment_cancel_ride"
+        android:label="fragment_cancel_ride">
+        <argument
+            android:name="rideID"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/participantRideFragment"
+        android:name="com.example.carpooling.ui.myrides.ParticipantRideFragment"
+        tools:layout="@layout/fragment_participant_ride"
+        android:label="fragment_participant_ride">
+        <argument
+            android:name="rideId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+        <action
+            android:id="@+id/cancelBooking"
+            app:destination="@id/cancelBookingFragment">
+            <argument
+                android:name="rideID"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/cancelBookingFragment"
+        android:name="com.example.carpooling.ui.myrides.CancelBookingFragment"
+        tools:layout="@layout/fragment_cancel_booking"
+        android:label="fragment_cancel_booking">
+        <argument
+            android:name="rideID"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
+</navigation>

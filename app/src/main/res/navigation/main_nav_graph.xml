@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/searchFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.carpooling.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/goToSearch"
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.carpooling.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/goToSearchResults"
+            app:destination="@id/searchResultFragment" />
+        <action
+            android:id="@+id/notLogged"
+            app:destination="@id/startFragment"
+            app:popUpTo="@id/searchFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/datePickerFragment"
+        android:name="com.example.carpooling.ui.search.DatePickerFragment"
+        android:label="DatePickerFragment" />
+    <dialog
+        android:id="@+id/timePickerFragment"
+        android:name="com.example.carpooling.ui.search.TimePickerFragment"
+        android:label="TimePickerFragment" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.carpooling.ui.search.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" >
+        <action
+            android:id="@+id/goToActiveRide"
+            app:destination="@id/activeRideFragment" >
+            <argument
+                android:name="active_ride_id"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/activeRideFragment"
+        android:name="com.example.carpooling.ui.activeride.ActiveRideFragment"
+        android:label="fragment_active_ride"
+        tools:layout="@layout/fragment_active_ride" >
+        <argument
+            android:name="active_ride_id"
+            android:defaultValue="-1L"
+            app:argType="long" />
+        <action
+            android:id="@+id/bookRide"
+            app:destination="@id/bookRideFragment">
+            <argument
+                android:name="activeRideId"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/bookRideFragment"
+        android:name="com.example.carpooling.ui.activeride.BookRideFragment"
+        android:label="fragment_book_ride"
+        tools:layout="@layout/fragment_book_ride" >
+        <argument
+            android:name="activeRideId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/successBooking"
+            app:destination="@id/successBookingFragment"
+            app:popUpTo="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successBookingFragment"
+        android:name="com.example.carpooling.ui.activeride.SuccessBookingFragment"
+        android:label="fragment_success_booking"
+        tools:layout="@layout/fragment_success_booking" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.carpooling.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/logout"
+            app:destination="@id/startFragment"
+            app:popUpTo="@id/main_nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/modifyProfile"
+            app:destination="@id/modifyProfileFragment" />
+        <action
+            android:id="@+id/toSettings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.carpooling.ui.login.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/goToLogin"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <include app:graph="@navigation/myrides_nav_graph" />
+    <include app:graph="@navigation/publish_nav_graph" />
+    <fragment
+        android:id="@+id/modifyProfileFragment"
+        android:name="com.example.carpooling.ui.profile.ModifyProfileFragment"
+        android:label="fragment_modify_profile"
+        tools:layout="@layout/fragment_modify_profile" >
+        <action
+            android:id="@+id/modifyProfileSuccess"
+            app:destination="@id/modifyProfileSuccessFragment"
+            app:popUpTo="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyProfileSuccessFragment"
+        android:name="com.example.carpooling.ui.profile.ModifyProfileSuccessFragment"
+        android:label="fragment_modify_profile_success"
+        tools:layout="@layout/fragment_modify_profile_success" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.carpooling.ui.profile.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.carpooling.ui.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/toDriverOldRide"
+            app:destination="@id/driverOldRideFragment" >
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+        </action>
+        <action
+            android:id="@+id/toPassengerOldRide"
+            app:destination="@id/passengerOldRideFragment" >
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/passengerOldRideFragment"
+        android:name="com.example.carpooling.ui.history.PassengerOldRideFragment"
+        android:label="fragment_passenger_old_ride"
+        tools:layout="@layout/fragment_passenger_old_ride" >
+        <argument
+            android:name="rideId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+    <fragment
+        android:id="@+id/driverOldRideFragment"
+        android:name="com.example.carpooling.ui.history.DriverOldRideFragment"
+        android:label="fragment_driver_old_ride"
+        tools:layout="@layout/fragment_driver_old_ride" >
+        <argument
+            android:name="rideId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+</navigation>

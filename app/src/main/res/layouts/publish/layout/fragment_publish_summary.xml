@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.publish.PublishSummaryFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.carpooling.viewmodels.PublishViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fieldPublishSummaryPrice"
+            android:layout_width="100dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="123dp"
+            android:text="@{viewModel.price.toString()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fieldPublishSummaryTime" />
+
+        <TextView
+            android:id="@+id/fieldPublishSummaryNotes"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="81dp"
+            android:text="@{viewModel.notes}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkPublishSilent" />
+
+        <TextView
+            android:id="@+id/labelPublishFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="58dp"
+            android:text="@string/from"
+            app:layout_constraintEnd_toStartOf="@+id/fieldPublishFrom"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/fieldPublishFrom"
+            android:layout_width="100dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="123dp"
+            android:text="@{viewModel.from}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/labelPublishTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="33dp"
+            android:text="@string/to"
+            app:layout_constraintEnd_toStartOf="@+id/fieldPublishTo"
+            app:layout_constraintTop_toBottomOf="@+id/labelPublishFrom" />
+
+        <TextView
+            android:id="@+id/fieldPublishTo"
+            android:layout_width="100dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="123dp"
+            android:text="@{viewModel.to}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fieldPublishFrom" />
+
+        <TextView
+            android:id="@+id/labelPublishDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="85dp"
+            android:text="@string/btnDate"
+            app:layout_constraintEnd_toStartOf="@+id/fieldPublishSummaryDate"
+            app:layout_constraintTop_toBottomOf="@+id/labelPublishTo" />
+
+        <TextView
+            android:id="@+id/fieldPublishSummaryDate"
+            android:layout_width="100dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="123dp"
+            android:text="@{viewModel.date}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fieldPublishTo" />
+
+        <TextView
+            android:id="@+id/fieldPublishSummaryTime"
+            android:layout_width="100dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="123dp"
+            android:text="@{viewModel.time}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fieldPublishSummaryDate" />
+
+        <TextView
+            android:id="@+id/labelPublishTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="92dp"
+            android:text="@string/btnTime"
+            app:layout_constraintEnd_toStartOf="@+id/fieldPublishSummaryTime"
+            app:layout_constraintTop_toBottomOf="@+id/labelPublishDate" />
+
+        <CheckBox
+            android:id="@+id/checkPublishSmoking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="168dp"
+            android:checked="@{viewModel.smoking}"
+            android:enabled="false"
+            android:text="@string/smoking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fieldPublishSummaryPrice" />
+
+        <CheckBox
+            android:id="@+id/checkPublishLuggage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="177dp"
+            android:checked="@{viewModel.silent}"
+            android:enabled="false"
+            android:text="@string/luggage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkPublishSmoking" />
+
+        <CheckBox
+            android:id="@+id/checkPublishSilent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="175dp"
+            android:checked="@{viewModel.luggage}"
+            android:enabled="false"
+            android:text="@string/silent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkPublishLuggage" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="41dp"
+            android:gravity="center"
+            android:text="@string/titlePublishSummary"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnPublish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="154dp"
+            android:text="@string/btnPublish"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fieldPublishSummaryNotes" />
+
+        <TextView
+            android:id="@+id/labelPublishPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="75dp"
+            android:text="@string/labelPublishPrice"
+            app:layout_constraintEnd_toStartOf="@+id/fieldPublishSummaryPrice"
+            app:layout_constraintTop_toBottomOf="@+id/labelPublishTime" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
