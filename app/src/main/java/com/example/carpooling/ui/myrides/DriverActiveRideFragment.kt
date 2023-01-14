@@ -1,6 +1,5 @@
 package com.example.carpooling.ui.myrides
 
-import android.location.Geocoder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,16 +10,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.carpooling.R
-import com.example.carpooling.databinding.FragmentRiderRideBinding
+import com.example.carpooling.databinding.FragmentDriverActiveRideBinding
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
-import java.util.*
 
-class RiderRideFragment : Fragment() {
+class DriverActiveRideFragment : Fragment() {
 
-    private lateinit var binding: FragmentRiderRideBinding
-    private val args: RiderRideFragmentArgs by navArgs()
+    private lateinit var binding: FragmentDriverActiveRideBinding
+    private val args: DriverActiveRideFragmentArgs by navArgs()
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
     }
@@ -30,7 +28,7 @@ class RiderRideFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rider_ride, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_driver_active_ride, container, false)
         return binding.root
     }
 
@@ -43,14 +41,23 @@ class RiderRideFragment : Fragment() {
             val fromAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.from_lat, ride.from_lng)
             val toAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.to_lat, ride.to_lng)
 
-            binding.apply {
-                activeRide = ride
-                from = fromAddressString
-                to = toAddressString
+            binding.basicInfo.apply {
+                fieldDate.text = ride.date
+                fieldTime.text = ride.time
+                fieldFrom.text = fromAddressString
+                fieldTo.text = toAddressString
+                fieldPrice.text = ride.price.toString()
+            }
+
+            binding.activeRideInfo.apply {
+                fieldNotes.text = ride.addNotes
+                checkSmoking.isChecked = ride.smokingAllowed
+                checkLuggage.isChecked = ride.luggageAllowed
+                checkSilent.isChecked = ride.silentRide
             }
 
             binding.btnDeleteRide.setOnClickListener{
-                val action = RiderRideFragmentDirections.cancelRide(args.rideId)
+                val action = DriverActiveRideFragmentDirections.cancelRide(args.rideId)
                 navController.navigate(action)
             }
         }

@@ -1,6 +1,5 @@
 package com.example.carpooling.ui.myrides
 
-import android.location.Geocoder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,16 +10,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.carpooling.R
-import com.example.carpooling.databinding.FragmentParticipantRideBinding
+import com.example.carpooling.databinding.FragmentPassengerActiveRideBinding
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
-import java.util.*
 
-class ParticipantRideFragment : Fragment() {
+class PassengerActiveRideFragment : Fragment() {
 
-    private lateinit var binding: FragmentParticipantRideBinding
-    private val args: ParticipantRideFragmentArgs by navArgs()
+    private lateinit var binding: FragmentPassengerActiveRideBinding
+    private val args: PassengerActiveRideFragmentArgs by navArgs()
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
     }
@@ -30,7 +28,7 @@ class ParticipantRideFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_participant_ride, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_passenger_active_ride, container, false)
         return binding.root
     }
 
@@ -39,32 +37,29 @@ class ParticipantRideFragment : Fragment() {
 
         val navController = findNavController()
 
-        binding.lifecycleOwner = viewLifecycleOwner
         myRidesViewModel.getActiveRideByID(args.rideId).observe(viewLifecycleOwner) { ride ->
-            /*val geocoder = Geocoder(binding.root.context, Locale.getDefault())
-            val fromAddress =
-                geocoder.getFromLocation(ride.from_lat, ride.from_lng, 1)[0]
-            val fromAddressString = "${fromAddress.locality}, ${fromAddress.adminArea}"
-            val toAddress =
-                geocoder.getFromLocation(ride.to_lat, ride.to_lng, 1)[0]
-            val toAddressString = "${toAddress.locality}, ${toAddress.adminArea}"*/
-
             val fromAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.from_lat, ride.from_lng)
             val toAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.to_lat, ride.to_lng)
 
-            binding.apply {
-                activeRide = ride
+            binding.basicInfo.apply {
+                fieldDate.text = ride.date
+                fieldTime.text = ride.time
+                fieldFrom.text = fromAddressString
+                fieldTo.text = toAddressString
+                fieldPrice.text = ride.price.toString()
+            }
+
+            binding.activeRideInfo.apply {
+                fieldNotes.text = ride.addNotes
+                checkSmoking.isChecked = ride.smokingAllowed
+                checkLuggage.isChecked = ride.luggageAllowed
+                checkSilent.isChecked = ride.silentRide
             }
 
             binding.btnCancelBooking.setOnClickListener{
-                val action = ParticipantRideFragmentDirections.cancelBooking(args.rideId)
+                val action = PassengerActiveRideFragmentDirections.cancelBooking(args.rideId)
                 navController.navigate(action)
             }
         }
     }
-
-    fun getAddress(lat: Double, lng: Double): String {
-        return Geocoding.getAddressFromLatLng(binding.root.context, lat, lng)
-    }
-
 }

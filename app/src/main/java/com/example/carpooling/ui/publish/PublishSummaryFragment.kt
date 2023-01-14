@@ -36,7 +36,7 @@ class PublishSummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply{
+        binding.apply {
             viewModel = publishViewModel
         }
 

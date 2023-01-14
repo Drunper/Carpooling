@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentMyRidesBinding
-import com.example.carpooling.ui.search.SearchResultFragmentDirections
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
@@ -75,7 +74,7 @@ class MyRidesFragment : Fragment() {
                 }
             })
 
-        val viewPagerAdapter = ParentAdapter(
+        val viewPagerAdapter = MyRidesTabAdapter(
             scrollListeners = scrollListeners,
             adapters = adapters
         )

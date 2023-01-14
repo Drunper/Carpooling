@@ -18,6 +18,8 @@ data class OldRide (
     val date: String,
     @SerializedName("time")
     val time: String,
+    @SerializedName("price")
+    val price: Double,
     @SerializedName("participants")
     val participants: List<User>
 ) : Serializable

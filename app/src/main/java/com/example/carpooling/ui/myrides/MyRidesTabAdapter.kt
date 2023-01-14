@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carpooling.databinding.MyRideTabItemBinding
 
-class ParentAdapter(
+class MyRidesTabAdapter(
     private val scrollListeners: List<RecyclerView.OnScrollListener>,
     private val adapters: List<MyRidesAdapter>
 ) : RecyclerView.Adapter<TabViewHolder>() {

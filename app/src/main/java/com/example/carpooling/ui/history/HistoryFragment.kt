@@ -75,7 +75,7 @@ class HistoryFragment : Fragment() {
                 }
             })
 
-        val viewPagerAdapter = TabAdapter(
+        val viewPagerAdapter = HistoryTabAdapter(
             scrollListeners = scrollListeners,
             adapters = adapters
         )

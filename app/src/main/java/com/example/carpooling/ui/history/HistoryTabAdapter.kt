@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carpooling.databinding.MyRideTabItemBinding
 
-class TabAdapter(private val scrollListeners: List<RecyclerView.OnScrollListener>,
-                 private val adapters: List<MyOldRidesAdapter>)
-: RecyclerView.Adapter<TabAdapter.TabViewHolder>() {
+class HistoryTabAdapter(private val scrollListeners: List<RecyclerView.OnScrollListener>,
+                        private val adapters: List<MyOldRidesAdapter>)
+: RecyclerView.Adapter<HistoryTabAdapter.TabViewHolder>() {
 
     private lateinit var binding: MyRideTabItemBinding
 

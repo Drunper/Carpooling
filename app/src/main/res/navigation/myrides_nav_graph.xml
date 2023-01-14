@@ -6,8 +6,8 @@
     app:startDestination="@id/myRidesFragment" >
     <fragment
         android:id="@+id/riderRideFragment"
-        android:name="com.example.carpooling.ui.myrides.RiderRideFragment"
-        tools:layout="@layout/fragment_rider_ride"
+        android:name="com.example.carpooling.ui.myrides.DriverActiveRideFragment"
+        tools:layout="@layout/fragment_driver_active_ride"
         android:label="fragment_rider_ride">
         <argument
             android:name="rideId"
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/cancelRideFragment"
         android:name="com.example.carpooling.ui.myrides.CancelRideFragment"
-        tools:layout="@layout/fragment_cancel_ride"
+        tools:layout="@layout/fragment_cancel_active_ride"
         android:label="fragment_cancel_ride">
         <argument
             android:name="rideID"
@@ -53,8 +53,8 @@
     </fragment>
     <fragment
         android:id="@+id/participantRideFragment"
-        android:name="com.example.carpooling.ui.myrides.ParticipantRideFragment"
-        tools:layout="@layout/fragment_participant_ride"
+        android:name="com.example.carpooling.ui.myrides.PassengerActiveRideFragment"
+        tools:layout="@layout/fragment_passenger_active_ride"
         android:label="fragment_participant_ride">
         <argument
             android:name="rideId"

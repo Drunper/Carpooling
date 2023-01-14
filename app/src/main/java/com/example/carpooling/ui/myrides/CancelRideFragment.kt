@@ -27,7 +27,7 @@ class CancelRideFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cancel_ride, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cancel_active_ride, container, false)
         return binding.root
     }
 
