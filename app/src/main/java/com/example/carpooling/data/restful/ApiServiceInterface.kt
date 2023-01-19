@@ -90,6 +90,9 @@ interface ApiServiceInterface {
     @PATCH("api/user/update")
     suspend fun updateProfile(@Body requestBody: UpdateProfileRequest) : Success
 
+    @GET("api/old_ride/{id}/feedbacks/missing")
+    suspend fun getMissingFeedbackUsers(@Path("id") id: Long) : List<User>
+
     /*@GET("api/active_ride/{id}/check/new_booking")
     suspend fun checkNewBooking()*/
 }

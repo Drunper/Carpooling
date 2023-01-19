@@ -25,6 +25,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _user = MutableLiveData(
         User(
+            id = -1,
             email = "not",
             username = "logged",
             profilePicReference = "in",
@@ -88,6 +89,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
             withContext(Dispatchers.Main) {
                 if (result.success) {
                     val updatedUser = User(
+                        id = _user.value!!.id,
                         email = _user.value!!.email,
                         username = request.username,
                         profilePicReference = _user.value!!.profilePicReference,

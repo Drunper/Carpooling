@@ -6,7 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.carpooling.data.MyRidesRepository
 import com.example.carpooling.data.model.ActiveRide
+import com.example.carpooling.data.model.Feedback
 import com.example.carpooling.data.model.OldRide
+import com.example.carpooling.data.model.User
+import com.example.carpooling.data.restful.requests.SendFeedbackRequest
 import kotlinx.coroutines.*
 
 class MyRidesViewModel(private val myRidesRepository: MyRidesRepository) : ViewModel() {
@@ -83,5 +86,37 @@ class MyRidesViewModel(private val myRidesRepository: MyRidesRepository) : ViewM
                 _cancelBookingResult.value = success.success
             }
         }
+    }
+
+    fun oldRideReceivedFeedbacks(id: Long) : LiveData<List<Feedback>> {
+        val feedbacks = liveData {
+            val result = myRidesRepository.getOldRideReceivedFeedbacks(id)
+            emit(result)
+        }
+        return feedbacks
+    }
+
+    fun oldRideSentFeedbacks(id: Long) : LiveData<List<Feedback>> {
+        val feedbacks = liveData {
+            val result = myRidesRepository.getOldRideSentFeedbacks(id)
+            emit(result)
+        }
+        return feedbacks
+    }
+
+    fun sendFeedback(request: SendFeedbackRequest) : LiveData<Boolean> {
+        val success = liveData {
+            val result = myRidesRepository.sendFeedback(request)
+            emit(result.success)
+        }
+        return success
+    }
+
+    fun getMissingUserFeedbacks(id: Long) : LiveData<List<User>> {
+        val users = liveData {
+            val result = myRidesRepository.getMissingFeedbackUsers(id)
+            emit(result)
+        }
+        return users
     }
 }

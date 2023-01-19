@@ -78,4 +78,17 @@
     <string name="labelModifyBio">Bio</string>
     <string name="btnModify">Modifica</string>
     <string name="titleModifyProfileSuccess">Profilo modificato con successo</string>
+
+    <!-- History -->
+    <string name="btnReceivedFeedbacks">Recensioni ricevute</string>
+    <string name="btnMyFeedbacks">Recensioni inviate</string>
+    <string name="titleReceivedFeedbacks">Recensioni ricevute</string>
+    <string name="titleSentFeedbacks">Recensioni inviate</string>
+    <string name="btnAddFeedback">Aggiungi recensione</string>
+    <string name="titleSendFeedback">Aggiungi recensione</string>
+    <string name="labelFeedbackText">Inserisci il testo</string>
+    <string name="labelFeedbackRecipient">Destinatario</string>
+    <string name="labelFeedbackRating">Valutazione</string>
+    <string name="btnSendFeedback">Invia</string>
+    <string name="titleWriteFeedbackSuccess">Recensione inviata con successo</string>
 </resources>

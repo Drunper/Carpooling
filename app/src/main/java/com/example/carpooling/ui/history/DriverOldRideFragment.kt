@@ -35,6 +35,8 @@ class DriverOldRideFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val navController = findNavController()
+
         myRidesViewModel.getOldRideByID(args.rideId).observe(viewLifecycleOwner) { ride ->
             val fromAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.from_lat, ride.from_lng)
             val toAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.to_lat, ride.to_lng)
@@ -45,6 +47,16 @@ class DriverOldRideFragment : Fragment() {
                 fieldFrom.text = fromAddressString
                 fieldTo.text = toAddressString
                 fieldPrice.text = ride.price.toString()
+            }
+
+            binding.btnDReceivedFeedbacks.setOnClickListener {
+                val action = DriverOldRideFragmentDirections.toDriverFeedbacks(args.rideId)
+                navController.navigate(action)
+            }
+
+            binding.btnDMyFeedbacks.setOnClickListener {
+                val action = DriverOldRideFragmentDirections.toDriverSentFeedbacks(args.rideId)
+                navController.navigate(action)
             }
         }
     }

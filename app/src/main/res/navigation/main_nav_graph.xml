@@ -162,6 +162,23 @@
             android:name="rideId"
             app:argType="long"
             android:defaultValue="-1L" />
+        <action
+            android:id="@+id/toPassengerFeedbacks"
+            app:destination="@id/receivedFeedbacksFragment" >
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+            <argument
+                android:name="driver"
+                android:defaultValue="false" />
+        </action>
+        <action
+            android:id="@+id/toPassengerSentFeedbacks"
+            app:destination="@id/sentFeedbacksFragment" >
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/driverOldRideFragment"
@@ -172,5 +189,70 @@
             android:name="rideId"
             app:argType="long"
             android:defaultValue="-1L" />
+        <action
+            android:id="@+id/toDriverFeedbacks"
+            app:destination="@id/receivedFeedbacksFragment" >
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+            <argument
+                android:name="driver"
+                android:defaultValue="true" />
+        </action>
+        <action
+            android:id="@+id/toDriverSentFeedbacks"
+            app:destination="@id/sentFeedbacksFragment" >
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+            <argument
+                android:name="driver"
+                android:defaultValue="true" />
+        </action>
     </fragment>
+    <fragment
+        android:id="@+id/receivedFeedbacksFragment"
+        android:name="com.example.carpooling.ui.history.ReceivedFeedbacksFragment"
+        android:label="fragment_received_feedbacks"
+        tools:layout="@layout/fragment_received_feedbacks" >
+        <argument
+            android:name="rideId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+    <fragment
+        android:id="@+id/sentFeedbacksFragment"
+        android:name="com.example.carpooling.ui.history.SentFeedbacksFragment"
+        android:label="SentFeedbacksFragment" >
+        <argument
+            android:name="rideId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/toWriteFeedback"
+            app:destination="@id/writeFeedbackFragment" >
+            <argument
+                android:name="rideId"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/writeFeedbackFragment"
+        android:name="com.example.carpooling.ui.history.WriteFeedbackFragment"
+        android:label="fragment_write_feedback"
+        tools:layout="@layout/fragment_write_feedback" >
+        <argument
+            android:name="rideId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/toWriteFeedbackSuccess"
+            app:destination="@id/writeFeedbackSuccessFragment"
+            app:popUpTo="@id/sentFeedbacksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeFeedbackSuccessFragment"
+        android:name="com.example.carpooling.ui.history.WriteFeedbackSuccessFragment"
+        android:label="fragment_write_feedback_success"
+        tools:layout="@layout/fragment_write_feedback_success" />
 </navigation>

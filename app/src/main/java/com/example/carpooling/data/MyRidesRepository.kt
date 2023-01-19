@@ -1,9 +1,8 @@
 package com.example.carpooling.data
 
-import com.example.carpooling.data.model.ActiveRide
-import com.example.carpooling.data.model.OldRide
-import com.example.carpooling.data.model.Success
+import com.example.carpooling.data.model.*
 import com.example.carpooling.data.restful.ApiClient
+import com.example.carpooling.data.restful.requests.SendFeedbackRequest
 
 class MyRidesRepository {
     suspend fun getParticipantActiveRides(page: Long) : List<ActiveRide> {
@@ -42,5 +41,21 @@ class MyRidesRepository {
 
     suspend fun cancelBooking(id: Long) : Success {
         return ApiClient.getApiService().cancelBookingActiveRide(id)
+    }
+
+    suspend fun getOldRideReceivedFeedbacks(id: Long): List<Feedback> {
+        return ApiClient.getApiService().getOldRideReceivedFeedbacks(id)
+    }
+
+    suspend fun getOldRideSentFeedbacks(id: Long): List<Feedback> {
+        return ApiClient.getApiService().getOldRideSentFeedbacks(id)
+    }
+
+    suspend fun sendFeedback(request: SendFeedbackRequest): Success {
+        return ApiClient.getApiService().sendFeedback(request)
+    }
+
+    suspend fun getMissingFeedbackUsers(id: Long) : List<User> {
+        return ApiClient.getApiService().getMissingFeedbackUsers(id)
     }
 }

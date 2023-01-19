@@ -4,8 +4,6 @@ import java.io.Serializable
 import com.google.gson.annotations.SerializedName
 
 data class SendFeedbackRequest(
-    @SerializedName("rider")
-    val rider: Boolean,
     @SerializedName("ride_id")
     val rideId: Long,
     @SerializedName("recipient_id")

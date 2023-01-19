@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/titlePassengerActiveRide"
+            android:id="@+id/titleDriverOldRide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="112dp"
@@ -28,5 +28,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnDMyFeedbacks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="124dp"
+            android:text="@string/btnMyFeedbacks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDReceivedFeedbacks" />
+
+        <Button
+            android:id="@+id/btnDReceivedFeedbacks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="116dp"
+            android:text="@string/btnReceivedFeedbacks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/basicInfo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

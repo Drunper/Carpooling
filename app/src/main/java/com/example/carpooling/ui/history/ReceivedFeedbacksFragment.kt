@@ -1,33 +1,32 @@
-package com.example.carpooling.ui.myrides
+package com.example.carpooling.ui.history
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.carpooling.R
-import com.example.carpooling.databinding.FragmentCancelActiveRideBinding
+import com.example.carpooling.databinding.FragmentReceivedFeedbacksBinding
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
-class CancelRideFragment : Fragment() {
-
-    private lateinit var binding: FragmentCancelActiveRideBinding
-    private val args: CancelRideFragmentArgs by navArgs()
+class ReceivedFeedbacksFragment : Fragment() {
+    private lateinit var binding: FragmentReceivedFeedbacksBinding
+    private val args: ReceivedFeedbacksFragmentArgs by navArgs()
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cancel_active_ride, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_received_feedbacks, container, false)
         return binding.root
     }
 
@@ -35,15 +34,15 @@ class CancelRideFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = findNavController()
+        val adapter =
+            FeedbacksAdapter { feedbackId ->
 
-        binding.btnConfirmDeleteRide.setOnClickListener{
-            myRidesViewModel.deleteRide(args.rideID)
-        }
-
-        myRidesViewModel.deleteRideResult.observe(viewLifecycleOwner) { success ->
-            if(success) {
-                navController.popBackStack(R.id.myRidesFragment, false)
             }
+
+        binding.feedbacksRecyclerView.adapter = adapter
+
+        myRidesViewModel.oldRideReceivedFeedbacks(args.rideId).observe(viewLifecycleOwner) { feedbacks ->
+            adapter.submitList(feedbacks)
         }
     }
 }

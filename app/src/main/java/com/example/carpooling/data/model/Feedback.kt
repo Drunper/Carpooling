@@ -4,6 +4,8 @@ import java.io.Serializable
 import com.google.gson.annotations.SerializedName
 
 data class Feedback (
+    @SerializedName("id")
+    val id: Long,
     @SerializedName("date")
     val date: String,
     @SerializedName("recipient")
