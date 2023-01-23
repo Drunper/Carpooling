@@ -1,6 +1,7 @@
 package com.example.carpooling.ui.search
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +12,19 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.carpooling.R
 import com.example.carpooling.data.model.Locations
+import com.example.carpooling.data.restful.ApiClient
 import com.example.carpooling.data.restful.requests.ActiveRidesRequest
 import com.example.carpooling.databinding.FragmentSearchBinding
 import com.example.carpooling.ui.login.LoginFragment
+import com.example.carpooling.ui.login.StartFragmentDirections
 import com.example.carpooling.utils.Geocoding
+import com.example.carpooling.utils.SessionManager
 import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.ActiveRidesViewModel
 import com.example.carpooling.viewmodels.DateTimeViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 class SearchFragment : Fragment() {
 
@@ -34,8 +40,7 @@ class SearchFragment : Fragment() {
     private val dateTimeViewModel: DateTimeViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
@@ -50,10 +55,28 @@ class SearchFragment : Fragment() {
         }
 
         val navController = findNavController()
+        val sessionManager = SessionManager(requireContext())
+        val authToken = sessionManager.getAuthToken()
 
-        if (userViewModel.user.value == null || userViewModel.user.value!!.email == "not") {
-            val action = SearchFragmentDirections.notLogged()
-            navController.navigate(action)
+        if (authToken == null) {
+            if (userViewModel.user.value == null) {
+                val action = SearchFragmentDirections.notLogged()
+                navController.navigate(action)
+            }
+        } else {
+            userViewModel.initUser(authToken)
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("heya", "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+                userViewModel.sendPushToken(token)
+
+                Log.d("heyaToken", token)
+            })
         }
 
         val textViewDate = binding.textViewDate
@@ -100,14 +123,30 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun getActiveRidesRequest(date: String, time: String, from: String, to: String,
-                                      smoking: Boolean, luggage: Boolean, silent: Boolean) : ActiveRidesRequest {
+    private fun getActiveRidesRequest(
+        date: String,
+        time: String,
+        from: String,
+        to: String,
+        smoking: Boolean,
+        luggage: Boolean,
+        silent: Boolean
+    ): ActiveRidesRequest {
         val locations: Locations = convertLocations(from, to)
-        return ActiveRidesRequest(locations.fromLat, locations.fromLng, locations.toLat, locations.toLng,
-        date, time, smoking, luggage, silent)
+        return ActiveRidesRequest(
+            locations.fromLat,
+            locations.fromLng,
+            locations.toLat,
+            locations.toLng,
+            date,
+            time,
+            smoking,
+            luggage,
+            silent
+        )
     }
 
-    private fun convertLocations(from: String, to: String) : Locations {
+    private fun convertLocations(from: String, to: String): Locations {
         return Geocoding.getLatLngFromAddresses(binding.root.context, from, to)
     }
 }

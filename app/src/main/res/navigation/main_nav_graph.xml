@@ -111,6 +111,11 @@
         <action
             android:id="@+id/goToLogin"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/alreadyLogged"
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <include app:graph="@navigation/myrides_nav_graph" />
     <include app:graph="@navigation/publish_nav_graph" />

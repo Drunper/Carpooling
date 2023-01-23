@@ -18,6 +18,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.carpooling.databinding.FragmentLoginBinding
 import com.example.carpooling.data.Result
 import com.example.carpooling.R
+import com.example.carpooling.data.restful.ApiClient
+import com.example.carpooling.utils.SessionManager
 import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
@@ -102,7 +104,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun login(email: String, password: String, rememberMe: Boolean) {
-        userViewModel.login(email, password, rememberMe).observe(viewLifecycleOwner
+        userViewModel.login(email, password).observe(viewLifecycleOwner
         ) { result ->
             /*if (result.status == Result.Status.SUCCESS) {
                 result.data?.let { userViewModel.updateUser(it) }
@@ -111,12 +113,20 @@ class LoginFragment : Fragment() {
                 showLoginFailed(R.string.login_failed)
             }
             findNavController().popBackStack()*/
-            if (result.status == Result.Status.SUCCESS) {
-                result.data?.let { userViewModel.updateUser(it) }
+            if (result.token == "401" || result.token == "error" || result.token == "exception") {
+                showLoginFailed(R.string.login_failed)
+            }
+            else {
+                val sessionManager = SessionManager(requireContext())
+                if (rememberMe) {
+                    sessionManager.saveAuthToken(result.token)
+                }
+                else {
+                    ApiClient.setApiService(result.token)
+                    userViewModel.updateUser(result.user)
+                }
                 val action = LoginFragmentDirections.goToSearch()
                 findNavController().navigate(action)
-            } else if (result.status == Result.Status.ERROR) {
-                showLoginFailed(R.string.login_failed)
             }
         }
     }

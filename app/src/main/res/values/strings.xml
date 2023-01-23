@@ -91,4 +91,19 @@
     <string name="labelFeedbackRating">Valutazione</string>
     <string name="btnSendFeedback">Invia</string>
     <string name="titleWriteFeedbackSuccess">Recensione inviata con successo</string>
+
+    <!-- Notifications -->
+    <string name="channelNewBooking">Nuove prenotazioni</string>
+    <string name="channelNewCancel">Nuove cancellazioni</string>
+    <string name="channelDeleteRide">Viaggi annullati</string>
+    <string name="channelNewBookingDesc">Questo canale ti notifica le nuove prenotazioni per i viaggi che hai pubblicato</string>
+    <string name="channelNewCancelDesc">Questo canale ti notifica le prenotazioni annullate per i viaggi che hai pubblicato</string>
+    <string name="channelDeleteRideDesc">Questo canale ti notifica i viaggi prenotati che sono stati cancellati</string>
+
+    <string name="notifyNewBookingTitle">C\'è una nuova prenotazione</string>
+    <string name="notifyNewBookingDesc">Un utente ha effettuato una prenotazione per un viaggio che hai pubblicato</string>
+    <string name="notifyNewCancelTitle">Prenotazione cancellata</string>
+    <string name="notifyNewCancelDesc">Un utente ha cancellato la sua prenotazione per un viaggio che hai pubblicato</string>
+    <string name="notifyDeleteRideTitle">Viaggio cancellato</string>
+    <string name="notifyDeleteRideDesc">Un viaggio che avevi prenotato è stato cancellato</string>
 </resources>

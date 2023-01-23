@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.carpooling.data.ActiveRidesRepository
 import com.example.carpooling.data.model.ActiveRide
+import com.example.carpooling.data.restful.RestError
+import com.example.carpooling.data.restful.RestException
+import com.example.carpooling.data.restful.RestSuccess
 import com.example.carpooling.data.restful.requests.ActiveRidesRequest
 import kotlinx.coroutines.*
 
@@ -14,9 +17,8 @@ class ActiveRidesViewModel(private val activeRidesRepository: ActiveRidesReposit
     val activeRides: LiveData<List<ActiveRide>> = _activeRides
 
     private val _searchQuery = MutableLiveData<ActiveRidesRequest>()
-    val searchQuery: LiveData<ActiveRidesRequest> = _searchQuery
 
-    var job: Job? = null
+    private var job: Job? = null
 
     fun setQuery(request: ActiveRidesRequest) {
         _searchQuery.value = request
@@ -24,7 +26,17 @@ class ActiveRidesViewModel(private val activeRidesRepository: ActiveRidesReposit
 
     fun executeQuery() {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val rides = activeRidesRepository.query(_searchQuery.value!!, 1)
+            val rides = when (val result = activeRidesRepository.query(_searchQuery.value!!, 1)) {
+                is RestSuccess -> {
+                    result.data
+                }
+                is RestError -> {
+                    listOf()
+                }
+                is RestException -> {
+                    listOf()
+                }
+            }
             withContext(Dispatchers.Main) {
                 _activeRides.value = rides
             }

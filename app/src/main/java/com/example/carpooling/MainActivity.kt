@@ -2,6 +2,7 @@ package com.example.carpooling
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -43,10 +44,12 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
             override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
                 when (f) {
-                    is SearchFragment, is PublishFragment, is SearchResultFragment, is HistoryFragment, is ProfileFragment, is MyRidesFragment -> {
+                    is NavHostFragment, is SearchFragment, is PublishFragment, is SearchResultFragment, is HistoryFragment, is ProfileFragment, is MyRidesFragment -> {
                         binding.bottomNav.visibility = View.VISIBLE
                     }
                     else -> {
+                        Log.d("bottomNav", "ok")
+                        Log.d("bottomNav",f::class.java.name)
                         binding.bottomNav.visibility = View.GONE
                     }
                 }

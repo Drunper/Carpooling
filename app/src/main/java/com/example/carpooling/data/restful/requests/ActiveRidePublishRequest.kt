@@ -1,6 +1,7 @@
 package com.example.carpooling.data.restful.requests
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ActiveRidePublishRequest(
     @SerializedName("from_lat")
@@ -27,4 +28,4 @@ data class ActiveRidePublishRequest(
     val silentRide: Boolean,
     @SerializedName("add_notes")
     val addNotes: String
-)
+) : Serializable

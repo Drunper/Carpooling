@@ -12,13 +12,13 @@ object ApiClient {
         return apiService!!
     }
 
-    fun getLoginApiService(email: String, password: String): ApiServiceInterface {
-        return createApiService(email, password)
+    fun getLoginApiService(): ApiServiceInterface {
+        return createApiService()
     }
 
-    fun setApiService(email: String, password: String) {
+    fun setApiService(token: String) {
         if (apiService == null) {
-            apiService = createApiService(email, password)
+            apiService = createApiService(token)
         }
     }
 
@@ -26,12 +26,29 @@ object ApiClient {
         apiService = null
     }
 
-    private fun createApiService(email: String, password: String): ApiServiceInterface {
+    private fun createApiService(): ApiServiceInterface {
         val mHttpLoggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
 
-        val basicAuthInterceptor = BasicAuthInterceptor(email, password)
+        val mOkHttpClient = OkHttpClient
+            .Builder()
+            .addInterceptor(mHttpLoggingInterceptor)
+            .build()
 
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:5000")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RestResultCallAdapterFactory.create())
+            .client(mOkHttpClient)
+            .build()
+        return retrofit.create(ApiServiceInterface::class.java)
+    }
+
+    private fun createApiService(token: String) : ApiServiceInterface {
+        val mHttpLoggingInterceptor = HttpLoggingInterceptor()
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        val basicAuthInterceptor = BasicAuthInterceptor(token, "")
         val mOkHttpClient = OkHttpClient
             .Builder()
             .addInterceptor(mHttpLoggingInterceptor)
@@ -41,9 +58,9 @@ object ApiClient {
         val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:5000")
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RestResultCallAdapterFactory.create())
             .client(mOkHttpClient)
             .build()
-
         return retrofit.create(ApiServiceInterface::class.java)
     }
 }

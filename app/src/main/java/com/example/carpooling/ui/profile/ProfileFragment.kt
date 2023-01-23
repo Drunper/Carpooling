@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentProfileBinding
+import com.example.carpooling.utils.SessionManager
 import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
@@ -49,6 +50,8 @@ class ProfileFragment : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             userViewModel.logout()
+            val sessionManager = SessionManager(requireContext())
+            sessionManager.deleteAuthToken()
             val action = ProfileFragmentDirections.logout()
             navController.navigate(action)
         }

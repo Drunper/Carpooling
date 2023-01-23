@@ -4,26 +4,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
+import androidx.lifecycle.liveData
 import com.example.carpooling.data.UserRepository
-import com.example.carpooling.data.Result
-
+import android.util.Log
 import com.example.carpooling.R
-import com.example.carpooling.data.model.PassengerRating
-import com.example.carpooling.data.model.RiderRating
-import com.example.carpooling.data.model.Success
-import com.example.carpooling.data.model.User
+import com.example.carpooling.data.model.*
+import com.example.carpooling.data.restful.*
+import com.example.carpooling.data.restful.requests.LoginRequest
+import com.example.carpooling.data.restful.requests.SendPushTokenRequest
 import com.example.carpooling.data.restful.requests.UpdateProfileRequest
 import com.example.carpooling.ui.login.LoginFormState
 import kotlinx.coroutines.*
 
 class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
-    private var job: Job? = null
-
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    private val _user = MutableLiveData(
+    /*private val _user = MutableLiveData(
         User(
             id = -1,
             email = "not",
@@ -31,8 +29,9 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
             profilePicReference = "in",
             bio = "!"
         )
-    )
-    val user: LiveData<User> = _user
+    )*/
+    private val _user = MutableLiveData<User?>()
+    val user: LiveData<User?> = _user
 
     private val _driverRating = MutableLiveData<RiderRating>()
     val driverRating: LiveData<RiderRating> = _driverRating
@@ -43,11 +42,79 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
     private val _updateProfileResult = MutableLiveData<Success>()
     val updateProfileResult: LiveData<Success> = _updateProfileResult
 
-    fun login(email: String, password: String, rememberMe: Boolean): LiveData<Result<User>> {
-        return userRepository.login(email, password, rememberMe)
+    private var job: Job? = null
+
+    fun login(email: String, password: String): LiveData<LoginResult> {
+        val loginResult = liveData {
+            val request = LoginRequest(email, password)
+            when (val result = userRepository.login(request)) {
+                is RestSuccess -> {
+                    Log.d(AUTH_SUCCESS, "signInWithEmail:success")
+                    emit(result.data)
+                }
+                is RestError -> {
+                    if (result.statusCode == 401) {
+                        Log.d(AUTH_FAILURE, "signInWithEmail:failure")
+                        val loginResult = LoginResult(token = "401", user = null)
+                        emit(loginResult)
+                    }
+                    else {
+                        Log.d(AUTH_ERROR, "signInWithEmail:error")
+                        Log.d(AUTH_ERROR_CODE, result.statusCode.toString())
+                        result.message?.let { Log.d(AUTH_ERROR_MESSAGE, it) }
+                        val loginResult = LoginResult(token = "error", user = null)
+                        emit(loginResult)
+                    }
+                }
+                is RestException -> {
+                    Log.d(AUTH_EXCEPTION, "signInWithEmail:exception")
+                    result.exception.message?.let { Log.d(AUTH_EXCEPTION_MESSAGE, it) }
+                    val loginResult = LoginResult(token = "exception", user = null)
+                    emit(loginResult)
+                }
+            }
+        }
+        return loginResult
+    }
+
+    fun initUser(token: String) {
+        ApiClient.setApiService(token)
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val value = when (val result = userRepository.getUser()) {
+                is RestSuccess -> result.data
+                is RestError -> null
+                is RestException -> null
+            }
+            withContext(Dispatchers.Main) {
+                _user.value = value
+            }
+        }
+    }
+
+    fun sendPushToken(pushToken: String) {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val sendPushTokenRequest = SendPushTokenRequest(pushToken = pushToken)
+            when (val result = userRepository.sendToken(sendPushTokenRequest)) {
+                is RestSuccess -> Log.d("sendPushToken", "success")
+                is RestError -> Log.d("sendPushToken", "error")
+                is RestException -> Log.d("sendPushToken", "exception")
+            }
+        }
+    }
+
+    fun deletePushToken() {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            when (val result = userRepository.deleteToken()) {
+                is RestSuccess -> Log.d("deletePushToken", "success")
+                is RestError -> Log.d("deletePushToken", "error")
+                is RestException -> Log.d("deletePushToken", "exception")
+            }
+        }
     }
 
     fun logout() {
+        deletePushToken()
+        _user.value = null
         userRepository.logout()
     }
 
@@ -61,43 +128,61 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
         }
     }
 
-    fun updateUser(user: User) {
+    fun updateUser(user: User?) {
         _user.value = user
     }
 
     fun getUserDriverRating() {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val driverRating = userRepository.getDriverRating()
+            val value = when (val result = userRepository.getDriverRating()) {
+                is RestSuccess -> {
+                    result.data
+                }
+                is RestError -> {
+                    RiderRating(0.0)
+                }
+                is RestException -> {
+                    RiderRating(0.0)
+                }
+            }
             withContext(Dispatchers.Main) {
-                _driverRating.value = driverRating
+                _driverRating.value = value
             }
         }
     }
 
     fun getUserPassengerRating() {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val passengerRating = userRepository.getPassengerRating()
+            val value = when (val result = userRepository.getPassengerRating()) {
+                is RestSuccess -> {
+                    result.data
+                }
+                is RestError -> {
+                    PassengerRating(0.0)
+                }
+                is RestException -> {
+                    PassengerRating(0.0)
+                }
+            }
             withContext(Dispatchers.Main) {
-                _passengerRating.value = passengerRating
+                _passengerRating.value = value
             }
         }
     }
 
     fun updateProfile(request: UpdateProfileRequest) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val result = userRepository.updateProfile(request)
+            val value = when (val result = userRepository.updateProfile(request)) {
+                is RestSuccess -> result.data
+                is RestError -> Success(success = false)
+                is RestException -> Success(success = false)
+            }
             withContext(Dispatchers.Main) {
-                if (result.success) {
-                    val updatedUser = User(
-                        id = _user.value!!.id,
-                        email = _user.value!!.email,
-                        username = request.username,
-                        profilePicReference = _user.value!!.profilePicReference,
-                        bio = request.bio
-                    )
+                if (value.success) {
+                    val updatedUser = _user.value!!.copy(username = request.username, bio = request.bio)
                     updateUser(updatedUser)
                 }
-                _updateProfileResult.value = result
+                _updateProfileResult.value = value
             }
         }
     }
@@ -114,5 +199,15 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
     // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 5
+    }
+
+    companion object {
+        const val AUTH_SUCCESS = "AuthSuccess"
+        const val AUTH_FAILURE = "AuthFailure"
+        const val AUTH_ERROR_CODE = "AuthErrorCode"
+        const val AUTH_ERROR_MESSAGE = "AuthErrorMessage"
+        const val AUTH_ERROR = "AuthError"
+        const val AUTH_EXCEPTION = "AuthException"
+        const val AUTH_EXCEPTION_MESSAGE = "AuthExceptionMessage"
     }
 }

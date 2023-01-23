@@ -1,14 +1,11 @@
 package com.example.carpooling.data
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.carpooling.data.model.*
 import com.example.carpooling.data.restful.ApiClient
+import com.example.carpooling.data.restful.RestResult
+import com.example.carpooling.data.restful.requests.LoginRequest
+import com.example.carpooling.data.restful.requests.SendPushTokenRequest
 import com.example.carpooling.data.restful.requests.UpdateProfileRequest
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class UserRepository() {
@@ -16,8 +13,7 @@ class UserRepository() {
         ApiClient.resetApiService()
     }
 
-    fun login(email: String, password: String, rememberMe: Boolean): LiveData<Result<User>> {
-        val liveData = MutableLiveData<Result<User>>()
+/*    suspend fun login(request: LoginRequest): LoginResult {
         val apiService = ApiClient.getLoginApiService(email, password)
         val call = apiService.login()
         call.enqueue(object : Callback<User> {
@@ -44,22 +40,33 @@ class UserRepository() {
             }
         })
         return liveData
+    }*/
+
+    suspend fun login(request: LoginRequest): RestResult<LoginResult> {
+        return ApiClient.getLoginApiService().login(request)
     }
 
-    suspend fun getDriverRating(): RiderRating {
+    suspend fun getUser(): RestResult<User> {
+        return ApiClient.getApiService().getUser()
+    }
+
+    suspend fun sendToken(request: SendPushTokenRequest): RestResult<Success> {
+        return ApiClient.getApiService().sendPushToken(request)
+    }
+
+    suspend fun deleteToken(): RestResult<Success> {
+        return ApiClient.getApiService().deletePushToken()
+    }
+
+    suspend fun getDriverRating(): RestResult<RiderRating> {
         return ApiClient.getApiService().getUserRiderRating()
     }
 
-    suspend fun getPassengerRating(): PassengerRating {
+    suspend fun getPassengerRating(): RestResult<PassengerRating> {
         return ApiClient.getApiService().getUserPassengerRating()
     }
 
-    suspend fun updateProfile(request: UpdateProfileRequest): Success {
+    suspend fun updateProfile(request: UpdateProfileRequest): RestResult<Success> {
         return ApiClient.getApiService().updateProfile(request)
-    }
-
-    companion object {
-        const val AUTH_SUCCESS = "AuthSuccess"
-        const val AUTH_FAILURE = "AuthFailure"
     }
 }
