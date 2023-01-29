@@ -10,14 +10,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentSearchResultBinding
-import com.example.carpooling.viewmodels.ActiveRidesViewModel
+import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
 class SearchResultFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchResultBinding
-
-    private val activeRidesViewModel: ActiveRidesViewModel by activityViewModels {
+    private val searchViewModel: SearchViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -43,8 +42,8 @@ class SearchResultFragment : Fragment() {
             }
 
         binding.recyclerView.adapter = adapter
-        activeRidesViewModel.activeRides.observe(viewLifecycleOwner) { activeRides ->
-            adapter.submitList(activeRides)
+        searchViewModel.executeQuery().observe(viewLifecycleOwner) { rides ->
+            adapter.submitList(rides)
         }
     }
 }

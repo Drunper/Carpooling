@@ -10,163 +10,170 @@
             type="com.example.carpooling.viewmodels.UserViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ImageView
-            android:id="@+id/imageViewAvatar"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="141dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="142dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleProfile"
-            tools:src="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="80dp">
 
-        <TextView
-            android:id="@+id/titleProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="168dp"
-            android:text="@string/titleProfile"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imageViewAvatar"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="141dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="142dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleProfile"
+                tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/labelProfileUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="112dp"
-            android:layout_marginTop="36dp"
-            android:text="@string/labelProfileUsername"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar" />
+            <TextView
+                android:id="@+id/titleProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="260dp"
+                android:layout_marginEnd="168dp"
+                android:text="@string/titleProfile"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/fieldProfileUsername"
-            android:layout_width="127dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="55dp"
-            android:text="@{viewModel.user.username}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar" />
+            <TextView
+                android:id="@+id/labelProfileUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="36dp"
+                android:text="@string/labelProfileUsername"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar" />
 
-        <TextView
-            android:id="@+id/labelProfileEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="110dp"
-            android:layout_marginTop="23dp"
-            android:text="@string/email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelProfileUsername" />
+            <TextView
+                android:id="@+id/fieldProfileUsername"
+                android:layout_width="127dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="55dp"
+                android:text="@{viewModel.user.username}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar" />
 
-        <TextView
-            android:id="@+id/fieldProfileEmail"
-            android:layout_width="158dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginEnd="66dp"
-            android:text="@{viewModel.user.email}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fieldProfileUsername" />
+            <TextView
+                android:id="@+id/labelProfileEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="110dp"
+                android:layout_marginTop="23dp"
+                android:text="@string/email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelProfileUsername" />
 
-        <TextView
-            android:id="@+id/labelProfileDriverRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="94dp"
-            android:layout_marginTop="14dp"
-            android:text="@string/driverRating"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fieldProfileBio" />
+            <TextView
+                android:id="@+id/fieldProfileEmail"
+                android:layout_width="158dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="66dp"
+                android:text="@{viewModel.user.email}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fieldProfileUsername" />
 
-        <TextView
-            android:id="@+id/labelProfilePassengerRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="94dp"
-            android:layout_marginTop="22dp"
-            android:text="@string/passengerRating"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelProfileDriverRating" />
+            <TextView
+                android:id="@+id/labelProfileDriverRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="94dp"
+                android:layout_marginTop="14dp"
+                android:text="@string/driverRating"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fieldProfileBio" />
 
-        <TextView
-            android:id="@+id/fieldProfileDriverRating"
-            android:layout_width="85dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="86dp"
-            android:text="@{Double.toString(viewModel.driverRating.riderRating)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fieldProfileBio" />
+            <TextView
+                android:id="@+id/labelProfilePassengerRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="94dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/passengerRating"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelProfileDriverRating" />
 
-        <TextView
-            android:id="@+id/fieldProfilePassengerRating"
-            android:layout_width="78dp"
-            android:layout_height="27dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="93dp"
-            android:text="@{Double.toString(viewModel.passengerRating.passengerRating)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fieldProfileDriverRating" />
+            <TextView
+                android:id="@+id/fieldProfileDriverRating"
+                android:layout_width="85dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="86dp"
+                android:text="@{Double.toString(viewModel.driverRating.riderRating)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fieldProfileBio" />
 
-        <TextView
-            android:id="@+id/labelProfileBio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="17dp"
-            android:text="@string/labelProfileBio"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelProfileEmail" />
+            <TextView
+                android:id="@+id/fieldProfilePassengerRating"
+                android:layout_width="78dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="93dp"
+                android:text="@{Double.toString(viewModel.passengerRating.passengerRating)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fieldProfileDriverRating" />
 
-        <TextView
-            android:id="@+id/fieldProfileBio"
-            android:layout_width="198dp"
-            android:layout_height="61dp"
-            android:layout_marginStart="112dp"
-            android:layout_marginTop="16dp"
-            android:text="@{viewModel.user.bio}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelProfileBio" />
+            <TextView
+                android:id="@+id/labelProfileBio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="106dp"
+                android:layout_marginTop="17dp"
+                android:text="@string/labelProfileBio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelProfileEmail" />
 
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="220dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/btnLogout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
+            <TextView
+                android:id="@+id/fieldProfileBio"
+                android:layout_width="198dp"
+                android:layout_height="61dp"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="16dp"
+                android:text="@{viewModel.user.bio}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelProfileBio" />
 
-        <Button
-            android:id="@+id/btnModifyProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/btnModifyProfile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelProfilePassengerRating" />
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="220dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/btnLogout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
 
-        <Button
-            android:id="@+id/btnSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="60dp"
-            android:text="@string/btnSettings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fieldProfilePassengerRating" />
+            <Button
+                android:id="@+id/btnModifyProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/btnModifyProfile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelProfilePassengerRating" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="60dp"
+                android:text="@string/btnSettings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fieldProfilePassengerRating" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

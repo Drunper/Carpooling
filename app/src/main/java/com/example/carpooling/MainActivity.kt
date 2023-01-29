@@ -39,22 +39,29 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.startFragment, R.id.searchFragment, R.id.publishFragment,  R.id.myRidesFragment, R.id.historyFragment, R.id.profileFragment)
         )
+        setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        supportFragmentManager.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
-            override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
-                when (f) {
-                    is NavHostFragment, is SearchFragment, is PublishFragment, is SearchResultFragment, is HistoryFragment, is ProfileFragment, is MyRidesFragment -> {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.startFragment) {
+                binding.bottomNav.visibility = View.GONE
+                supportActionBar?.hide()
+            } else {
+                supportActionBar?.show()
+                when (destination.id) {
+                    R.id.searchFragment, R.id.publishFragment, R.id.searchResultFragment, R.id.historyFragment, R.id.profileFragment, R.id.myRidesFragment -> {
                         binding.bottomNav.visibility = View.VISIBLE
+                        com.google.android.material.R.styleable.ActionBar
                     }
+/*                    R.id.publishDatetimeFragment -> {
+                        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
+                    }*/
                     else -> {
-                        Log.d("bottomNav", "ok")
-                        Log.d("bottomNav",f::class.java.name)
                         binding.bottomNav.visibility = View.GONE
                     }
                 }
             }
-        }, true)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

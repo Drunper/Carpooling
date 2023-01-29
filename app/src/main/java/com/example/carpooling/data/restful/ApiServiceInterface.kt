@@ -23,29 +23,29 @@ interface ApiServiceInterface {
     @GET("api/old_ride/{id}")
     suspend fun getOldRide(@Path("id") id: Long) : RestResult<OldRide>
 
-    @POST("api/active_rides/{page}")
-    suspend fun getActiveRides(@Body requestBody: ActiveRidesRequest, @Path("page") page: Long): RestResult<List<ActiveRide>>
+    @POST("api/active_rides")
+    suspend fun getActiveRides(@Body requestBody: ActiveRidesRequest): RestResult<List<ActiveRide>>
 
     @GET("api/active_rides/{id}/participants")
     suspend fun getActiveRideParticipants(@Path("id") id: Long) : RestResult<List<User>>
 
-    @GET("api/rider/old_rides/{page}")
-    suspend fun getRiderOldRides(@Path("page") page: Long) : RestResult<List<OldRide>>
+    @GET("api/rider/old_rides")
+    suspend fun getDriverOldRides() : RestResult<List<OldRide>>
 
-    @GET("api/rider/active_rides/{page}")
-    suspend fun getRiderActiveRides(@Path("page") page: Long) : RestResult<List<ActiveRide>>
+    @GET("api/rider/active_rides")
+    suspend fun getDriverActiveRides() : RestResult<List<ActiveRide>>
 
-    @GET("api/participant/active_rides/{page}")
-    suspend fun getParticipantActiveRides(@Path("page") page: Long) : RestResult<List<ActiveRide>>
+    @GET("api/participant/active_rides")
+    suspend fun getPassengerActiveRides() : RestResult<List<ActiveRide>>
 
-    @GET("api/participant/old_rides/{page}")
-    suspend fun getParticipantOldRides(@Path("page") page: Long) : RestResult<List<OldRide>>
+    @GET("api/participant/old_rides")
+    suspend fun getPassengerOldRides() : RestResult<List<OldRide>>
 
-    @GET("api/user/feedbacks/received/{page}")
-    suspend fun getReceivedFeedbacks(@Path("page") page: Long) : RestResult<List<Feedback>>
+    @GET("api/user/feedbacks/received")
+    suspend fun getReceivedFeedbacks() : RestResult<List<Feedback>>
 
-    @GET("api/user/feedbacks/sent/{page}")
-    suspend fun getSentFeedbacks(@Path("page") page: Long) : RestResult<List<Feedback>>
+    @GET("api/user/feedbacks/sent")
+    suspend fun getSentFeedbacks() : RestResult<List<Feedback>>
 
     @GET("api/old_ride/{id}/feedbacks/received")
     suspend fun getOldRideReceivedFeedbacks(@Path("id") id: Long) : RestResult<List<Feedback>>

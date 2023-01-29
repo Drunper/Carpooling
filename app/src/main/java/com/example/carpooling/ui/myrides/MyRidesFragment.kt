@@ -24,15 +24,11 @@ class MyRidesFragment : Fragment() {
 
     private lateinit var binding: FragmentMyRidesBinding
     private lateinit var adapters: List<MyRidesAdapter>
-    private var currentRiderRidesPage: Int = 1
-    private var currentParticipantsRidesPage: Int = 1
-    private var totalRiderRidesPage: Int = 1
-    private var totalParticipantsRidesPage: Int = 1
 
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
     }
-    private val userViewModel: UserViewModel by activityViewModels{
+    private val userViewModel: UserViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -59,15 +55,12 @@ class MyRidesFragment : Fragment() {
             userViewModel.initUser(authToken)
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    Log.w("heya", "Fetching FCM registration token failed", task.exception)
                     return@OnCompleteListener
                 }
 
                 // Get new FCM registration token
                 val token = task.result
                 userViewModel.sendPushToken(token)
-
-                Log.d("heyaToken", token)
             })
         }
 
@@ -80,31 +73,8 @@ class MyRidesFragment : Fragment() {
                 navController.navigate(action)
             }
         )
-        val scrollListeners = listOf(
-            object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if (!recyclerView.canScrollVertically(1)) {
-                        if (currentParticipantsRidesPage < totalParticipantsRidesPage) {
-                            currentParticipantsRidesPage += 1
-                            loadParticipantRides()
-                        }
-                    }
-                }
-            }, object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if (!recyclerView.canScrollVertically(1)) {
-                        if (currentRiderRidesPage < totalRiderRidesPage) {
-                            currentRiderRidesPage += 1
-                            loadRiderRides()
-                        }
-                    }
-                }
-            })
 
         val viewPagerAdapter = MyRidesTabAdapter(
-            scrollListeners = scrollListeners,
             adapters = adapters
         )
         viewPager.adapter = viewPagerAdapter
@@ -116,21 +86,12 @@ class MyRidesFragment : Fragment() {
                 tab.text = "Prenotati"
         }.attach()
 
-        loadParticipantRides()
-        loadRiderRides()
-    }
+        myRidesViewModel.getPassengerActiveRides().observe(viewLifecycleOwner) { rides ->
+            adapters[0].submitList(rides)
+        }
 
-    fun loadParticipantRides() {
-        myRidesViewModel.getParticipantActiveRides(currentParticipantsRidesPage.toLong())
-            .observe(viewLifecycleOwner) {
-                adapters[0].submitList(it)
-            }
-    }
-
-    fun loadRiderRides() {
-        myRidesViewModel.getRiderActiveRides(currentRiderRidesPage.toLong())
-            .observe(viewLifecycleOwner) {
-                adapters[1].submitList(it)
-            }
+        myRidesViewModel.getDriverActiveRides().observe(viewLifecycleOwner) { rides ->
+            adapters[1].submitList(rides)
+        }
     }
 }

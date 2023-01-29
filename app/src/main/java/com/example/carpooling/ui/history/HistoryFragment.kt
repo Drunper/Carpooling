@@ -1,6 +1,7 @@
 package com.example.carpooling.ui.history
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carpooling.R
+import com.example.carpooling.data.model.OldRide
 import com.example.carpooling.databinding.FragmentHistoryBinding
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
@@ -19,10 +21,6 @@ class HistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentHistoryBinding
     private lateinit var adapters: List<MyOldRidesAdapter>
-    private var currentDriverRidesPage: Int = 1
-    private var currentPassengerRidesPage: Int = 1
-    private var totalDriverRidesPage: Int = 1
-    private var totalPassengerRidesPage: Int = 1
 
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
@@ -33,6 +31,7 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.d("historyLifecycle", "onCreateView")
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
         return binding.root
     }
@@ -43,6 +42,7 @@ class HistoryFragment : Fragment() {
         val navController = findNavController()
         val tabLayout = binding.tabLayoutHistory
         val viewPager = binding.viewPagerHistory
+        Log.d("historyLifecycle", "onViewCreated")
         adapters = listOf(
             MyOldRidesAdapter { rideID ->
                 val action = HistoryFragmentDirections.toPassengerOldRide(rideID)
@@ -52,31 +52,8 @@ class HistoryFragment : Fragment() {
                 navController.navigate(action)
             }
         )
-        val scrollListeners = listOf(
-            object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if (!recyclerView.canScrollVertically(1)) {
-                        if (currentPassengerRidesPage < totalPassengerRidesPage) {
-                            currentPassengerRidesPage += 1
-                            loadPassengerRides()
-                        }
-                    }
-                }
-            }, object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if (!recyclerView.canScrollVertically(1)) {
-                        if (currentDriverRidesPage < totalDriverRidesPage) {
-                            currentDriverRidesPage += 1
-                            loadDriverRides()
-                        }
-                    }
-                }
-            })
 
         val viewPagerAdapter = HistoryTabAdapter(
-            scrollListeners = scrollListeners,
             adapters = adapters
         )
         viewPager.adapter = viewPagerAdapter
@@ -88,22 +65,12 @@ class HistoryFragment : Fragment() {
                 tab.text = "Prenotati"
         }.attach()
 
-        loadPassengerRides()
-        loadDriverRides()
-    }
+        myRidesViewModel.getPassengerOldRides().observe(viewLifecycleOwner) { rides ->
+            adapters[0].submitList(rides)
+        }
 
-
-    fun loadPassengerRides() {
-        myRidesViewModel.getParticipantOldRides(currentPassengerRidesPage.toLong())
-            .observe(viewLifecycleOwner) {
-                adapters[0].submitList(it)
-            }
-    }
-
-    fun loadDriverRides() {
-        myRidesViewModel.getRiderOldRides(currentDriverRidesPage.toLong())
-            .observe(viewLifecycleOwner) {
-                adapters[1].submitList(it)
-            }
+        myRidesViewModel.getDriverOldRides().observe(viewLifecycleOwner) { rides ->
+            adapters[1].submitList(rides)
+        }
     }
 }

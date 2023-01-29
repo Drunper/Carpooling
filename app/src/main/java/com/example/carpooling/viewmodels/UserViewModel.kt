@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
 import androidx.lifecycle.liveData
-import com.example.carpooling.data.UserRepository
 import android.util.Log
 import com.example.carpooling.R
+import com.example.carpooling.data.RestRepository
 import com.example.carpooling.data.model.*
 import com.example.carpooling.data.restful.*
 import com.example.carpooling.data.restful.requests.LoginRequest
@@ -16,20 +16,11 @@ import com.example.carpooling.data.restful.requests.UpdateProfileRequest
 import com.example.carpooling.ui.login.LoginFormState
 import kotlinx.coroutines.*
 
-class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
+class UserViewModel(private val restRepository: RestRepository) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    /*private val _user = MutableLiveData(
-        User(
-            id = -1,
-            email = "not",
-            username = "logged",
-            profilePicReference = "in",
-            bio = "!"
-        )
-    )*/
     private val _user = MutableLiveData<User?>()
     val user: LiveData<User?> = _user
 
@@ -47,7 +38,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
     fun login(email: String, password: String): LiveData<LoginResult> {
         val loginResult = liveData {
             val request = LoginRequest(email, password)
-            when (val result = userRepository.login(request)) {
+            when (val result = restRepository.login(request)) {
                 is RestSuccess -> {
                     Log.d(AUTH_SUCCESS, "signInWithEmail:success")
                     emit(result.data)
@@ -80,7 +71,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
     fun initUser(token: String) {
         ApiClient.setApiService(token)
         job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = userRepository.getUser()) {
+            val value = when (val result = restRepository.getUser()) {
                 is RestSuccess -> result.data
                 is RestError -> null
                 is RestException -> null
@@ -94,7 +85,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
     fun sendPushToken(pushToken: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
             val sendPushTokenRequest = SendPushTokenRequest(pushToken = pushToken)
-            when (val result = userRepository.sendToken(sendPushTokenRequest)) {
+            when (val result = restRepository.sendToken(sendPushTokenRequest)) {
                 is RestSuccess -> Log.d("sendPushToken", "success")
                 is RestError -> Log.d("sendPushToken", "error")
                 is RestException -> Log.d("sendPushToken", "exception")
@@ -102,20 +93,18 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
         }
     }
 
-    fun deletePushToken() {
+    fun logout() {
         job = CoroutineScope(Dispatchers.IO).launch {
-            when (val result = userRepository.deleteToken()) {
+            when (val result = restRepository.deleteToken()) {
                 is RestSuccess -> Log.d("deletePushToken", "success")
                 is RestError -> Log.d("deletePushToken", "error")
                 is RestException -> Log.d("deletePushToken", "exception")
             }
+            withContext(Dispatchers.Main) {
+                _user.value = null
+                restRepository.logout()
+            }
         }
-    }
-
-    fun logout() {
-        deletePushToken()
-        _user.value = null
-        userRepository.logout()
     }
 
     fun loginDataChanged(email: String, password: String) {
@@ -134,7 +123,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     fun getUserDriverRating() {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = userRepository.getDriverRating()) {
+            val value = when (val result = restRepository.getDriverRating()) {
                 is RestSuccess -> {
                     result.data
                 }
@@ -153,7 +142,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     fun getUserPassengerRating() {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = userRepository.getPassengerRating()) {
+            val value = when (val result = restRepository.getPassengerRating()) {
                 is RestSuccess -> {
                     result.data
                 }
@@ -172,7 +161,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     fun updateProfile(request: UpdateProfileRequest) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = userRepository.updateProfile(request)) {
+            val value = when (val result = restRepository.updateProfile(request)) {
                 is RestSuccess -> result.data
                 is RestError -> Success(success = false)
                 is RestException -> Success(success = false)

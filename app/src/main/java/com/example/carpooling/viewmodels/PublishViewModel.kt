@@ -3,7 +3,7 @@ package com.example.carpooling.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.carpooling.data.ActiveRidesRepository
+import com.example.carpooling.data.RestRepository
 import com.example.carpooling.data.model.Success
 import com.example.carpooling.data.restful.RestError
 import com.example.carpooling.data.restful.RestException
@@ -11,7 +11,7 @@ import com.example.carpooling.data.restful.RestSuccess
 import com.example.carpooling.data.restful.requests.ActiveRidePublishRequest
 import kotlinx.coroutines.*
 
-class PublishViewModel(private val activeRidesRepository: ActiveRidesRepository) : ViewModel() {
+class PublishViewModel(private val restRepository: RestRepository) : ViewModel() {
 
     private var job: Job? = null
 
@@ -67,7 +67,7 @@ class PublishViewModel(private val activeRidesRepository: ActiveRidesRepository)
             addNotes = notes!!
         )
         job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = activeRidesRepository.publish(request)) {
+            val value = when (val result = restRepository.publish(request)) {
                 is RestSuccess -> result.data
                 is RestError -> Success(success = false)
                 is RestException -> Success(success = false)

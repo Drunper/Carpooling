@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.carpooling.databinding.MyRideTabItemBinding
 
 class MyRidesTabAdapter(
-    private val scrollListeners: List<RecyclerView.OnScrollListener>,
     private val adapters: List<MyRidesAdapter>
 ) : RecyclerView.Adapter<TabViewHolder>() {
 
@@ -20,7 +19,6 @@ class MyRidesTabAdapter(
 
     override fun onBindViewHolder(holder: TabViewHolder, position: Int) {
         holder.binding.recyclerView.adapter = adapters[position]
-        holder.binding.recyclerView.addOnScrollListener(scrollListeners[position])
         holder.binding.recyclerView.layoutManager =
             LinearLayoutManager(holder.itemView.context, LinearLayoutManager.VERTICAL, false)
     }

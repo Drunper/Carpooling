@@ -6,14 +6,17 @@ import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.example.carpooling.viewmodels.DateTimeViewModel
+import com.example.carpooling.viewmodels.SearchViewModel
+import com.example.carpooling.viewmodels.ViewModelFactory
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
 class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    private val dateTimeViewModel: DateTimeViewModel by activityViewModels()
+    private val searchViewModel: SearchViewModel by activityViewModels{
+        ViewModelFactory()
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Use the current date as the default date in the picker
@@ -30,6 +33,6 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
         val date = LocalDate.of(year, month + 1, day)
         val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        dateTimeViewModel.setDate(date.format(dtf))
+        searchViewModel.setDate(date.format(dtf))
     }
 }

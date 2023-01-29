@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- TODO: Choose colors -->
+    <color name="red">#F44336</color>
 </resources>
