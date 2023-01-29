@@ -14,7 +14,7 @@ data class ActiveRidesRequest(
     val toLng: Double,
     @SerializedName("date")
     val date: String,
-    @SerializedName("time")
+    @SerializedName("departure_time")
     val time: String,
     @SerializedName("price_lower")
     val priceLower: Double,

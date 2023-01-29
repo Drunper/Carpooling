@@ -46,7 +46,7 @@ class ActiveRideFragment : Fragment() {
 
                 binding.basicInfo.apply {
                     fieldDate.text = ride.date
-                    fieldTime.text = ride.time
+                    fieldTime.text = ride.departureTime
                     fieldFrom.text = fromAddressString
                     fieldTo.text = toAddressString
                     fieldPrice.text = ride.price.toString()

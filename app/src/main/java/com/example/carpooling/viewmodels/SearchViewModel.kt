@@ -16,6 +16,8 @@ import kotlinx.coroutines.*
 class SearchViewModel(private val restRepository: RestRepository) : ViewModel() {
 
     private val _searchQuery = MutableLiveData<ActiveRidesRequest>()
+    val searchQuery: LiveData<ActiveRidesRequest> = _searchQuery
+
     private var job: Job? = null
 
     private val _time = MutableLiveData<String>()

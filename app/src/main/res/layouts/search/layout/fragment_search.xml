@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/cardview_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/btnTime"
+                    android:text="@string/departure_time"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/guideline_vertical_55"
                     app:layout_constraintTop_toBottomOf="@+id/divider_to_date_time" />
@@ -284,6 +284,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/cardview_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

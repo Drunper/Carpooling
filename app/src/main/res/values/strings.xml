@@ -50,16 +50,19 @@
 
     <!-- Others -->
     <string name="btnNext">Avanti</string>
-    <string name="from">Partenza</string>
-    <string name="to">Destinazione</string>
+    <string name="from">Partenza da</string>
+    <string name="to">Arrivo a</string>
     <string name="price">Prezzo</string>
+    <string name="departure_time">Ora di partenza</string>
+    <string name="insert">Inserisci</string>
     <string name="btnSearch">Cerca</string>
     <string name="btnDate">Data</string>
     <string name="btnTime">Ora</string>
     <string name="luggage">Bagagli</string>
     <string name="silent">Silenzio</string>
     <string name="smoking">Fumatori</string>
-    <string name="resultsTitle">Risultati</string>
+    <string name="title_search_results">Risultati della ricerca</string>
+    <string name="field_search_query_datetime_format">Il giorno %1$s dalle ore %2$s</string>
     <string name="activeRideTitle">Riepilogo viaggio</string>
     <string name="btnBook">Prenota</string>
     <string name="bookRideTitle">Prenota</string>

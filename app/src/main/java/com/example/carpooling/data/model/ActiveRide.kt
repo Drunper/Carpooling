@@ -16,8 +16,10 @@ data class ActiveRide(
     val to_lng: Double,
     @SerializedName("date")
     val date: String,
-    @SerializedName("time")
-    val time: String,
+    @SerializedName("departure_time")
+    val departureTime: String,
+    @SerializedName("arrival_time")
+    val arrivalTime: String,
     @SerializedName("smoking")
     val smokingAllowed: Boolean,
     @SerializedName("luggage")

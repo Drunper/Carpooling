@@ -70,10 +70,15 @@ class LocationFragment : Fragment() {
             }
         }
 
-        binding.btnOk.setOnClickListener {
+        if (args.from)
+            binding.fieldLocation.hint = getString(R.string.from)
+        else
+            binding.fieldLocation.hint = getString(R.string.to)
+
+        binding.btnInsert.setOnClickListener {
             val location = Geocoding.getLatLngFromAddress(
                 requireContext(),
-                binding.editTextTextPersonName.text.toString()
+                binding.fieldLocation.editText!!.text.toString()
             )
             if (args.from)
                 searchViewModel.setFrom(location)
@@ -84,19 +89,14 @@ class LocationFragment : Fragment() {
     }
 
     private fun getLocation() {
-        Log.d("yo", "yo")
         if (checkPermission()) {
-            Log.d("yo", "yoo")
             if (isLocationEnabled()) {
-                Log.d("yo", "yooo")
                 locationClient.lastLocation.addOnCompleteListener { task ->
-                    Log.d("yo", "yoooo")
                     val location: Location? = task.result
                     if (location != null) {
-                        Log.d("yo", "yoooooo")
                         currentLocation = location
                         currentLocationString = Geocoding.getAddressFromLatLng(requireContext(), location.latitude, location.longitude)
-                        binding.editTextTextPersonName.setText(currentLocationString)
+                        binding.fieldLocation.editText!!.setText(currentLocationString)
                     }
                     else {
                         Log.d("locationDebug","permissions granted, location is null")
@@ -108,7 +108,6 @@ class LocationFragment : Fragment() {
                 startActivity(intent)
             }
         } else {
-            Log.d("yo", "tu ma")
             requestLocationPermissions()
         }
     }
