@@ -16,10 +16,14 @@ data class OldRide (
     val to_lng: Double,
     @SerializedName("date")
     val date: String,
-    @SerializedName("time")
-    val time: String,
+    @SerializedName("departure_time")
+    val departureTime: String,
+    @SerializedName("arrival_time")
+    val arrivalTime: String,
     @SerializedName("price")
     val price: Double,
+    @SerializedName("rider")
+    val rider: User,
     @SerializedName("participants")
-    val participants: List<User>
+    val passengers: List<User>
 ) : Serializable

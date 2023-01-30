@@ -60,12 +60,12 @@ class SearchViewModel(private val restRepository: RestRepository) : ViewModel() 
         return rides
     }
 
-    fun getActiveRideById(id: Long) : LiveData<ActiveRide?> {
+    fun getActiveRideById(id: Long) : LiveData<ActiveRide> {
         val ride = liveData {
             when (val result = restRepository.getActiveRide(id)) {
                 is RestSuccess -> emit(result.data)
-                is RestError -> emit(null)
-                is RestException -> emit(null)
+                is RestError -> {}
+                is RestException -> {}
             }
         }
         return ride

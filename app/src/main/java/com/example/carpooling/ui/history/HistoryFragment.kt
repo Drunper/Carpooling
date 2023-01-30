@@ -20,7 +20,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 class HistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentHistoryBinding
-    private lateinit var adapters: List<MyOldRidesAdapter>
+    private lateinit var passengerOldRidesAdapter: MyPassengerOldRidesAdapter
+    private lateinit var driverOldRidesAdapter: MyDriverOldRidesAdapter
 
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
@@ -43,34 +44,32 @@ class HistoryFragment : Fragment() {
         val tabLayout = binding.tabLayoutHistory
         val viewPager = binding.viewPagerHistory
         Log.d("historyLifecycle", "onViewCreated")
-        adapters = listOf(
-            MyOldRidesAdapter { rideID ->
-                val action = HistoryFragmentDirections.toPassengerOldRide(rideID)
-                navController.navigate(action)
-            }, MyOldRidesAdapter { rideID ->
-                val action = HistoryFragmentDirections.toDriverOldRide(rideID)
-                navController.navigate(action)
-            }
-        )
+        passengerOldRidesAdapter = MyPassengerOldRidesAdapter { rideID ->
+            val action = HistoryFragmentDirections.toPassengerOldRide(rideID)
+            navController.navigate(action)
+        }
+        driverOldRidesAdapter = MyDriverOldRidesAdapter { rideID ->
+            val action = HistoryFragmentDirections.toDriverOldRide(rideID)
+            navController.navigate(action) }
 
         val viewPagerAdapter = HistoryTabAdapter(
-            adapters = adapters
+            passengerOldRidesAdapter, driverOldRidesAdapter
         )
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             viewPager.setCurrentItem(tab.position, true)
-            if (position == 1)
-                tab.text = "Pubblicati"
             if (position == 0)
                 tab.text = "Prenotati"
+            if (position == 1)
+                tab.text = "Pubblicati"
         }.attach()
 
         myRidesViewModel.getPassengerOldRides().observe(viewLifecycleOwner) { rides ->
-            adapters[0].submitList(rides)
+            passengerOldRidesAdapter.submitList(rides)
         }
 
         myRidesViewModel.getDriverOldRides().observe(viewLifecycleOwner) { rides ->
-            adapters[1].submitList(rides)
+            driverOldRidesAdapter.submitList(rides)
         }
     }
 }

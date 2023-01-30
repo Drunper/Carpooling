@@ -21,9 +21,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.messaging.FirebaseMessaging
 
 class MyRidesFragment : Fragment() {
-
     private lateinit var binding: FragmentMyRidesBinding
-    private lateinit var adapters: List<MyRidesAdapter>
+    private lateinit var passengerActiveRidesAdapter: MyPassengerActiveRidesAdapter
+    private lateinit var driverActiveRidesAdapter: MyDriverActiveRidesAdapter
 
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
@@ -64,18 +64,18 @@ class MyRidesFragment : Fragment() {
             })
         }
 
-        adapters = listOf(
-            MyRidesAdapter { rideID ->
-                val action = MyRidesFragmentDirections.toParticipantRide(rideID)
-                navController.navigate(action)
-            }, MyRidesAdapter { rideID ->
-                val action = MyRidesFragmentDirections.toRiderRide(rideID)
-                navController.navigate(action)
-            }
-        )
+        passengerActiveRidesAdapter = MyPassengerActiveRidesAdapter { rideID ->
+            val action = MyRidesFragmentDirections.toParticipantRide(rideID)
+            navController.navigate(action)
+        }
+
+        driverActiveRidesAdapter = MyDriverActiveRidesAdapter { rideID ->
+            val action = MyRidesFragmentDirections.toRiderRide(rideID)
+            navController.navigate(action)
+        }
 
         val viewPagerAdapter = MyRidesTabAdapter(
-            adapters = adapters
+            passengerActiveRidesAdapter, driverActiveRidesAdapter
         )
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -87,11 +87,11 @@ class MyRidesFragment : Fragment() {
         }.attach()
 
         myRidesViewModel.getPassengerActiveRides().observe(viewLifecycleOwner) { rides ->
-            adapters[0].submitList(rides)
+            passengerActiveRidesAdapter.submitList(rides)
         }
 
         myRidesViewModel.getDriverActiveRides().observe(viewLifecycleOwner) { rides ->
-            adapters[1].submitList(rides)
+            driverActiveRidesAdapter.submitList(rides)
         }
     }
 }

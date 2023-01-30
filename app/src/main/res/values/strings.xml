@@ -54,7 +54,12 @@
     <string name="to">Arrivo a</string>
     <string name="price">Prezzo</string>
     <string name="departure_time">Ora di partenza</string>
+    <string name="arrival_time">Ora di arrivo</string>
+    <string name="notes">Note aggiuntive</string>
     <string name="insert">Inserisci</string>
+    <string name="driver">Autista</string>
+    <string name="passengers">Passeggeri</string>
+    <string name="you">Tu</string>
     <string name="btnSearch">Cerca</string>
     <string name="btnDate">Data</string>
     <string name="btnTime">Ora</string>

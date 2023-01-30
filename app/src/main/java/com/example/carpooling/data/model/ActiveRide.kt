@@ -29,11 +29,11 @@ data class ActiveRide(
     @SerializedName("available_seats")
     val availableSeats: Int,
     @SerializedName("add_notes")
-    val addNotes: String,
+    val notes: String,
     @SerializedName("rider")
     val rider: User,
     @SerializedName("price")
     val price: Double,
     @SerializedName("participants")
-    val participants: List<User>
+    val passengers: List<User>
 ) : Serializable
