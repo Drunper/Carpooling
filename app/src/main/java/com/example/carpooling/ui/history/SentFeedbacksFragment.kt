@@ -36,11 +36,9 @@ class SentFeedbacksFragment : Fragment() {
 
         val navController = findNavController()
         val adapter =
-            FeedbacksAdapter { feedbackId ->
+            FeedbacksAdapter(reviewer = true)
 
-            }
-
-        binding.recyclerViewSentFeedbacks.adapter = adapter
+        binding.recyclerviewSentFeedbacks.adapter = adapter
 
         binding.btnAddFeedback.setOnClickListener {
             val action = SentFeedbacksFragmentDirections.toWriteFeedback(args.rideId)

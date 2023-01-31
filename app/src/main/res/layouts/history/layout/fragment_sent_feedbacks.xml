@@ -9,36 +9,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/titleSentFeedbacks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="148dp"
-            android:text="@string/titleSentFeedbacks"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_sent_feedbacks"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constrainedHeight="true"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/guideline_top"
+            app:layout_constraintBottom_toTopOf="@id/btn_add_feedback"
+            tools:listitem="@layout/feedback_item"/>
 
         <Button
-            android:id="@+id/btnAddFeedback"
+            android:id="@+id/btn_add_feedback"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnAddFeedback"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_sent_feedbacks" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="116dp"
-            android:text="@string/btnAddFeedback"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewSentFeedbacks" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewSentFeedbacks"
-            android:layout_width="409dp"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="1dp"
-            app:layoutManager="LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleSentFeedbacks" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

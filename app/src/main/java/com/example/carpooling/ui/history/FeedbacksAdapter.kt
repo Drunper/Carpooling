@@ -5,16 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.carpooling.data.model.Feedback
 import com.example.carpooling.databinding.FeedbackItemBinding
 
-class FeedbacksAdapter(private val onClick: (Long) -> Unit) : ListAdapter<Feedback, FeedbacksAdapter.FeedbackViewHolder>(FeedbackDiffCallback) {
+class FeedbacksAdapter(private val reviewer: Boolean) : ListAdapter<Feedback, FeedbacksAdapter.FeedbackViewHolder>(FeedbackDiffCallback) {
 
     private lateinit var binding: FeedbackItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedbackViewHolder {
         binding = FeedbackItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FeedbackViewHolder(binding, onClick)
+        return FeedbackViewHolder(binding, reviewer)
     }
 
     override fun onBindViewHolder(holder: FeedbackViewHolder, position: Int) {
@@ -23,23 +24,25 @@ class FeedbacksAdapter(private val onClick: (Long) -> Unit) : ListAdapter<Feedba
     }
 
     class FeedbackViewHolder(private val binding: FeedbackItemBinding,
-                             private val onClick: (Long) -> Unit
+                             private val reviewer: Boolean
     ): RecyclerView.ViewHolder(binding.root) {
-        private var feedback: Feedback? = null
+        private var currentFeedback: Feedback? = null
 
-        init {
-            itemView.setOnClickListener {
-                feedback?.let {
-                    onClick(it.id)
-                }
+        fun bind(feedback: Feedback) {
+            currentFeedback = feedback
+            val picReference = if (reviewer) {
+                binding.fieldItemFeedbackUsername.text = feedback.recipient.username
+                feedback.recipient.profilePicReference
             }
-        }
-
-        fun bind(value: Feedback) {
-            feedback = value
-            binding.fieldText.text = value.text
-            binding.fieldUsername.text = value.reviewer.username
-            binding.fieldRating.text = value.rating.toString()
+            else {
+                binding.fieldItemFeedbackUsername.text = feedback.reviewer.username
+                feedback.reviewer.profilePicReference
+            }
+            binding.itemFeedbackText.text = feedback.text
+            binding.itemFeedbackRating.rating = feedback.rating.toFloat()
+            Glide.with(binding.root.context)
+                .load("http://10.0.2.2:8080/carpooling_images/$picReference")
+                .into(binding.imageItemFeedbackUser)
         }
     }
 }

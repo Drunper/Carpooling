@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,12 +15,16 @@ import com.example.carpooling.R
 import com.example.carpooling.data.model.User
 import com.example.carpooling.data.restful.requests.SendFeedbackRequest
 import com.example.carpooling.databinding.FragmentWriteFeedbackBinding
+import com.example.carpooling.utils.showSnackbar
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 
 class WriteFeedbackFragment : Fragment() {
 
     private lateinit var binding: FragmentWriteFeedbackBinding
+    private var recipientId: Long = -1L
     private val args: WriteFeedbackFragmentArgs by navArgs()
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
@@ -38,36 +43,39 @@ class WriteFeedbackFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val navController = findNavController()
-        val ratingPicker = binding.fieldRating
-        ratingPicker.minValue = 1
-        ratingPicker.maxValue = 5
-        ratingPicker.displayedValues = arrayOf("1", "2", "3", "4", "5")
-
-        val spinner = binding.fieldFeedbackRecipient
 
         myRidesViewModel.getMissingUserFeedbacks(args.rideId).observe(viewLifecycleOwner) { users ->
-            val items = users.map { user -> SpinnerItem(id = user.id, username = user.username) }
-            val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
-            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            val usersIds = users.map { user -> user.id }
+            val options = users.map { user -> user.username}
+            val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, options)
+            (binding.fieldWriteFeedbackRecipient.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
-            spinner.apply {
-                adapter = spinnerAdapter
-                setSelection(0, false)
-                prompt = "Seleziona l'utente che vuoi recensire"
+            (binding.fieldWriteFeedbackRecipient.editText as? MaterialAutoCompleteTextView)?.setOnItemClickListener { _, _, position, _ ->
+                recipientId = usersIds[position]
             }
 
             binding.btnSendFeedback.setOnClickListener {
-                val request = SendFeedbackRequest(
-                    rideId = args.rideId,
-                    rating = ratingPicker.value,
-                    text = binding.fieldFeedbackText.text.toString(),
-                    recipientId = (spinner.selectedItem as SpinnerItem).id
-                )
+                val rating = binding.writeFeedbackRating.rating
+                if (rating < 1) {
+                    binding.root.showSnackbar(
+                        requireView(),
+                        getString(R.string.error_necessary_rating),
+                        Snackbar.LENGTH_INDEFINITE,
+                        requireContext().getString(R.string.ok),
+                    ) {}
+                } else {
+                    val request = SendFeedbackRequest(
+                        rideId = args.rideId,
+                        rating = binding.writeFeedbackRating.rating.toInt(),
+                        text = binding.fieldWriteFeedbackText.editText?.text.toString(),
+                        recipientId = recipientId
+                    )
 
-                myRidesViewModel.sendFeedback(request).observe(viewLifecycleOwner) { success ->
-                    if (success) {
-                        val action = WriteFeedbackFragmentDirections.toWriteFeedbackSuccess()
-                        navController.navigate(action)
+                    myRidesViewModel.sendFeedback(request).observe(viewLifecycleOwner) { success ->
+                        if (success) {
+                            val action = WriteFeedbackFragmentDirections.toWriteFeedbackSuccess()
+                            navController.navigate(action)
+                        }
                     }
                 }
             }

@@ -15,11 +15,16 @@
     </style>
 
     <style name="buttonWarning" parent="Widget.Material3.Button">
-        <item name="android:backgroundTint">@color/design_default_color_error</item>
+        <item name="android:backgroundTint">?attr/colorError</item>
     </style>
 
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/gray_200</item>
+        <item name="colorControlActivated">@color/gold_700</item>
     </style>
 </resources>

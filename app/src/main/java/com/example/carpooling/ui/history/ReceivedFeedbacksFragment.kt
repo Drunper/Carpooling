@@ -33,13 +33,10 @@ class ReceivedFeedbacksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navController = findNavController()
         val adapter =
-            FeedbacksAdapter { feedbackId ->
+            FeedbacksAdapter(reviewer = false)
 
-            }
-
-        binding.feedbacksRecyclerView.adapter = adapter
+        binding.recyclerviewReceivedFeedbacks.adapter = adapter
 
         myRidesViewModel.oldRideReceivedFeedbacks(args.rideId).observe(viewLifecycleOwner) { feedbacks ->
             adapter.submitList(feedbacks)

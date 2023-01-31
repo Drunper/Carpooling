@@ -135,7 +135,7 @@ class LocationFragment : Fragment() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
             binding.root.showSnackbar(
                 requireView(),
-                requireContext().getString(R.string.location_permission_required),
+                getString(R.string.location_permission_required),
                 Snackbar.LENGTH_INDEFINITE,
                 requireContext().getString(R.string.ok),
             ) {

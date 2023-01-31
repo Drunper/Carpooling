@@ -53,6 +53,12 @@
     <string name="from">Partenza da</string>
     <string name="to">Arrivo a</string>
     <string name="price">Prezzo</string>
+    <string name="label_write_feedback_recipient">Destinatario</string>
+    <string name="label_write_feedback_text">Testo</string>
+    <string name="label_item_feedback_rating">Valutazione</string>
+    <string name="helper_write_feedback_text">Scrivi cosa ne pensi del viaggio fatto</string>
+    <string name="label_write_feedback_rating">Valutazione</string>
+    <string name="error_necessary_rating">Per procedere è necessario inserire una valutazione</string>
     <string name="departure_time">Ora di partenza</string>
     <string name="arrival_time">Ora di arrivo</string>
     <string name="notes">Note aggiuntive</string>
