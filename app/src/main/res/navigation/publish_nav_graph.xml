@@ -11,7 +11,12 @@
     <dialog
         android:id="@+id/publishTimePickerFragment"
         android:name="com.example.carpooling.ui.publish.PublishTimePickerFragment"
-        android:label="PublishTimePickerFragment" />
+        android:label="PublishTimePickerFragment">
+        <argument
+            android:name="departure"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </dialog>
     <fragment
         android:id="@+id/publishPriceFragment"
         android:name="com.example.carpooling.ui.publish.PublishPriceFragment"
@@ -52,8 +57,15 @@
         android:label="fragment_publish"
         tools:layout="@layout/fragment_publish">
         <action
-            android:id="@+id/toPublishDatetime"
-            app:destination="@id/publishDatetimeFragment" />
+            android:id="@+id/toPublishDate"
+            app:destination="@id/publishDateFragment" />
+        <action
+            android:id="@+id/insert_location"
+            app:destination="@id/publishLocationFragment">
+            <argument
+                android:name="from"
+                android:defaultValue="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/publishNotesFragment"
@@ -65,13 +77,13 @@
             app:destination="@id/publishPriceFragment" />
     </fragment>
     <fragment
-        android:id="@+id/publishDatetimeFragment"
-        android:name="com.example.carpooling.ui.publish.PublishDatetimeFragment"
-        android:label="fragment_publish_datetime"
-        tools:layout="@layout/fragment_publish_datetime">
+        android:id="@+id/publishDateFragment"
+        android:name="com.example.carpooling.ui.publish.PublishDateFragment"
+        android:label="fragment_publish_date"
+        tools:layout="@layout/fragment_publish_date">
         <action
-            android:id="@+id/toPublishSeats"
-            app:destination="@id/publishSeatsFragment" />
+            android:id="@+id/toPublishTime"
+            app:destination="@id/publishTimeFragment" />
     </fragment>
     <fragment
         android:id="@+id/publishOptionsFragment"
@@ -81,5 +93,30 @@
         <action
             android:id="@+id/toPublishNotes"
             app:destination="@id/publishNotesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishLocationFragment"
+        android:name="com.example.carpooling.ui.publish.PublishLocationFragment"
+        android:label="PublishLocationFragment">
+        <argument
+            android:name="from"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/publishTimeFragment"
+        android:name="com.example.carpooling.ui.publish.PublishTimeFragment"
+        android:label="fragment_publish_time"
+        tools:layout="@layout/fragment_publish_time">
+        <action
+            android:id="@+id/insert_time"
+            app:destination="@id/publishTimePickerFragment">
+            <argument
+                android:name="departure"
+                android:defaultValue="false" />
+        </action>
+        <action
+            android:id="@+id/toPublishSeats"
+            app:destination="@id/publishSeatsFragment" />
     </fragment>
 </navigation>

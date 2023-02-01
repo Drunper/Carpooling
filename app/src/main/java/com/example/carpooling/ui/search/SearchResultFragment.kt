@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentSearchResultBinding
+import com.example.carpooling.ui.myrides.MyPassengerActiveRidesAdapter
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
@@ -37,7 +38,7 @@ class SearchResultFragment : Fragment() {
 
         val navController = findNavController()
         val adapter =
-            ActiveRidesAdapter { activeRideID ->
+            MyPassengerActiveRidesAdapter { activeRideID ->
                 val action = SearchResultFragmentDirections.goToActiveRide(activeRideID)
                 navController.navigate(action)
             }

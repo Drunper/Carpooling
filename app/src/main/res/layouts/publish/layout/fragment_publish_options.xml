@@ -4,59 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.publish.PublishOptionsFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.carpooling.viewmodels.PublishViewModel" />
+    </data>
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <TextView
-            android:id="@+id/titlePublishOptions"
+            android:id="@+id/title_publish_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="70dp"
-            android:text="@string/titlePublishOptions"
+            android:text="@string/title_publish_options"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
         <CheckBox
-            android:id="@+id/publishCheckSmoking"
+            android:id="@+id/box_smoking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="164dp"
-            android:text="@string/smoking"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titlePublishOptions" />
+            android:text="@string/question_smoking"
+            android:layout_marginStart="-40dp"
+            android:checked="@={viewModel.smoking}"
+            app:layout_constraintBottom_toTopOf="@+id/box_luggage"
+            app:layout_constraintStart_toStartOf="@id/barrier2"
+            app:layout_constraintTop_toBottomOf="@+id/title_publish_options" />
 
         <CheckBox
-            android:id="@+id/publishCheckLuggage"
+            android:id="@+id/box_luggage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="173dp"
-            android:text="@string/luggage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/publishCheckSmoking" />
+            android:text="@string/question_luggage"
+            android:layout_marginStart="-40dp"
+            android:checked="@={viewModel.luggage}"
+            app:layout_constraintBottom_toTopOf="@+id/box_silence"
+            app:layout_constraintStart_toStartOf="@id/barrier2"
+            app:layout_constraintTop_toBottomOf="@+id/box_smoking" />
 
         <CheckBox
-            android:id="@+id/publishCheckSilent"
+            android:id="@+id/box_silence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="171dp"
-            android:text="@string/silent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/publishCheckLuggage" />
+            android:text="@string/question_silent"
+            android:layout_marginStart="-40dp"
+            android:checked="@={viewModel.silent}"
+            app:layout_constraintBottom_toTopOf="@+id/btn_to_publish_notes"
+            app:layout_constraintStart_toStartOf="@id/barrier2"
+            app:layout_constraintTop_toBottomOf="@+id/box_luggage" />
 
         <Button
-            android:id="@+id/btnPublishOptionsNext"
+            android:id="@+id/btn_to_publish_notes"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnNext"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_50"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/guideline_left" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="59dp"
-            android:layout_marginEnd="160dp"
-            android:text="@string/btnNext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/publishCheckSilent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:constraint_referenced_ids="btn_to_publish_notes" />
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

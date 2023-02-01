@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -22,7 +23,6 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_marginTop="?actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:defaultNavHost="true"

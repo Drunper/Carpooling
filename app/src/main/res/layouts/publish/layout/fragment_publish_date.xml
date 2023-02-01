@@ -2,10 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.publish.PublishFragment">
+    tools:context=".ui.publish.PublishDateFragment">
 
     <data>
-       <variable
+        <variable
             name="viewModel"
             type="com.example.carpooling.viewmodels.PublishViewModel" />
     </data>
@@ -16,70 +16,49 @@
         android:layout_marginTop="?attr/actionBarSize">
 
         <TextView
-            android:id="@+id/title_publish_start"
+            android:id="@+id/title_publish_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_publish_start"
+            android:text="@string/title_publish_date"
             android:textSize="24sp"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
         <TextView
-            android:id="@+id/label_from"
+            android:id="@+id/label_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/from"
-            android:textSize="16sp"
             android:layout_marginTop="8dp"
+            android:text="@string/btnDate"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/title_publish_start" />
+            app:layout_constraintTop_toBottomOf="@id/title_publish_date" />
 
         <TextView
-            android:id="@+id/field_from"
+            android:id="@+id/field_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/text_view_round_corner"
             android:clickable="true"
             android:textSize="24sp"
-            android:text="@{@string/format_location(viewModel.from.thoroughfare, viewModel.from.subThoroughfare, viewModel.from.locality)}"
+            android:text="@{viewModel.date}"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/label_from" />
-
-        <TextView
-            android:id="@+id/label_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/to"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/field_from" />
-
-        <TextView
-            android:id="@+id/field_to"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/text_view_round_corner"
-            android:clickable="true"
-            android:textSize="24sp"
-            android:text="@{@string/format_location(viewModel.to.thoroughfare, viewModel.to.subThoroughfare, viewModel.to.locality)}"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/label_to" />
+            app:layout_constraintTop_toBottomOf="@id/label_date" />
 
         <Button
-            android:id="@+id/btn_to_publish_date"
+            android:id="@+id/btn_to_publish_time"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/btnNext"
             android:enabled="false"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@+id/field_to" />
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/field_date" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"

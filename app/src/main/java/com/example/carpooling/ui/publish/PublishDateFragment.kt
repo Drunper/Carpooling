@@ -5,18 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.carpooling.R
-import com.example.carpooling.databinding.FragmentPublishDatetimeBinding
+import com.example.carpooling.databinding.FragmentPublishDateBinding
 import com.example.carpooling.viewmodels.PublishViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
-class PublishDatetimeFragment : Fragment() {
+class PublishDateFragment : Fragment() {
 
-    private lateinit var binding: FragmentPublishDatetimeBinding
+    private lateinit var binding: FragmentPublishDateBinding
     private val publishViewModel: PublishViewModel by activityViewModels{
         ViewModelFactory()
     }
@@ -26,31 +25,32 @@ class PublishDatetimeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_publish_datetime, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_publish_date, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            viewModel = publishViewModel
-        }
-
         val navController = findNavController()
 
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        binding.btnPublishDate.setOnClickListener{
-            navController.navigate(R.id.publishDatePickerFragment)
+        publishViewModel.date.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.btnToPublishTime.isEnabled = true
+            }
         }
 
-        binding.btnPublishTime.setOnClickListener{
-            navController.navigate(R.id.publishTimePickerFragment)
-        }
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = publishViewModel
 
-        binding.btnPublishDatetimeNext.setOnClickListener {
-            val action = PublishDatetimeFragmentDirections.toPublishSeats()
-            navController.navigate(action)
+            fieldDate.setOnClickListener {
+                navController.navigate(R.id.publishDatePickerFragment)
+            }
+
+            btnToPublishTime.setOnClickListener {
+                val action = PublishDateFragmentDirections.toPublishTime()
+                navController.navigate(action)
+            }
         }
     }
 }

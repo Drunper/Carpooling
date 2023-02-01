@@ -1,11 +1,11 @@
 package com.example.carpooling
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
+import android.util.TypedValue
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,12 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.carpooling.databinding.ActivityMainBinding
-import com.example.carpooling.ui.history.HistoryFragment
-import com.example.carpooling.ui.myrides.MyRidesFragment
-import com.example.carpooling.ui.publish.PublishFragment
-import com.example.carpooling.ui.search.SearchFragment
-import com.example.carpooling.ui.search.SearchResultFragment
-import com.example.carpooling.ui.profile.ProfileFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                 when (destination.id) {
                     R.id.searchFragment, R.id.publishFragment, R.id.searchResultFragment, R.id.historyFragment, R.id.profileFragment, R.id.myRidesFragment -> {
                         binding.bottomNav.visibility = View.VISIBLE
-                        com.google.android.material.R.styleable.ActionBar
                     }
 /*                    R.id.publishDatetimeFragment -> {
                         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)

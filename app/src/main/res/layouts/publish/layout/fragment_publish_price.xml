@@ -6,39 +6,77 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <TextView
-            android:id="@+id/titlePublishPrice"
+            android:id="@+id/title_publish_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="53dp"
-            android:text="@string/titlePublishPrice"
+            android:text="@string/title_publish_price"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toTopOf="@id/guideline_top"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left" />
 
-        <EditText
-            android:id="@+id/fieldPublishPrice"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/field_publish_price"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp"
-            android:layout_marginEnd="105dp"
-            android:ems="10"
-            android:hint="@string/hintFieldPublishPrice"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titlePublishPrice" />
+            android:layout_marginTop="24dp"
+            android:hint="@string/price"
+            app:helperText="@string/helper_publish_price"
+            app:errorEnabled="true"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/title_publish_price">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnPublishPriceNext"
+            android:id="@+id/btn_to_publish_summary"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/btnNext"
+            android:enabled="false"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/field_publish_price" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="163dp"
-            android:text="@string/btnNext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fieldPublishPrice" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

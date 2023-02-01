@@ -12,61 +12,95 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/btnPlus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
-            android:text="@string/btnPlus"
-            android:textSize="34sp"
-            app:layout_constraintStart_toEndOf="@+id/fieldAvailableSeats"
-            app:layout_constraintTop_toBottomOf="@+id/titlePublishSeats" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <TextView
-            android:id="@+id/titlePublishSeats"
+            android:id="@+id/title_publish_seats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
-            android:layout_marginEnd="48dp"
-            android:text="@string/titlePublishSeats"
+            android:text="@string/title_publish_seats"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/fieldAvailableSeats"
-            android:layout_width="54dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="76dp"
-            android:textSize="24sp"
-            android:text="@{viewModel.availableSeats.toString()}"
-            app:layout_constraintStart_toEndOf="@+id/btnMinus"
-            app:layout_constraintTop_toBottomOf="@+id/titlePublishSeats" />
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
         <Button
-            android:id="@+id/btnMinus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="64dp"
-            android:text="@string/btnMinus"
+            android:id="@+id/btn_minus"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btn_minus"
             android:enabled="@{viewModel.availableSeats != 1}"
-            android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titlePublishSeats" />
+            app:layout_constraintEnd_toStartOf="@+id/field_available_seats"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/title_publish_seats" />
+
+        <TextView
+            android:id="@+id/field_available_seats"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="32dp"
+            android:text="@{viewModel.availableSeats.toString()}"
+            android:background="@drawable/text_view_round_corner"
+            android:textSize="24sp"
+            android:minEms="1"
+            app:layout_constraintEnd_toStartOf="@+id/btn_plus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_minus"
+            app:layout_constraintTop_toBottomOf="@id/title_publish_seats" />
 
         <Button
-            android:id="@+id/btnPublishSeatsNext"
+            android:id="@+id/btn_plus"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btn_add"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/field_available_seats"
+            app:layout_constraintTop_toBottomOf="@id/title_publish_seats" />
+
+        <Button
+            android:id="@+id/btn_to_publish_options"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnNext"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/field_available_seats"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.5"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="163dp"
-            android:text="@string/btnNext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fieldAvailableSeats" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

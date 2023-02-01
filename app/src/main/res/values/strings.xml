@@ -27,16 +27,21 @@
     <string name="login_failed">"Login failed"</string>
 
     <!-- Publish -->
-    <string name="titlePublishStart">Inserisci partenza e destinazione</string>
-    <string name="titlePublishDatetime">Inserisci la data e l\'ora</string>
-    <string name="titlePublishSeats">Quanti posti sono disponibili?</string>
-    <string name="titlePublishOptions">Inserisci le tue preferenze</string>
-    <string name="titlePublishNotes">Se c\'è altro da sapere scrivilo qui</string>
-    <string name="titlePublishPrice">Inserisci il prezzo del viaggio</string>
-    <string name="titlePublishSummary">Rivedi il tuo viaggio prima di pubblicarlo</string>
+    <string name="title_publish_start">Da dove parti e dove arrivi?</string>
+    <string name="title_publish_date">Inserisci la data di partenza</string>
+    <string name="title_publish_time">Qual è l\'ora di partenza e di arrivo? </string>
+    <string name="title_publish_seats">Quanti posti sono disponibili?</string>
+    <string name="title_publish_options">Inserisci le tue preferenze</string>
+    <string name="title_publish_notes">Se c\'è altro da sapere scrivilo qui</string>
+    <string name="title_publish_price">Inserisci il prezzo del viaggio</string>
+    <string name="title_publish_summary">Rivedi il tuo viaggio prima di pubblicarlo</string>
+    <string name="question_smoking">È permesso fumare in auto?</string>
+    <string name="question_luggage">Si possono portare bagagli?</string>
+    <string name="question_silent">Si viaggia in silenzio?</string>
+    <string name="helper_publish_notes">Per esempio il modello di auto</string>
+    <string name="helper_publish_price">Per esempio 5.50</string>
+    <string name="error_publish_price">Inserisci un prezzo valido</string>
     <string name="titlePublishSuccess">Viaggio pubblicato con successo</string>
-    <string name="btnMinus">-</string>
-    <string name="btnPlus">+</string>
     <string name="btnPublish">Pubblica</string>
     <string name="labelPublishPrice">Prezzo</string>
 
@@ -49,6 +54,7 @@
     <string name="titleCancelBooking">Sei sicuro di voler cancellare la tua prenotazione?</string>
 
     <!-- Others -->
+    <string name="format_location">%1$s %2$s, %3$s</string>
     <string name="btnNext">Avanti</string>
     <string name="from">Partenza da</string>
     <string name="to">Arrivo a</string>
@@ -129,7 +135,7 @@
 
     <!-- Permissions -->
     <string name="location_permission_required">Per ricercare con la propria posizione sono necessari i permessi.</string>
-    <string name="ok">OK</string>
+    <string name="snackbar_ok">OK</string>
     <string name="location_permission_granted">Ora puoi effettuare ricerche usando la tua posizione.</string>
     <string name="use_current_location">Usa la tua posizione attuale</string>
 </resources>

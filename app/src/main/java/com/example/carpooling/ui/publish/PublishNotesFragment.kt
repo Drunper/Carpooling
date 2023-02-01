@@ -31,11 +31,10 @@ class PublishNotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val navController = findNavController()
 
-        binding.btnPublishNotesNext.setOnClickListener {
-            publishViewModel.notes = binding.fieldPublishNotes.text.toString()
+        binding.btnToPublishPrice.setOnClickListener {
+            publishViewModel.setNotes(binding.fieldPublishNotes.editText!!.text.toString())
             val action = PublishNotesFragmentDirections.toPublishPrice()
             navController.navigate(action)
         }

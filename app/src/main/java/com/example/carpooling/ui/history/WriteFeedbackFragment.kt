@@ -52,6 +52,7 @@ class WriteFeedbackFragment : Fragment() {
 
             (binding.fieldWriteFeedbackRecipient.editText as? MaterialAutoCompleteTextView)?.setOnItemClickListener { _, _, position, _ ->
                 recipientId = usersIds[position]
+                binding.btnSendFeedback.isEnabled = true
             }
 
             binding.btnSendFeedback.setOnClickListener {
@@ -61,7 +62,7 @@ class WriteFeedbackFragment : Fragment() {
                         requireView(),
                         getString(R.string.error_necessary_rating),
                         Snackbar.LENGTH_INDEFINITE,
-                        requireContext().getString(R.string.ok),
+                        requireContext().getString(R.string.snackbar_ok),
                     ) {}
                 } else {
                     val request = SendFeedbackRequest(

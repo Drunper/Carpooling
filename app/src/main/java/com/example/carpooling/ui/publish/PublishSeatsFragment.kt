@@ -32,24 +32,24 @@ class PublishSeatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val navController = findNavController()
+
         binding.apply {
             viewModel = publishViewModel
             lifecycleOwner = viewLifecycleOwner
-        }
 
-        val navController = findNavController()
+            btnMinus.setOnClickListener {
+                publishViewModel.decreaseAvailableSeats()
+            }
 
-        binding.btnPublishSeatsNext.setOnClickListener {
-            val action = PublishSeatsFragmentDirections.toPublishOptions()
-            navController.navigate(action)
-        }
+            btnPlus.setOnClickListener {
+                publishViewModel.increaseAvailableSeats()
+            }
 
-        binding.btnMinus.setOnClickListener {
-            publishViewModel.decreaseAvailableSeats()
-        }
-
-        binding.btnPlus.setOnClickListener {
-            publishViewModel.increaseAvailableSeats()
+            btnToPublishOptions.setOnClickListener {
+                val action = PublishSeatsFragmentDirections.toPublishOptions()
+                navController.navigate(action)
+            }
         }
     }
 }

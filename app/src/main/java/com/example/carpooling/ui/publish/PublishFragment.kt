@@ -32,14 +32,28 @@ class PublishFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val navController = findNavController()
 
-        binding.btnPublishStartNext.setOnClickListener {
-            publishViewModel.from = binding.editTextPublishFrom.text.toString()
-            publishViewModel.to = binding.editTextPublishTo.text.toString()
-            val action = PublishFragmentDirections.toPublishDatetime()
-            navController.navigate(action)
+        publishViewModel.locationFormState.observe(viewLifecycleOwner) {
+            if (it)
+                binding.btnToPublishDate.isEnabled = true
+        }
+
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = publishViewModel
+            fieldFrom.setOnClickListener {
+                val action = PublishFragmentDirections.insertLocation(true)
+                navController.navigate(action)
+            }
+            fieldTo.setOnClickListener {
+                val action = PublishFragmentDirections.insertLocation(false)
+                navController.navigate(action)
+            }
+            btnToPublishDate.setOnClickListener {
+                val action = PublishFragmentDirections.toPublishDate()
+                navController.navigate(action)
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.carpooling.ui.search
+package com.example.carpooling.ui.publish
 
 import android.Manifest
 import android.content.Context
@@ -22,18 +22,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentLocationBinding
+import com.example.carpooling.ui.search.LocationFragmentArgs
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.utils.showSnackbar
+import com.example.carpooling.viewmodels.PublishViewModel
 import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 
-class LocationFragment : Fragment() {
+class PublishLocationFragment  : Fragment() {
     private lateinit var binding: FragmentLocationBinding
     private lateinit var locationClient: FusedLocationProviderClient
-    private val args:LocationFragmentArgs by navArgs()
+    private val args: LocationFragmentArgs by navArgs()
     private val requestMultiplePermissionsLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -46,7 +48,7 @@ class LocationFragment : Fragment() {
     private var currentLocation: Location? = null
     private var currentLocationString: String? = null
 
-    private val searchViewModel: SearchViewModel by activityViewModels {
+    private val publishViewModel: PublishViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -62,6 +64,8 @@ class LocationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // TODO: controllo di correttezza sulla location, ovvero devo avere salvato un indirizzo valido
 
         val navController = findNavController()
         binding.btnCurrentPosition.setOnClickListener {
@@ -81,9 +85,9 @@ class LocationFragment : Fragment() {
                 binding.fieldLocation.editText!!.text.toString()
             )
             if (args.from)
-                searchViewModel.setFrom(location)
+                publishViewModel.setFrom(location)
             else
-                searchViewModel.setTo(location)
+                publishViewModel.setTo(location)
             navController.popBackStack()
         }
     }
