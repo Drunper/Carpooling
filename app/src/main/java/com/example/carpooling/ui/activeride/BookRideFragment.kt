@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentBookRideBinding
 import com.example.carpooling.viewmodels.BookingViewModel
@@ -39,9 +42,10 @@ class BookRideFragment : Fragment() {
         val navController = findNavController()
 
         bookingViewModel.bookRideResult.observe(viewLifecycleOwner) { success ->
-            if(success) {
-                val action = BookRideFragmentDirections.successBooking()
-                navController.navigate(action)
+            if (success) {
+                val action = MainNavGraphDirections.toSuccessDialog(title = R.string.success_booking_title, message = R.string.success_booking_message)
+                val navOptions = NavOptions.Builder().setPopUpTo(R.id.searchResultFragment, false).build()
+                navController.navigate(action, navOptions)
             }
         }
 

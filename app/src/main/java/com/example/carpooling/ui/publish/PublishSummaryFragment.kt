@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
 import com.example.carpooling.data.model.Locations
 import com.example.carpooling.data.restful.requests.ActiveRidePublishRequest
@@ -41,8 +43,9 @@ class PublishSummaryFragment : Fragment() {
         publishViewModel.apply {
             publishResult.observe(viewLifecycleOwner) { success ->
                 if (success) {
-                    val action = PublishSummaryFragmentDirections.toPublishSuccess()
-                    navController.navigate(action)
+                    val action = MainNavGraphDirections.toSuccessDialog(title = R.string.success_cancel_ride_title, message = R.string.success_cancel_ride_message)
+                    val navOptions = NavOptions.Builder().setPopUpTo(R.id.publishFragment, true).build()
+                    navController.navigate(action, navOptions)
                 }
             }
         }

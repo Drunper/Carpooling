@@ -43,14 +43,11 @@ class PublishViewModel(private val restRepository: RestRepository) : ViewModel()
     private val _publishResult = MutableLiveData<Boolean>()
     val publishResult: LiveData<Boolean> = _publishResult
 
-    private val _smoking = MutableLiveData(false)
-    val smoking: LiveData<Boolean> = _smoking
+    val smoking = MutableLiveData(false)
 
-    private val _luggage = MutableLiveData(false)
-    val luggage: LiveData<Boolean> = _luggage
+    val luggage = MutableLiveData(false)
 
-    private val _silent = MutableLiveData(false)
-    val silent: LiveData<Boolean> = _silent
+    val silent = MutableLiveData(false)
 
     private val _price = MutableLiveData<Double?>()
     val price: LiveData<Double?> = _price
@@ -117,9 +114,9 @@ class PublishViewModel(private val restRepository: RestRepository) : ViewModel()
             arrivalTime = _arrivalTime.value!!,
             price = _price.value!!,
             availableSeats = _availableSeats.value!!,
-            smokingAllowed = _smoking.value!!,
-            luggageAllowed = _luggage.value!!,
-            silentRide = _silent.value!!,
+            smokingAllowed = smoking.value!!,
+            luggageAllowed = luggage.value!!,
+            silentRide = silent.value!!,
             addNotes = notes.value!!
         )
         job = CoroutineScope(Dispatchers.IO).launch {

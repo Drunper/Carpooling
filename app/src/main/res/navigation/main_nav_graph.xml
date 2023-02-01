@@ -5,6 +5,11 @@
     android:id="@+id/main_nav_graph"
     android:label="@string/label_fragment_login"
     app:startDestination="@id/searchFragment">
+
+    <action
+        android:id="@+id/to_success_dialog"
+        app:destination="@id/successDialogFragment" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.carpooling.ui.login.LoginFragment"
@@ -84,16 +89,7 @@
             android:name="activeRideId"
             android:defaultValue="-1L"
             app:argType="long" />
-        <action
-            android:id="@+id/successBooking"
-            app:destination="@id/successBookingFragment"
-            app:popUpTo="@id/searchResultFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/successBookingFragment"
-        android:name="com.example.carpooling.ui.activeride.SuccessBookingFragment"
-        android:label="fragment_success_booking"
-        tools:layout="@layout/fragment_success_booking" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.carpooling.ui.profile.ProfileFragment"
@@ -126,17 +122,7 @@
         android:id="@+id/modifyProfileFragment"
         android:name="com.example.carpooling.ui.profile.ModifyProfileFragment"
         android:label="fragment_modify_profile"
-        tools:layout="@layout/fragment_modify_profile">
-        <action
-            android:id="@+id/modifyProfileSuccess"
-            app:destination="@id/modifyProfileSuccessFragment"
-            app:popUpTo="@id/profileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/modifyProfileSuccessFragment"
-        android:name="com.example.carpooling.ui.profile.ModifyProfileSuccessFragment"
-        android:label="fragment_modify_profile_success"
-        tools:layout="@layout/fragment_modify_profile_success" />
+        tools:layout="@layout/fragment_modify_profile"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.carpooling.ui.profile.SettingsFragment"
@@ -253,16 +239,7 @@
             android:name="rideId"
             android:defaultValue="-1L"
             app:argType="long" />
-        <action
-            android:id="@+id/toWriteFeedbackSuccess"
-            app:destination="@id/writeFeedbackSuccessFragment"
-            app:popUpTo="@id/sentFeedbacksFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/writeFeedbackSuccessFragment"
-        android:name="com.example.carpooling.ui.history.WriteFeedbackSuccessFragment"
-        android:label="fragment_write_feedback_success"
-        tools:layout="@layout/fragment_write_feedback_success" />
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.carpooling.ui.search.LocationFragment"
@@ -273,4 +250,17 @@
             android:defaultValue="false"
             app:argType="boolean" />
     </fragment>
+    <dialog
+        android:id="@+id/successDialogFragment"
+        android:name="com.example.carpooling.ui.alertdialogs.SuccessDialogFragment"
+        android:label="SuccessDialogFragment">
+        <argument
+            android:name="title"
+            android:defaultValue="@string/default_success_title"
+            app:argType="reference" />
+        <argument
+            android:name="message"
+            android:defaultValue="@string/default_success_message"
+            app:argType="reference" />
+    </dialog>
 </navigation>

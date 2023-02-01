@@ -54,6 +54,18 @@
     <string name="titleCancelBooking">Sei sicuro di voler cancellare la tua prenotazione?</string>
 
     <!-- Others -->
+    <string name="default_success_title">Successo</string>
+    <string name="default_success_message">Operazione effettuata con successo</string>
+    <string name="success_booking_title">Prenotazione effettuata con successo</string>
+    <string name="success_booking_message">Puoi vedere il viaggio prenotato dalla sezione "Viaggi". Nel caso in cui l\'autista dovesse cancellare il viaggio riceverai una notifica. </string>
+    <string name="success_send_feedback_title">Recensione inviata con successo</string>
+    <string name="success_send_feedback_message">Grazie per aver recensito il tuo collega, questo contribuirà a migliorare la qualità dei viaggi offerti.</string>
+    <string name="success_modify_profile_title">Profilo modificato con successo</string>
+    <string name="success_modify_profile_message">Le tue informazioni personali sono state aggiornate.</string>
+    <string name="success_cancel_ride_title">Pubblicazione cancellata con successo</string>
+    <string name="success_cancel_ride_message">Il viaggio offerto è stato cancellato, ai tuoi colleghi è stata inviata una notifica per avvertirli.</string>
+    <string name="success_cancel_booking_title">Prenotazione annullata con successo</string>
+    <string name="success_cancel_booking_message">La tua prenotazione è stata annullata, è stata inviata una notifica all\'autista per avvertilo di ciò. </string>
     <string name="format_location">%1$s %2$s, %3$s</string>
     <string name="btnNext">Avanti</string>
     <string name="from">Partenza da</string>

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentCancelBookingBinding
 import com.example.carpooling.viewmodels.MyRidesViewModel
@@ -44,7 +45,9 @@ class CancelBookingFragment : Fragment() {
 
         myRidesViewModel.cancelBookingResult.observe(viewLifecycleOwner) { success ->
             if(success) {
-                navController.popBackStack(R.id.myRidesFragment, false)
+                val action = MainNavGraphDirections.toSuccessDialog(title = R.string.success_cancel_booking_title, message = R.string.success_cancel_booking_message)
+                val navOptions = NavOptions.Builder().setPopUpTo(R.id.myRidesFragment, false).build()
+                navController.navigate(action, navOptions)
             }
         }
     }

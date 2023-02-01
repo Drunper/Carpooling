@@ -66,21 +66,21 @@ class ActiveRideFragment : Fragment() {
             binding.activeRideInfo.apply {
                 fieldActiveRideNotes.text = ride.notes
                 val smoking = if (ride.smokingAllowed) {
-                    R.drawable.smoking_image
+                    R.drawable.smoking_icon
                 } else {
-                    R.drawable.no_smoking_image
+                    R.drawable.no_smoking_icon
                 }
 
                 val luggage = if (ride.luggageAllowed) {
-                    R.drawable.luggage_image
+                    R.drawable.luggage_icon
                 } else {
-                    R.drawable.no_luggage_image
+                    R.drawable.no_luggage_icon
                 }
 
                 val silent = if (ride.silentRide) {
-                    R.drawable.silent_image
+                    R.drawable.silent_icon
                 } else {
-                    R.drawable.no_silent_image
+                    R.drawable.no_silent_icon
                 }
                 imageActiveRideSmoking.setImageResource(smoking)
                 imageActiveRideLuggage.setImageResource(luggage)

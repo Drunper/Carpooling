@@ -36,21 +36,10 @@
             app:destination="@id/publishOptionsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/publishSuccessFragment"
-        android:name="com.example.carpooling.ui.publish.PublishSuccessFragment"
-        android:label="fragment_publish_success"
-        tools:layout="@layout/fragment_publish_success" />
-    <fragment
         android:id="@+id/publishSummaryFragment"
         android:name="com.example.carpooling.ui.publish.PublishSummaryFragment"
         android:label="fragment_publish_summary"
-        tools:layout="@layout/fragment_publish_summary">
-        <action
-            android:id="@+id/toPublishSuccess"
-            app:destination="@id/publishSuccessFragment"
-            app:popUpTo="@id/publishFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_publish_summary"/>
     <fragment
         android:id="@+id/publishFragment"
         android:name="com.example.carpooling.ui.publish.PublishFragment"
