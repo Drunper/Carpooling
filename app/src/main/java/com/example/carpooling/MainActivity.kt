@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.startFragment, R.id.searchFragment, R.id.publishFragment,  R.id.myRidesFragment, R.id.historyFragment, R.id.profileFragment)
+            setOf(R.id.startFragment, R.id.searchFragment, R.id.publishFragment,  R.id.myRidesFragment, R.id.historyFragment, R.id.userProfileFragment)
         )
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 supportActionBar?.show()
                 when (destination.id) {
-                    R.id.searchFragment, R.id.publishFragment, R.id.searchResultFragment, R.id.historyFragment, R.id.profileFragment, R.id.myRidesFragment -> {
+                    R.id.searchFragment, R.id.publishFragment, R.id.searchResultFragment, R.id.historyFragment, R.id.userProfileFragment, R.id.myRidesFragment -> {
                         binding.bottomNav.visibility = View.VISIBLE
                         setMenuVisibility(true)
                     }

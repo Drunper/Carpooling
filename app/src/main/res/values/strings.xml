@@ -132,4 +132,5 @@
     <string name="settings_action_notifications">Enable notifications</string>
     <string name="settings_currency_title">Currency</string>
     <string name="settings_title_currency_category">Currency options</string>
+    <string name="title_app" translatable="false">CARPOOLING</string>
 </resources>

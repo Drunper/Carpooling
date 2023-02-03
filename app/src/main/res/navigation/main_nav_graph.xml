@@ -16,6 +16,14 @@
         app:popUpTo="@id/main_nav_graph"
         app:popUpToInclusive="true" />
 
+    <action
+        android:id="@+id/to_profile"
+        app:destination="@id/profileFragment" >
+        <argument
+            android:name="user_id"
+            android:defaultValue="-1" />
+    </action>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.carpooling.ui.login.LoginFragment"
@@ -72,17 +80,17 @@
             android:defaultValue="-1" />
         <action
             android:id="@+id/to_book_ride_dialog"
-            app:destination="@id/book_ride_dialog">
+            app:destination="@id/bookRideDialog">
             <argument
                 android:name="ride_id"
                 android:defaultValue="-1" />
         </action>
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.carpooling.ui.profile.ProfileFragment"
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.carpooling.ui.profile.UserProfileFragment"
         android:label="@string/label_fragment_profile"
-        tools:layout="@layout/fragment_profile">
+        tools:layout="@layout/fragment_user_profile">
         <action
             android:id="@+id/modifyProfile"
             app:destination="@id/modifyProfileFragment" />
@@ -221,7 +229,7 @@
             app:argType="integer" />
         <action
             android:id="@+id/to_submit_feedback_dialog_fragment"
-            app:destination="@id/submit_feedback_dialog" />
+            app:destination="@id/submitFeedbackDialog" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
@@ -234,7 +242,7 @@
             app:argType="boolean" />
     </fragment>
     <dialog
-        android:id="@+id/book_ride_dialog"
+        android:id="@+id/bookRideDialog"
         android:name="com.example.carpooling.ui.activeride.BookRideDialogFragment"
         android:label="Prenota">
         <argument
@@ -243,7 +251,7 @@
             app:argType="integer" />
     </dialog>
     <dialog
-        android:id="@+id/submit_feedback_dialog"
+        android:id="@+id/submitFeedbackDialog"
         android:name="com.example.carpooling.ui.history.SubmitFeedbackDialogFragment"
         android:label="Invia" />
     <dialog
@@ -254,4 +262,14 @@
         android:id="@+id/timePickerFragment"
         android:name="com.example.carpooling.ui.search.TimePickerFragment"
         android:label="" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.carpooling.ui.profile.ProfileFragment"
+        android:label=""
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="user_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
 </navigation>

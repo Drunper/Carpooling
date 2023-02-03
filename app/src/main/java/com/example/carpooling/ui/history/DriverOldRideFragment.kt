@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentDriverOldRideBinding
 import com.example.carpooling.ui.activeride.PassengerAdapter
@@ -34,7 +35,8 @@ class DriverOldRideFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_driver_old_ride, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_driver_old_ride, container, false)
         return binding.root
     }
 
@@ -44,8 +46,10 @@ class DriverOldRideFragment : Fragment() {
         val navController = findNavController()
 
         myRidesViewModel.getOldRideByID(args.rideId).observe(viewLifecycleOwner) { ride ->
-            val fromAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.from_lat, ride.from_lng)
-            val toAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.to_lat, ride.to_lng)
+            val fromAddressString =
+                Geocoding.getAddressFromLatLng(binding.root.context, ride.from_lat, ride.from_lng)
+            val toAddressString =
+                Geocoding.getAddressFromLatLng(binding.root.context, ride.to_lat, ride.to_lng)
 
             binding.basicInfo.apply {
                 fieldRideDate.text = ride.date.convertDate("dd/MM/yyyy", "EEE dd MMM yyyy")
@@ -59,12 +63,22 @@ class DriverOldRideFragment : Fragment() {
             binding.ridePassengersInfo.apply {
                 fieldRideRiderName.text = getString(R.string.you)
                 val picReference = ride.rider.profilePicReference
-                Glide.with(requireContext()).load("http://10.0.2.2:8080/carpooling_images/$picReference").into(imageRideRider)
-                val adapter = PassengerAdapter()
+                Glide.with(requireContext())
+                    .load("http://10.0.2.2:8080/carpooling_images/$picReference")
+                    .error(R.drawable.ic_user)
+                    .into(imageRideRider)
+                val adapter = PassengerAdapter { userID ->
+                    val action = MainNavGraphDirections.toProfile(userID)
+                    navController.navigate(action)
+                }
                 passengersRecyclerView.adapter = adapter
                 adapter.submitList(ride.passengers)
-            }
 
+                layoutRider.setOnClickListener {
+                    val action = MainNavGraphDirections.toProfile(ride.rider.id)
+                    navController.navigate(action)
+                }
+            }
 
             binding.btnDriverReceivedFeedbacks.setOnClickListener {
                 val action = DriverOldRideFragmentDirections.toDriverFeedbacks(args.rideId)

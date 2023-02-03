@@ -17,7 +17,7 @@
         android:icon="@drawable/ic_baseline_history_24"
         android:title="@string/bottom_bar_history" />
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/userProfileFragment"
         android:icon="@drawable/baseline_account_circle_white_24dp"
         android:title="@string/bottom_bar_profile" />
 </menu>

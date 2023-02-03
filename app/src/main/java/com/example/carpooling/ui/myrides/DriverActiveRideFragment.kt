@@ -33,7 +33,7 @@ class DriverActiveRideFragment : Fragment() {
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
     }
-    private val userViewModel: UserViewModel by activityViewModels{
+    private val userViewModel: UserViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -42,7 +42,12 @@ class DriverActiveRideFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_driver_active_ride, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_driver_active_ride,
+            container,
+            false
+        )
         return binding.root
     }
 
@@ -112,14 +117,25 @@ class DriverActiveRideFragment : Fragment() {
             binding.ridePassengersInfo.apply {
                 fieldRideRiderName.text = getString(R.string.you)
                 val picReference = ride.rider.profilePicReference
-                Glide.with(requireContext()).load("http://10.0.2.2:8080/carpooling_images/$picReference").into(imageRideRider)
-                val adapter = PassengerAdapter()
+                Glide.with(requireContext())
+                    .load("http://10.0.2.2:8080/carpooling_images/$picReference")
+                    .error(R.drawable.ic_user)
+                    .into(imageRideRider)
+                val adapter = PassengerAdapter { userID ->
+                    val action = MainNavGraphDirections.toProfile(userID)
+                    navController.navigate(action)
+                }
                 passengersRecyclerView.adapter = adapter
                 adapter.submitList(ride.passengers)
+
+                layoutRider.setOnClickListener {
+                    val action = MainNavGraphDirections.toProfile(ride.rider.id)
+                    navController.navigate(action)
+                }
             }
 
             myRidesViewModel.deleteRideResult.observe(viewLifecycleOwner) { success ->
-                if(success) {
+                if (success) {
                     binding.root.showSnackbar(
                         requireView(),
                         getString(R.string.snackbar_cancel_ride_success),
@@ -130,7 +146,7 @@ class DriverActiveRideFragment : Fragment() {
                 }
             }
 
-            binding.btnDeleteRide.setOnClickListener{
+            binding.btnDeleteRide.setOnClickListener {
                 val action = DriverActiveRideFragmentDirections.toCancelRideDialog(args.rideId)
                 navController.navigate(action)
             }

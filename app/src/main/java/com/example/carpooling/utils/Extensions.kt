@@ -43,7 +43,7 @@ fun String.convertDate(
 fun Address.getString(): String {
     return if (thoroughfare != null) {
         if (subThoroughfare != null)
-            "$thoroughfare, $subThoroughfare, $locality"
+            "$thoroughfare $subThoroughfare, $locality"
         else
             "$thoroughfare, $locality"
     }

@@ -18,16 +18,6 @@
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btn_modify_profile"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_modify_profile"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/profile_base_info" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"
             android:layout_width="wrap_content"

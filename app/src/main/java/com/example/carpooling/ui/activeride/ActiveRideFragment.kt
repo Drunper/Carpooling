@@ -10,8 +10,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentActiveRideBinding
+import com.example.carpooling.ui.search.SearchResultFragmentDirections
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.utils.convertDate
 import com.example.carpooling.utils.formatCurrency
@@ -88,10 +90,21 @@ class ActiveRideFragment : Fragment() {
             binding.ridePassengersInfo.apply {
                 fieldRideRiderName.text = ride.rider.username
                 val picReference = ride.rider.profilePicReference
-                Glide.with(requireContext()).load("http://10.0.2.2:8080/carpooling_images/$picReference").into(imageRideRider)
-                val adapter = PassengerAdapter()
+                Glide.with(requireContext())
+                    .load("http://10.0.2.2:8080/carpooling_images/$picReference")
+                    .error(R.drawable.ic_user)
+                    .into(imageRideRider)
+                val adapter = PassengerAdapter { userID ->
+                    val action = MainNavGraphDirections.toProfile(userID)
+                    navController.navigate(action)
+                }
                 passengersRecyclerView.adapter = adapter
                 adapter.submitList(ride.passengers)
+
+                layoutRider.setOnClickListener {
+                    val action = MainNavGraphDirections.toProfile(ride.rider.id)
+                    navController.navigate(action)
+                }
             }
 
             val btnBook = binding.btnBook

@@ -174,6 +174,17 @@ class UserViewModel(private val restRepository: RestRepository) : ViewModel() {
         return result
     }
 
+    fun getUserById(id: Int): LiveData<User> {
+        val value = liveData {
+            when (val result = restRepository.getUserById(id)) {
+                is RestSuccess -> emit(result.data)
+                is RestError -> {}
+                is RestException -> {}
+            }
+        }
+        return value
+    }
+
     fun getProfilePicReference(): String {
         return _user.value!!.profilePicReference
     }

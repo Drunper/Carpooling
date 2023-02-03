@@ -2,6 +2,7 @@ package com.example.carpooling.ui.history
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.carpooling.R
 import com.example.carpooling.data.model.OldRide
 import com.example.carpooling.databinding.PassengerOldRideItemBinding
 import com.example.carpooling.utils.Geocoding
@@ -50,6 +51,7 @@ class PassengerOldRideViewHolder(
 
         Glide.with(binding.root.context)
             .load("http://10.0.2.2:8080/carpooling_images/$picReference")
+            .error(R.drawable.ic_user)
             .into(binding.imageItemRideRider)
     }
 }

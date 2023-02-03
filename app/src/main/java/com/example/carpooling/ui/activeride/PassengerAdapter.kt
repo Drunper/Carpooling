@@ -6,16 +6,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.carpooling.R
 import com.example.carpooling.data.model.User
 import com.example.carpooling.databinding.PassengerItemBinding
 
-class PassengerAdapter: ListAdapter<User, PassengerViewHolder>(PassengerDiffCallback) {
+class PassengerAdapter(private val onClick: (Int) -> Unit) :
+    ListAdapter<User, PassengerViewHolder>(PassengerDiffCallback) {
 
     private lateinit var binding: PassengerItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PassengerViewHolder {
         binding = PassengerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PassengerViewHolder(binding)
+        return PassengerViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: PassengerViewHolder, position: Int) {
@@ -25,14 +27,28 @@ class PassengerAdapter: ListAdapter<User, PassengerViewHolder>(PassengerDiffCall
 }
 
 
-class PassengerViewHolder(private val binding: PassengerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class PassengerViewHolder(
+    private val binding: PassengerItemBinding,
+    val onClick: (Int) -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
     private var currentPassenger: User? = null
+
+    init {
+        itemView.setOnClickListener {
+            currentPassenger?.let {
+                onClick(it.id)
+            }
+        }
+    }
 
     fun bind(passenger: User) {
         currentPassenger = passenger
         binding.fieldRidePassengerName.text = passenger.username
         val picReference = passenger.profilePicReference
-        Glide.with(binding.root.context).load("http://10.0.2.2:8080/carpooling_images/$picReference").into(binding.imageRidePassenger)
+        Glide.with(binding.root.context)
+            .load("http://10.0.2.2:8080/carpooling_images/$picReference")
+            .error(R.drawable.ic_user)
+            .into(binding.imageRidePassenger)
     }
 }
 

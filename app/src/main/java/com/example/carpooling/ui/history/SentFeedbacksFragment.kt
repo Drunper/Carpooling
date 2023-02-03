@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentSentFeedbacksBinding
 import com.example.carpooling.viewmodels.MyRidesViewModel
@@ -36,7 +37,10 @@ class SentFeedbacksFragment : Fragment() {
 
         val navController = findNavController()
         val adapter =
-            FeedbacksAdapter(reviewer = true)
+            FeedbacksAdapter(reviewer = true, onClick = { userId ->
+                val action = MainNavGraphDirections.toProfile(userId)
+                navController.navigate(action)
+            })
 
         binding.recyclerviewSentFeedbacks.adapter = adapter
 

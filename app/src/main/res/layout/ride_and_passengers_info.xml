@@ -26,25 +26,36 @@
         app:layout_constraintTop_toTopOf="@id/guideline_top"
         app:layout_constraintStart_toStartOf="@id/guideline_left"/>
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/image_ride_rider"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/label_ride_rider"
-        app:layout_constraintBottom_toBottomOf="@id/divider_driver_passengers"
-        app:shapeAppearanceOverlay="@style/circleImageView"
-        app:srcCompat="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/field_ride_rider_name"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_rider"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="Mattia Viola"
-        app:layout_constraintStart_toEndOf="@id/image_ride_rider"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toBottomOf="@id/label_ride_rider"
-        app:layout_constraintBottom_toTopOf="@id/divider_driver_passengers"/>
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_ride_rider"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/field_ride_rider_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Mattia Viola"
+            app:layout_constraintStart_toEndOf="@id/image_ride_rider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider_driver_passengers"
@@ -54,7 +65,7 @@
         app:dividerColor="#B39DDB"
         app:dividerInsetEnd="20dp"
         app:dividerInsetStart="20dp"
-        app:layout_constraintTop_toBottomOf="@id/image_ride_rider" />
+        app:layout_constraintTop_toBottomOf="@id/layout_rider" />
 
     <TextView
         android:id="@+id/label_ride_passengers"

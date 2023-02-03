@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentSearchBinding
 import com.example.carpooling.utils.SessionManager
@@ -59,22 +60,25 @@ class SearchFragment : Fragment() {
             userViewModel.initUser(authToken)
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    Log.w("heya", "Fetching FCM registration token failed", task.exception)
                     return@OnCompleteListener
                 }
 
                 // Get new FCM registration token
                 val token = task.result
                 userViewModel.sendPushToken(token)
-
-                Log.d("heyaToken", token)
             })
         }
 
         binding.scrollview
 
         binding.fieldPrice.setLabelFormatter { value: Float ->
-            value.toDouble().formatCurrency(requireContext())
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            val format: NumberFormat = NumberFormat.getCurrencyInstance()
+            format.maximumFractionDigits = 0
+            format.minimumFractionDigits = 0
+            format.currency =
+                Currency.getInstance(sharedPreferences.getString("currency", "EUR"))
+            format.format(value.toDouble())
         }
 
         searchViewModel.date.observe(viewLifecycleOwner) { date ->
