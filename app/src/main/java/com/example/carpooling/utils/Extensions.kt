@@ -1,11 +1,14 @@
 package com.example.carpooling.utils
 
+import android.content.Context
 import android.content.res.Resources
 import android.location.Address
 import android.view.View
 import androidx.compose.ui.res.stringResource
+import androidx.preference.PreferenceManager
 import com.example.carpooling.R
 import com.google.android.material.snackbar.Snackbar
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,4 +50,14 @@ fun Address.getString(): String {
     else {
         locality
     }
+}
+
+fun Double.formatCurrency(context: Context): String {
+    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    val format: NumberFormat = NumberFormat.getCurrencyInstance()
+    format.maximumFractionDigits = 2
+    format.minimumFractionDigits = 2
+    format.currency =
+        Currency.getInstance(sharedPreferences.getString("currency", "EUR"))
+    return format.format(this)
 }

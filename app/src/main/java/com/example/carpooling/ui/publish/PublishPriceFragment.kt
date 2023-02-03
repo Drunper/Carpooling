@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPublishPriceBinding
 import com.example.carpooling.viewmodels.PublishViewModel
@@ -43,7 +44,8 @@ class PublishPriceFragment : Fragment() {
         }
 
         binding.apply {
-            val currency = Currency.getInstance("EUR").symbol
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            val currency = Currency.getInstance(sharedPreferences.getString("currency", "EUR")).symbol
             fieldPublishPrice.suffixText = currency
 
             btnToPublishSummary.setOnClickListener {

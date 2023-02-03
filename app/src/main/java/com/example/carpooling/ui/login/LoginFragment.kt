@@ -51,12 +51,8 @@ class LoginFragment : Fragment() {
                     return@Observer
                 }
                 loginButton.isEnabled = loginFormState.isDataValid
-                loginFormState.emailError?.let {
-                    emailInput.error = getString(it)
-                }
-                loginFormState.passwordError?.let {
-                    passwordInput.error = getString(it)
-                }
+                emailInput.error = if (loginFormState.emailError != null) getString(loginFormState.emailError) else ""
+                passwordInput.error = if (loginFormState.passwordError != null) getString(loginFormState.passwordError) else ""
             })
 
         val afterTextChangedListener = object : TextWatcher {
@@ -98,7 +94,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun login(email: String, password: String, rememberMe: Boolean) {
-        userViewModel.login(email, password).observe(viewLifecycleOwner
+        userViewModel.login(email, password).observe(
+            viewLifecycleOwner
         ) { result ->
             /*if (result.status == Result.Status.SUCCESS) {
                 result.data?.let { userViewModel.updateUser(it) }
@@ -109,13 +106,11 @@ class LoginFragment : Fragment() {
             findNavController().popBackStack()*/
             if (result.token == "401" || result.token == "error" || result.token == "exception") {
                 showLoginFailed(R.string.error_login_failed)
-            }
-            else {
+            } else {
                 val sessionManager = SessionManager(requireContext())
                 if (rememberMe) {
                     sessionManager.saveAuthToken(result.token)
-                }
-                else {
+                } else {
                     ApiClient.setApiService(result.token)
                     userViewModel.updateUser(result.user)
                 }

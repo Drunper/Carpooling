@@ -4,4 +4,14 @@
         <item>0.00</item>
         <item>100.0</item>
     </array>
+    <array name="settings_currency_entries">
+        <item>"Euro (€)"</item>
+        <item>"Sterlina (£)"</item>
+        <item>"Dollaro ($)"</item>
+    </array>
+    <array name="settings_currency_entry_values">
+        <item>"EUR"</item>
+        <item>"GBP"</item>
+        <item>"USD"</item>
+    </array>
 </resources>

@@ -9,12 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPassengerOldRideBinding
 import com.example.carpooling.ui.activeride.PassengerAdapter
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.utils.convertDate
+import com.example.carpooling.utils.formatCurrency
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import java.text.NumberFormat
@@ -45,19 +47,13 @@ class PassengerOldRideFragment : Fragment() {
             val fromAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.from_lat, ride.from_lng)
             val toAddressString = Geocoding.getAddressFromLatLng(binding.root.context, ride.to_lat, ride.to_lng)
 
-            val format: NumberFormat = NumberFormat.getCurrencyInstance()
-            format.maximumFractionDigits = 2
-            format.minimumFractionDigits = 2
-            format.currency =
-                Currency.getInstance("EUR")
-
             binding.basicInfo.apply {
                 fieldRideDate.text = ride.date.convertDate("dd/MM/yyyy", "EEE dd MMM yyyy")
                 fieldRideDepartureTime.text = ride.departureTime
                 fieldRideArrivalTime.text = ride.arrivalTime
                 fieldRideFrom.text = fromAddressString
                 fieldRideTo.text = toAddressString
-                fieldRidePrice.text = format.format(ride.price)
+                fieldRidePrice.text = ride.price.formatCurrency(requireContext())
             }
 
             binding.ridePassengersInfo.apply {

@@ -15,6 +15,7 @@ import com.example.carpooling.databinding.FragmentPassengerActiveRideBinding
 import com.example.carpooling.ui.activeride.PassengerAdapter
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.utils.convertDate
+import com.example.carpooling.utils.formatCurrency
 import com.example.carpooling.utils.showSnackbar
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
@@ -50,19 +51,13 @@ class PassengerActiveRideFragment : Fragment() {
             val toAddressString =
                 Geocoding.getAddressFromLatLng(binding.root.context, ride.to_lat, ride.to_lng)
 
-            val format: NumberFormat = NumberFormat.getCurrencyInstance()
-            format.maximumFractionDigits = 2
-            format.minimumFractionDigits = 2
-            format.currency =
-                Currency.getInstance("EUR") // TODO: bisogna usare la currency utilizzata di default dal sistema
-
             binding.basicInfo.apply {
                 fieldRideDate.text = ride.date.convertDate("dd/MM/yyyy", "EEE dd MMM yyyy")
                 fieldRideDepartureTime.text = ride.departureTime
                 fieldRideArrivalTime.text = ride.arrivalTime
                 fieldRideFrom.text = fromAddressString
                 fieldRideTo.text = toAddressString
-                fieldRidePrice.text = format.format(ride.price)
+                fieldRidePrice.text = ride.price.formatCurrency(requireContext())
             }
 
             binding.activeRideInfo.apply {

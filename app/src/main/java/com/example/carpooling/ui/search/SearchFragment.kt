@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentSearchBinding
 import com.example.carpooling.utils.SessionManager
+import com.example.carpooling.utils.formatCurrency
 import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
@@ -70,20 +71,17 @@ class SearchFragment : Fragment() {
             })
         }
 
+        binding.scrollview
+
         binding.fieldPrice.setLabelFormatter { value: Float ->
-            val format = NumberFormat.getCurrencyInstance()
-            format.maximumFractionDigits = 0
-            format.currency = Currency.getInstance("EUR")
-            format.format(value.toDouble())
+            value.toDouble().formatCurrency(requireContext())
         }
 
         searchViewModel.date.observe(viewLifecycleOwner) { date ->
-            // TODO: formattare bene la data
             binding.fieldDate.text = date
         }
 
         searchViewModel.time.observe(viewLifecycleOwner) { time ->
-            // TODO: formattare bene l'ora
             binding.fieldTime.text = time
         }
 

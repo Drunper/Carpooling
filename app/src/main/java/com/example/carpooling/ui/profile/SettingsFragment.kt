@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.view.marginTop
 import androidx.core.view.setMargins
+import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import com.example.carpooling.R
 
 class SettingsFragment : PreferenceFragmentCompat() {

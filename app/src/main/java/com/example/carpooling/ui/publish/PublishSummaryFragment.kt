@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPublishSummaryBinding
 import com.example.carpooling.utils.convertDate
+import com.example.carpooling.utils.formatCurrency
 import com.example.carpooling.utils.getString
 import com.example.carpooling.utils.showSnackbar
 import com.example.carpooling.viewmodels.PublishViewModel
@@ -51,12 +52,11 @@ class PublishSummaryFragment : Fragment() {
         }
 
         publishViewModel.price.observe(viewLifecycleOwner) { price ->
-            val format: NumberFormat = NumberFormat.getCurrencyInstance()
-            format.maximumFractionDigits = 2
-            format.minimumFractionDigits = 2
-            format.currency =
-                Currency.getInstance("EUR") // TODO: bisogna usare la currency utilizzata di default dal sistema
-            binding.fieldRidePrice.text = format.format(price)
+            if (price != null) {
+                binding.fieldRidePrice.text = price.formatCurrency(requireContext())
+            } else {
+                binding.fieldRidePrice.text = ""
+            }
         }
 
         publishViewModel.date.observe(viewLifecycleOwner) { date ->

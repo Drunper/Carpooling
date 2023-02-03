@@ -2,11 +2,22 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         app:key="notifications_category"
-        app:title="Notifiche">
+        app:title="@string/settings_title_notifications">
 
         <SwitchPreferenceCompat
             app:key="notifications"
-            app:title="Abilita le notifiche"/>
+            app:title="@string/settings_action_notifications"/>
 
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:key="currency_category"
+        app:title="@string/settings_title_currency_category">
+
+        <ListPreference
+            app:key="currency"
+            app:title="@string/settings_currency_title"
+            app:useSimpleSummaryProvider="true"
+            app:entries="@array/settings_currency_entries"
+            app:entryValues="@array/settings_currency_entry_values" />
     </PreferenceCategory>
 </PreferenceScreen>

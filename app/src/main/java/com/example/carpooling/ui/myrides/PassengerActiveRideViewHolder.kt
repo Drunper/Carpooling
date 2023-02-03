@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.example.carpooling.data.model.ActiveRide
 import com.example.carpooling.databinding.PassengerActiveRideItemBinding
 import com.example.carpooling.utils.Geocoding
+import com.example.carpooling.utils.formatCurrency
 import java.text.NumberFormat
 import java.util.*
 
@@ -26,14 +27,9 @@ class PassengerActiveRideViewHolder(
     fun bind(activeRide: ActiveRide) {
         currentActiveRide = activeRide
 
-        val format: NumberFormat = NumberFormat.getCurrencyInstance()
-        format.maximumFractionDigits = 2
-        format.minimumFractionDigits = 2
-        format.currency = Currency.getInstance("EUR") // TODO: bisogna usare la currency utilizzata di default dal sistema
-
         binding.fieldItemRideDepartureTime.text = activeRide.departureTime
         binding.fieldItemRideArrivalTime.text = activeRide.arrivalTime
-        binding.fieldItemRidePrice.text = format.format(activeRide.price)
+        binding.fieldItemRidePrice.text = activeRide.price.formatCurrency(binding.root.context)
         binding.fieldItemRideRiderName.text = activeRide.rider.username
 
         val from = Geocoding.getAddressFromLatLng(binding.root.context, activeRide.from_lat,  activeRide.from_lng)
