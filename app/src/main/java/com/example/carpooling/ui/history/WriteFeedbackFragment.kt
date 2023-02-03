@@ -26,7 +26,7 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView
 class WriteFeedbackFragment : Fragment() {
 
     private lateinit var binding: FragmentWriteFeedbackBinding
-    private var recipientId: Long = -1L
+    private var recipientId: Int = -1
     private val args: WriteFeedbackFragmentArgs by navArgs()
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
@@ -67,21 +67,28 @@ class WriteFeedbackFragment : Fragment() {
                         requireContext().getString(R.string.snackbar_ok),
                     ) {}
                 } else {
-                    val request = SendFeedbackRequest(
+                    myRidesViewModel.feedbackRequest = SendFeedbackRequest(
                         rideId = args.rideId,
                         rating = binding.writeFeedbackRating.rating.toInt(),
                         text = binding.fieldWriteFeedbackText.editText?.text.toString(),
                         recipientId = recipientId
                     )
 
-                    myRidesViewModel.sendFeedback(request).observe(viewLifecycleOwner) { success ->
-                        if (success) {
-                            val action = MainNavGraphDirections.toSuccessDialog(title = R.string.success_send_feedback_title, message = R.string.success_send_feedback_message)
-                            val navOptions = NavOptions.Builder().setPopUpTo(R.id.sentFeedbacksFragment, false).build()
-                            navController.navigate(action, navOptions)
-                        }
-                    }
+                    val action = WriteFeedbackFragmentDirections.toSubmitFeedbackDialogFragment()
+                    navController.navigate(action)
                 }
+            }
+        }
+
+        myRidesViewModel.sendFeedbackResult.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                binding.root.showSnackbar(
+                    requireView(),
+                    getString(R.string.snackbar_send_feedback_success),
+                    Snackbar.LENGTH_LONG,
+                    null
+                ) {}
+                navController.popBackStack()
             }
         }
     }

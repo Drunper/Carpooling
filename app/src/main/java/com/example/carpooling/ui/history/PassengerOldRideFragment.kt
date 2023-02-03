@@ -14,6 +14,7 @@ import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPassengerOldRideBinding
 import com.example.carpooling.ui.activeride.PassengerAdapter
 import com.example.carpooling.utils.Geocoding
+import com.example.carpooling.utils.convertDate
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import java.text.NumberFormat
@@ -51,7 +52,7 @@ class PassengerOldRideFragment : Fragment() {
                 Currency.getInstance("EUR")
 
             binding.basicInfo.apply {
-                fieldRideDate.text = ride.date
+                fieldRideDate.text = ride.date.convertDate("dd/MM/yyyy", "EEE dd MMM yyyy")
                 fieldRideDepartureTime.text = ride.departureTime
                 fieldRideArrivalTime.text = ride.arrivalTime
                 fieldRideFrom.text = fromAddressString

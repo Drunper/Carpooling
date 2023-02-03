@@ -7,8 +7,14 @@
     app:startDestination="@id/searchFragment">
 
     <action
-        android:id="@+id/to_success_dialog"
-        app:destination="@id/successDialogFragment" />
+        android:id="@+id/to_settings_fragment"
+        app:destination="@id/settingsFragment" />
+
+    <action
+        android:id="@+id/logout"
+        app:destination="@id/startFragment"
+        app:popUpTo="@id/main_nav_graph"
+        app:popUpToInclusive="true" />
 
     <fragment
         android:id="@+id/loginFragment"
@@ -24,7 +30,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.carpooling.ui.search.SearchFragment"
-        android:label="fragment_search"
+        android:label="@string/label_fragment_search"
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/goToSearchResults"
@@ -42,75 +48,49 @@
                 android:defaultValue="false" />
         </action>
     </fragment>
-    <dialog
-        android:id="@+id/datePickerFragment"
-        android:name="com.example.carpooling.ui.search.DatePickerFragment"
-        android:label="DatePickerFragment" />
-    <dialog
-        android:id="@+id/timePickerFragment"
-        android:name="com.example.carpooling.ui.search.TimePickerFragment"
-        android:label="TimePickerFragment" />
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.example.carpooling.ui.search.SearchResultFragment"
-        android:label="fragment_search_result"
+        android:label="@string/label_fragment_search_result"
         tools:layout="@layout/fragment_search_result">
         <action
             android:id="@+id/goToActiveRide"
             app:destination="@id/activeRideFragment">
             <argument
                 android:name="active_ride_id"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
         </action>
     </fragment>
     <fragment
         android:id="@+id/activeRideFragment"
         android:name="com.example.carpooling.ui.activeride.ActiveRideFragment"
-        android:label="fragment_active_ride"
+        android:label=""
         tools:layout="@layout/fragment_active_ride">
         <argument
             android:name="active_ride_id"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            app:argType="integer"
+            android:defaultValue="-1" />
         <action
-            android:id="@+id/bookRide"
-            app:destination="@id/bookRideFragment">
+            android:id="@+id/to_book_ride_dialog"
+            app:destination="@id/book_ride_dialog">
             <argument
-                android:name="activeRideId"
-                android:defaultValue="-1L" />
+                android:name="ride_id"
+                android:defaultValue="-1" />
         </action>
-    </fragment>
-    <fragment
-        android:id="@+id/bookRideFragment"
-        android:name="com.example.carpooling.ui.activeride.BookRideFragment"
-        android:label="fragment_book_ride"
-        tools:layout="@layout/fragment_book_ride">
-        <argument
-            android:name="activeRideId"
-            android:defaultValue="-1L"
-            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.carpooling.ui.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="@string/label_fragment_profile"
         tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/logout"
-            app:destination="@id/startFragment"
-            app:popUpTo="@id/main_nav_graph"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/modifyProfile"
             app:destination="@id/modifyProfileFragment" />
-        <action
-            android:id="@+id/toSettings"
-            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/startFragment"
         android:name="com.example.carpooling.ui.login.StartFragment"
-        android:label="fragment_start"
+        android:label=""
         tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/goToLogin"
@@ -121,47 +101,47 @@
     <fragment
         android:id="@+id/modifyProfileFragment"
         android:name="com.example.carpooling.ui.profile.ModifyProfileFragment"
-        android:label="fragment_modify_profile"
+        android:label=""
         tools:layout="@layout/fragment_modify_profile"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.carpooling.ui.profile.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="@string/label_fragment_settings" />
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.carpooling.ui.history.HistoryFragment"
-        android:label="fragment_history"
+        android:label="@string/label_fragment_history"
         tools:layout="@layout/fragment_history">
         <action
             android:id="@+id/toDriverOldRide"
             app:destination="@id/driverOldRideFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
         </action>
         <action
             android:id="@+id/toPassengerOldRide"
             app:destination="@id/passengerOldRideFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
         </action>
     </fragment>
     <fragment
         android:id="@+id/passengerOldRideFragment"
         android:name="com.example.carpooling.ui.history.PassengerOldRideFragment"
-        android:label="fragment_passenger_old_ride"
+        android:label=""
         tools:layout="@layout/fragment_passenger_old_ride">
         <argument
             android:name="rideId"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <action
             android:id="@+id/toPassengerFeedbacks"
             app:destination="@id/receivedFeedbacksFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
             <argument
                 android:name="driver"
                 android:defaultValue="false" />
@@ -171,24 +151,24 @@
             app:destination="@id/sentFeedbacksFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
         </action>
     </fragment>
     <fragment
         android:id="@+id/driverOldRideFragment"
         android:name="com.example.carpooling.ui.history.DriverOldRideFragment"
-        android:label="fragment_driver_old_ride"
+        android:label=""
         tools:layout="@layout/fragment_driver_old_ride">
         <argument
             android:name="rideId"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <action
             android:id="@+id/toDriverFeedbacks"
             app:destination="@id/receivedFeedbacksFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
             <argument
                 android:name="driver"
                 android:defaultValue="true" />
@@ -198,7 +178,7 @@
             app:destination="@id/sentFeedbacksFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
             <argument
                 android:name="driver"
                 android:defaultValue="true" />
@@ -207,43 +187,46 @@
     <fragment
         android:id="@+id/receivedFeedbacksFragment"
         android:name="com.example.carpooling.ui.history.ReceivedFeedbacksFragment"
-        android:label="fragment_received_feedbacks"
+        android:label=""
         tools:layout="@layout/fragment_received_feedbacks">
         <argument
             android:name="rideId"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/sentFeedbacksFragment"
         android:name="com.example.carpooling.ui.history.SentFeedbacksFragment"
-        android:label="SentFeedbacksFragment">
+        android:label="">
         <argument
             android:name="rideId"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <action
             android:id="@+id/toWriteFeedback"
             app:destination="@id/writeFeedbackFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
         </action>
     </fragment>
     <fragment
         android:id="@+id/writeFeedbackFragment"
         android:name="com.example.carpooling.ui.history.WriteFeedbackFragment"
-        android:label="fragment_write_feedback"
+        android:label=""
         tools:layout="@layout/fragment_write_feedback">
         <argument
             android:name="rideId"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/to_submit_feedback_dialog_fragment"
+            app:destination="@id/submit_feedback_dialog" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
         android:name="com.example.carpooling.ui.search.LocationFragment"
-        android:label="fragment_location"
+        android:label=""
         tools:layout="@layout/fragment_location">
         <argument
             android:name="from"
@@ -251,16 +234,24 @@
             app:argType="boolean" />
     </fragment>
     <dialog
-        android:id="@+id/successDialogFragment"
-        android:name="com.example.carpooling.ui.alertdialogs.SuccessDialogFragment"
-        android:label="SuccessDialogFragment">
+        android:id="@+id/book_ride_dialog"
+        android:name="com.example.carpooling.ui.activeride.BookRideDialogFragment"
+        android:label="Prenota">
         <argument
-            android:name="title"
-            android:defaultValue="@string/default_success_title"
-            app:argType="reference" />
-        <argument
-            android:name="message"
-            android:defaultValue="@string/default_success_message"
-            app:argType="reference" />
+            android:name="ride_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </dialog>
+    <dialog
+        android:id="@+id/submit_feedback_dialog"
+        android:name="com.example.carpooling.ui.history.SubmitFeedbackDialogFragment"
+        android:label="Invia" />
+    <dialog
+        android:id="@+id/datePickerFragment"
+        android:name="com.example.carpooling.ui.search.DatePickerFragment"
+        android:label="" />
+    <dialog
+        android:id="@+id/timePickerFragment"
+        android:name="com.example.carpooling.ui.search.TimePickerFragment"
+        android:label="" />
 </navigation>

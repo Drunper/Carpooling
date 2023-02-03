@@ -33,7 +33,7 @@ import com.google.android.material.snackbar.Snackbar
 class LocationFragment : Fragment() {
     private lateinit var binding: FragmentLocationBinding
     private lateinit var locationClient: FusedLocationProviderClient
-    private val args:LocationFragmentArgs by navArgs()
+    private val args: LocationFragmentArgs by navArgs()
     private val requestMultiplePermissionsLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -66,8 +66,6 @@ class LocationFragment : Fragment() {
         val navController = findNavController()
         binding.btnCurrentPosition.setOnClickListener {
             getLocation()
-            if (currentLocationString != null) {
-            }
         }
 
         if (args.from)
@@ -80,11 +78,16 @@ class LocationFragment : Fragment() {
                 requireContext(),
                 binding.fieldLocation.editText!!.text.toString()
             )
-            if (args.from)
-                searchViewModel.setFrom(location)
-            else
-                searchViewModel.setTo(location)
-            navController.popBackStack()
+            if (location != null) {
+                binding.fieldLocation.error = null
+                if (args.from)
+                    searchViewModel.setFrom(location)
+                else
+                    searchViewModel.setTo(location)
+                navController.popBackStack()
+            } else {
+                binding.fieldLocation.error = getString(R.string.error_field_location)
+            }
         }
     }
 
@@ -95,15 +98,25 @@ class LocationFragment : Fragment() {
                     val location: Location? = task.result
                     if (location != null) {
                         currentLocation = location
-                        currentLocationString = Geocoding.getAddressFromLatLng(requireContext(), location.latitude, location.longitude)
+                        currentLocationString = Geocoding.getAddressFromLatLng(
+                            requireContext(),
+                            location.latitude,
+                            location.longitude
+                        )
                         binding.fieldLocation.editText!!.setText(currentLocationString)
-                    }
-                    else {
-                        Log.d("locationDebug","permissions granted, location is null")
+                    } else {
+                        binding.root.showSnackbar(
+                            requireView(),
+                            getString(R.string.snackbar_get_location_error),
+                            Snackbar.LENGTH_LONG,
+                            null,
+                        ) {}
+                        Log.d("locationDebug", "permissions granted, location is null")
                     }
                 }
             } else {
-                Toast.makeText(requireContext(), "Please turn on location", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Please turn on location", Toast.LENGTH_LONG)
+                    .show()
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(intent)
             }

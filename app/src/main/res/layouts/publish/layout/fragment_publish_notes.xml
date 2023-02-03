@@ -43,7 +43,7 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/btnNext"
+            android:text="@string/btn_next"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/field_publish_notes" />

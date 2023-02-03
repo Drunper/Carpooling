@@ -44,7 +44,7 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/btnNext"
+            android:text="@string/btn_next"
             android:enabled="false"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/guideline_left"

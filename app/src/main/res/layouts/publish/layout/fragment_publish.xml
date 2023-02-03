@@ -43,7 +43,7 @@
             android:background="@drawable/text_view_round_corner"
             android:clickable="true"
             android:textSize="24sp"
-            android:text="@{@string/format_location(viewModel.from.thoroughfare, viewModel.from.subThoroughfare, viewModel.from.locality)}"
+            android:text="@{viewModel.from.toString()}"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/label_from" />
@@ -65,7 +65,7 @@
             android:background="@drawable/text_view_round_corner"
             android:clickable="true"
             android:textSize="24sp"
-            android:text="@{@string/format_location(viewModel.to.thoroughfare, viewModel.to.subThoroughfare, viewModel.to.locality)}"
+            android:text="@{viewModel.to.toString()}"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/label_to" />
@@ -75,7 +75,7 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/btnNext"
+            android:text="@string/btn_next"
             android:enabled="false"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"

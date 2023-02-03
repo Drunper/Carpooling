@@ -5,7 +5,7 @@ import java.io.Serializable
 
 data class User(
     @SerializedName("id")
-    val id: Long,
+    val id: Int,
     @SerializedName("email")
     val email: String,
     @SerializedName("username")

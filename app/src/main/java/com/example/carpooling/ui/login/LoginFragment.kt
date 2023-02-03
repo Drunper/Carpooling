@@ -13,10 +13,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.fragment.findNavController
 import com.example.carpooling.databinding.FragmentLoginBinding
-import com.example.carpooling.data.Result
 import com.example.carpooling.R
 import com.example.carpooling.data.restful.ApiClient
 import com.example.carpooling.utils.SessionManager
@@ -30,7 +28,6 @@ class LoginFragment : Fragment() {
     private val userViewModel: UserViewModel by activityViewModels {
         ViewModelFactory()
     }
-    private lateinit var savedStateHandle: SavedStateHandle
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,11 +41,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*savedStateHandle = findNavController().previousBackStackEntry!!.savedStateHandle
-        savedStateHandle.set(LOGIN_SUCCESSFUL, false)*/
-
-        val emailEditText = binding.email
-        val passwordEditText = binding.password
+        val emailInput = binding.fieldLoginEmail
+        val passwordInput = binding.fieldLoginPassword
         val loginButton = binding.login
         val rememberMeCheckbox = binding.remember
         userViewModel.loginFormState.observe(viewLifecycleOwner,
@@ -58,10 +52,10 @@ class LoginFragment : Fragment() {
                 }
                 loginButton.isEnabled = loginFormState.isDataValid
                 loginFormState.emailError?.let {
-                    emailEditText.error = getString(it)
+                    emailInput.error = getString(it)
                 }
                 loginFormState.passwordError?.let {
-                    passwordEditText.error = getString(it)
+                    passwordInput.error = getString(it)
                 }
             })
 
@@ -76,18 +70,18 @@ class LoginFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 userViewModel.loginDataChanged(
-                    emailEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    emailInput.editText?.text.toString(),
+                    passwordInput.editText?.text.toString()
                 )
             }
         }
-        emailEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+        emailInput.editText?.addTextChangedListener(afterTextChangedListener)
+        passwordInput.editText?.addTextChangedListener(afterTextChangedListener)
+        passwordInput.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 login(
-                    emailEditText.text.toString(),
-                    passwordEditText.text.toString(),
+                    emailInput.editText?.text.toString(),
+                    passwordInput.editText?.text.toString(),
                     rememberMeCheckbox.isChecked
                 )
             }
@@ -96,8 +90,8 @@ class LoginFragment : Fragment() {
 
         loginButton.setOnClickListener {
             login(
-                emailEditText.text.toString(),
-                passwordEditText.text.toString(),
+                emailInput.editText?.text.toString(),
+                passwordInput.editText?.text.toString(),
                 rememberMeCheckbox.isChecked
             )
         }
@@ -114,7 +108,7 @@ class LoginFragment : Fragment() {
             }
             findNavController().popBackStack()*/
             if (result.token == "401" || result.token == "error" || result.token == "exception") {
-                showLoginFailed(R.string.login_failed)
+                showLoginFailed(R.string.error_login_failed)
             }
             else {
                 val sessionManager = SessionManager(requireContext())

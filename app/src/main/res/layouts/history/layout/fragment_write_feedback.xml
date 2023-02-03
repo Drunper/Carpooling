@@ -13,7 +13,7 @@
             android:id="@+id/title_send_feedback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/titleSendFeedback"
+            android:text="@string/title_send_feedback"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -52,7 +52,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text|textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +86,7 @@
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/btnSendFeedback"
+            android:text="@string/btn_send_feedback"
             android:enabled="false"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"

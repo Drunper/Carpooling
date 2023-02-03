@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class SendFeedbackRequest(
     @SerializedName("ride_id")
-    val rideId: Long,
+    val rideId: Int,
     @SerializedName("recipient_id")
-    val recipientId: Long,
+    val recipientId: Int,
     @SerializedName("rating")
     val rating: Int,
     @SerializedName("text")

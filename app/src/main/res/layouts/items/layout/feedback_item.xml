@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toTopOf="@id/guideline_top"
             app:shapeAppearanceOverlay="@style/circleImageView"
-            app:srcCompat="@mipmap/ic_launcher" />
+            tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/field_item_feedback_username"

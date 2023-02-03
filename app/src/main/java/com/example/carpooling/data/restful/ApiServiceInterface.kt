@@ -18,16 +18,16 @@ interface ApiServiceInterface {
     suspend fun getUser(): RestResult<User>
 
     @GET("api/active_ride/{id}")
-    suspend fun getActiveRide(@Path("id") id: Long) : RestResult<ActiveRide>
+    suspend fun getActiveRide(@Path("id") id: Int) : RestResult<ActiveRide>
 
     @GET("api/old_ride/{id}")
-    suspend fun getOldRide(@Path("id") id: Long) : RestResult<OldRide>
+    suspend fun getOldRide(@Path("id") id: Int) : RestResult<OldRide>
 
     @POST("api/active_rides")
     suspend fun getActiveRides(@Body requestBody: ActiveRidesRequest): RestResult<List<ActiveRide>>
 
     @GET("api/active_rides/{id}/participants")
-    suspend fun getActiveRideParticipants(@Path("id") id: Long) : RestResult<List<User>>
+    suspend fun getActiveRideParticipants(@Path("id") id: Int) : RestResult<List<User>>
 
     @GET("api/rider/old_rides")
     suspend fun getDriverOldRides() : RestResult<List<OldRide>>
@@ -48,37 +48,37 @@ interface ApiServiceInterface {
     suspend fun getSentFeedbacks() : RestResult<List<Feedback>>
 
     @GET("api/old_ride/{id}/feedbacks/received")
-    suspend fun getOldRideReceivedFeedbacks(@Path("id") id: Long) : RestResult<List<Feedback>>
+    suspend fun getOldRideReceivedFeedbacks(@Path("id") id: Int) : RestResult<List<Feedback>>
 
     @GET("api/old_ride/{id}/feedbacks/sent")
-    suspend fun getOldRideSentFeedbacks(@Path("id") id: Long) : RestResult<List<Feedback>>
+    suspend fun getOldRideSentFeedbacks(@Path("id") id: Int) : RestResult<List<Feedback>>
 
     @POST("api/active_ride/publish")
     suspend fun publishActiveRide(@Body requestBody: ActiveRidePublishRequest) : RestResult<Success>
 
-    @GET("api/rider/rating")
-    suspend fun getUserRiderRating() : RestResult<RiderRating>
+    @GET("api/driver/{id}/rating")
+    suspend fun getDriverRating(@Path("id") id: Int) : RestResult<DriverRating>
 
-    @GET("api/participant/rating")
-    suspend fun getUserPassengerRating() : RestResult<PassengerRating>
+    @GET("api/passenger/{id}/rating")
+    suspend fun getPassengerRating(@Path("id") id: Int) : RestResult<PassengerRating>
 
     @POST("api/active_ride/{id}/book")
-    suspend fun bookActiveRide(@Path("id") id: Long) : RestResult<Success>
+    suspend fun bookActiveRide(@Path("id") id: Int) : RestResult<Success>
 
     @POST("api/active_ride/{id}/cancel_booking")
-    suspend fun cancelBookingActiveRide(@Path("id") id: Long) : RestResult<Success>
+    suspend fun cancelBookingActiveRide(@Path("id") id: Int) : RestResult<Success>
 
     @DELETE("api/active_ride/{id}/delete")
-    suspend fun deleteActiveRide(@Path("id") id: Long) : RestResult<Success>
+    suspend fun deleteActiveRide(@Path("id") id: Int) : RestResult<Success>
 
     @POST("api/send/feedback")
     suspend fun sendFeedback(@Body requestBody: SendFeedbackRequest) : RestResult<Success>
 
-    @GET("api/rider/feedbacks/amount")
-    suspend fun getNumberOfRiderFeedbacks() : RestResult<Amount>
+    @GET("api/driver/{id}/feedbacks/amount")
+    suspend fun getNumberOfRiderFeedbacks(@Path("id") id: Int) : RestResult<Amount>
 
-    @GET("api/participant/feedbacks/amount")
-    suspend fun getNumberOfParticipantFeedbacks() : RestResult<Amount>
+    @GET("api/passenger/{id}/feedbacks/amount")
+    suspend fun getNumberOfParticipantFeedbacks(@Path("id") id: Int) : RestResult<Amount>
 
     @GET("api/rider/old_rides/amount")
     suspend fun getNumberOfRiderOldRides() : RestResult<Amount>
@@ -90,20 +90,14 @@ interface ApiServiceInterface {
     suspend fun updateProfile(@Body requestBody: UpdateProfileRequest) : RestResult<Success>
 
     @GET("api/old_ride/{id}/feedbacks/missing")
-    suspend fun getMissingFeedbackUsers(@Path("id") id: Long) : RestResult<List<User>>
-
-    @POST("api/check/new_cancellations")
-    suspend fun getNewCancellations() : RestResult<List<Long>>
-
-    @POST("api/check/new_bookings")
-    suspend fun getNewBooking() : RestResult<List<Long>>
-
-    @POST("api/check/new_deleted_rides")
-    suspend fun getNewDeletedRides() : RestResult<List<Long>>
+    suspend fun getMissingFeedbackUsers(@Path("id") id: Int) : RestResult<List<User>>
 
     @POST("api/push_token/send")
     suspend fun sendPushToken(@Body requestBody: SendPushTokenRequest) : RestResult<Success>
 
     @DELETE("api/push_token/delete")
     suspend fun deletePushToken() : RestResult<Success>
+
+    @GET("api/user/{id}")
+    suspend fun getUserById(@Path("id") id: Int) : RestResult<User>
 }

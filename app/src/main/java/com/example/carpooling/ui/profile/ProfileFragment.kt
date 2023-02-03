@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentProfileBinding
-import com.example.carpooling.utils.SessionManager
 import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
@@ -33,36 +32,35 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.apply {
-            viewModel = userViewModel
-        }
-
-        userViewModel.getUserDriverRating()
-        userViewModel.getUserPassengerRating()
-
-        val picReference = userViewModel.getProfilePicReference()
-        val imageViewAvatar = binding.imageViewAvatar
         val navController = findNavController()
 
-        Glide.with(this).load("http://10.0.2.2:8080/carpooling_images/$picReference").into(imageViewAvatar)
+        userViewModel.apply {
+            user.observe(viewLifecycleOwner) { profileUser ->
+                binding.profileBaseInfo.apply {
+                    fieldProfileUsername.text = profileUser!!.username
+                    fieldProfileEmail.text = profileUser.email
+                }
+            }
 
-        binding.btnLogout.setOnClickListener {
-            userViewModel.logout()
-            val sessionManager = SessionManager(requireContext())
-            sessionManager.deleteAuthToken()
-            val action = ProfileFragmentDirections.logout()
-            navController.navigate(action)
+            driverRating.observe(viewLifecycleOwner) { rating ->
+                binding.profileBaseInfo.profileDriverRating.rating = rating
+            }
+
+            passengerRating.observe(viewLifecycleOwner) { rating ->
+                binding.profileBaseInfo.profilePassengerRating.rating = rating
+            }
         }
+
+        userViewModel.getDriverRating(userViewModel.user.value!!.id)
+        userViewModel.getPassengerRating(userViewModel.user.value!!.id)
+
+        val picReference = userViewModel.getProfilePicReference()
+        val imageView = binding.profileBaseInfo.imageProfilePic
+
+        Glide.with(this).load("http://10.0.2.2:8080/carpooling_images/$picReference").into(imageView)
 
         binding.btnModifyProfile.setOnClickListener {
             val action = ProfileFragmentDirections.modifyProfile()
-            navController.navigate(action)
-        }
-
-        binding.btnSettings.setOnClickListener {
-            val action = ProfileFragmentDirections.toSettings()
             navController.navigate(action)
         }
     }

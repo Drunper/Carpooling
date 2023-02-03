@@ -4,21 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.history.SentFeedbacksFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize">
 
+        <TextView
+            android:id="@+id/title_sent_feedbacks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/title_sent_feedbacks"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toTopOf="@id/guideline_top" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_sent_feedbacks"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             app:layout_constrainedHeight="true"
             app:layoutManager="LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/guideline_top"
+            app:layout_constraintTop_toBottomOf="@id/title_sent_feedbacks"
             app:layout_constraintBottom_toTopOf="@id/btn_add_feedback"
             tools:listitem="@layout/feedback_item"/>
 
@@ -26,7 +39,7 @@
             android:id="@+id/btn_add_feedback"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:text="@string/btnAddFeedback"
+            android:text="@string/btn_add_feedback"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"

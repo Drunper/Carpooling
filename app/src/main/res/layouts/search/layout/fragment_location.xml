@@ -13,6 +13,7 @@
             android:id="@+id/field_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toTopOf="@id/guideline_top">

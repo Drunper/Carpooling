@@ -1,32 +1,19 @@
 <resources>
-    <string name="app_name">Carpooling</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name" translatable="false">Carpooling</string>
 
-    <!-- Fragment toolbar strings -->
+    <!-- Toolbar strings -->
     <string name="label_fragment_login">Accedi</string>
+    <string name="label_fragment_search">Cerca</string>
+    <string name="label_fragment_search_result">Risultati</string>
+    <string name="label_fragment_profile">Profilo</string>
+    <string name="label_fragment_settings">Impostazioni</string>
+    <string name="label_fragment_history">Cronologia</string>
+    <string name="label_fragment_publish">Pubblica</string>
+    <string name="label_fragment_myrides">Viaggi</string>
 
-    <!-- Bottom bar strings -->
-    <string name="bottomBarTitleSearch">Ricerca</string>
-    <string name="bottomBarTitlePublish">Pubblica</string>
-    <string name="bottomBarTitleRides">Viaggi</string>
-    <string name="bottomBarTitleHistory">Cronologia</string>
-    <string name="bottomBarTitleProfile">Profilo</string>
-
-    <!-- Strings related to login -->
-    <string name="descStartFragment">Viaggiare insieme ai tuoi colleghi con facilità</string>
-    <string name="desc_login_fragment">Per effettuare l\'accesso inserisci la tua email e la tua password</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Login</string>
-    <string name="action_sign_in_short">Login</string>
-    <string name="remember_me">Ricordami</string>
-    <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid email</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-
-    <!-- Publish -->
+    <!-- Title strings -->
+    <string name="title_received_feedbacks">Recensioni ricevute</string>
+    <string name="title_sent_feedbacks">Recensioni inviate</string>
     <string name="title_publish_start">Da dove parti e dove arrivi?</string>
     <string name="title_publish_date">Inserisci la data di partenza</string>
     <string name="title_publish_time">Qual è l\'ora di partenza e di arrivo? </string>
@@ -35,48 +22,135 @@
     <string name="title_publish_notes">Se c\'è altro da sapere scrivilo qui</string>
     <string name="title_publish_price">Inserisci il prezzo del viaggio</string>
     <string name="title_publish_summary">Rivedi il tuo viaggio prima di pubblicarlo</string>
-    <string name="question_smoking">È permesso fumare in auto?</string>
-    <string name="question_luggage">Si possono portare bagagli?</string>
-    <string name="question_silent">Si viaggia in silenzio?</string>
-    <string name="helper_publish_notes">Per esempio il modello di auto</string>
-    <string name="helper_publish_price">Per esempio 5.50</string>
-    <string name="error_publish_price">Inserisci un prezzo valido</string>
-    <string name="titlePublishSuccess">Viaggio pubblicato con successo</string>
-    <string name="btnPublish">Pubblica</string>
-    <string name="labelPublishPrice">Prezzo</string>
+    <string name="title_login">Per effettuare l\'accesso inserisci la tua email e la tua password</string>
+    <string name="title_search_results">Risultati della ricerca</string>
+    <string name="title_ride_summary">Riepilogo viaggio</string>
+    <string name="title_modify_profile">Modifica profilo</string>
+    <string name="title_send_feedback">Aggiungi recensione</string>
 
-    <!-- My Rides -->
-    <string name="tabItemPublished">Pubblicati</string>
-    <string name="tabItemBooked">Prenotati</string>
-    <string name="btnCancelBooking">Cancella prenotazione</string>
-    <string name="btnDeleteRide">Cancella pubblicazione</string>
-    <string name="titleDeleteRide">Sei sicuro di voler cancellare la tua pubblicazione?</string>
-    <string name="titleCancelBooking">Sei sicuro di voler cancellare la tua prenotazione?</string>
+    <!-- Bottom bar strings -->
+    <string name="bottom_bar_search">Ricerca</string>
+    <string name="bottom_bar_publish">Pubblica</string>
+    <string name="bottom_bar_myrides">Viaggi</string>
+    <string name="bottom_bar_history">Cronologia</string>
+    <string name="bottom_bar_profile">Profilo</string>
 
-    <!-- Others -->
-    <string name="default_success_title">Successo</string>
-    <string name="default_success_message">Operazione effettuata con successo</string>
-    <string name="success_booking_title">Prenotazione effettuata con successo</string>
-    <string name="success_booking_message">Puoi vedere il viaggio prenotato dalla sezione "Viaggi". Nel caso in cui l\'autista dovesse cancellare il viaggio riceverai una notifica. </string>
-    <string name="success_send_feedback_title">Recensione inviata con successo</string>
-    <string name="success_send_feedback_message">Grazie per aver recensito il tuo collega, questo contribuirà a migliorare la qualità dei viaggi offerti.</string>
-    <string name="success_modify_profile_title">Profilo modificato con successo</string>
-    <string name="success_modify_profile_message">Le tue informazioni personali sono state aggiornate.</string>
-    <string name="success_cancel_ride_title">Pubblicazione cancellata con successo</string>
-    <string name="success_cancel_ride_message">Il viaggio offerto è stato cancellato, ai tuoi colleghi è stata inviata una notifica per avvertirli.</string>
-    <string name="success_cancel_booking_title">Prenotazione annullata con successo</string>
-    <string name="success_cancel_booking_message">La tua prenotazione è stata annullata, è stata inviata una notifica all\'autista per avvertilo di ciò. </string>
-    <string name="format_location">%1$s %2$s, %3$s</string>
-    <string name="btnNext">Avanti</string>
-    <string name="from">Partenza da</string>
-    <string name="to">Arrivo a</string>
-    <string name="price">Prezzo</string>
+    <!-- Snackbar strings -->
+    <string name="snackbar_get_location_error">Impossibile ottenere la posizione corrente</string>
+    <string name="snackbar_send_feedback_success">Recensione inviata</string>
+    <string name="snackbar_cancel_booking_success">Prenotazione annullata</string>
+    <string name="snackbar_cancel_ride_success">Viaggio annullato</string>
+    <string name="snackbar_publish_success">Viaggio pubblicato</string>
+    <string name="snackbar_ok">OK</string>
+    <string name="snackbar_booking_success">Prenotazione effettuata</string>
+    <string name="snackbar_update_profile_success">Profilo aggiornato</string>
+
+    <!-- (Field) label strings -->
+    <string name="label_field_remember_me">Ricordami</string>
+    <string name="label_field_publish_smoking">È permesso fumare in auto?</string>
+    <string name="label_field_publish_luggage">Si possono portare bagagli?</string>
+    <string name="label_field_publish_silent">Si viaggia in silenzio?</string>
+    <string name="label_field_publish_price">Prezzo</string>
+    <string name="label_profile_driver_rating">Valutazione autista</string>
+    <string name="label_profile_passenger_rating">Valutazione passeggero</string>
+    <string name="label_profile_bio">Biografia</string>
     <string name="label_write_feedback_recipient">Destinatario</string>
     <string name="label_write_feedback_text">Testo</string>
     <string name="label_item_feedback_rating">Valutazione</string>
-    <string name="helper_write_feedback_text">Scrivi cosa ne pensi del viaggio fatto</string>
     <string name="label_write_feedback_rating">Valutazione</string>
+
+    <!--  Field (format) strings -->
+    <string name="field_search_query_datetime_format">Il giorno %1$s dalle ore %2$s</string>
+
+    <!-- Hints -->
+    <string name="hint_login_password">Password</string>
+    <string name="hint_modify_username">Username</string>
+    <string name="hint_modify_bio">Biografia</string>
+    <string name="hint_login_email">Email</string>
+
+    <!-- Helpers -->
+    <string name="helper_publish_notes">Per esempio il modello di auto</string>
+    <string name="helper_publish_price">Per esempio 5.50</string>
+    <string name="helper_modify_username">Questo è il nome che gli altri utenti visualizeranno</string>
+    <string name="helper_modify_bio">Qui puoi scrivere qualcosa riguardo a te</string>
+    <string name="helper_write_feedback_text">Scrivi cosa ne pensi del viaggio fatto</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_email">L\'email inserita non è valida</string>
+    <string name="error_invalid_password">La password deve essere almeno di 6 caratteri</string>
+    <string name="error_publish_price">Inserisci un prezzo valido</string>
+    <string name="error_login_failed">Errore durante il login</string>
+    <string name="error_field_location">Il luogo inserito non è valido</string>
     <string name="error_necessary_rating">Per procedere è necessario inserire una valutazione</string>
+
+    <!-- Buttons -->
+    <string name="btn_login">Login</string>
+    <string name="btn_publish">Pubblica</string>
+    <string name="btn_cancel_booking">Cancella prenotazione</string>
+    <string name="btn_delete_ride">Cancella pubblicazione</string>
+    <string name="btn_next">Avanti</string>
+    <string name="btn_search">Cerca</string>
+    <string name="btn_date">Data</string>
+    <string name="btn_time">Ora</string>
+    <string name="btn_book">Prenota</string>
+    <string name="btn_add_feedback">Aggiungi recensione</string>
+    <string name="btn_send_feedback">Invia</string>
+    <string name="btn_received_feedbacks">Recensioni ricevute</string>
+    <string name="btn_my_feedbacks">Recensioni inviate</string>
+    <string name="btn_modify">Modifica</string>
+    <string name="btn_modify_profile">Modifica</string>
+    <string name="btn_start_login">Accedi</string>
+
+
+    <!-- Tab items strings -->
+    <string name="tab_item_published">Pubblicati</string>
+    <string name="tab_item_booked">Prenotati</string>
+
+    <!-- Toolbar options strings -->
+    <string name="action_bar_settings">Impostazioni</string>
+    <string name="action_bar_logout">Logout</string>
+
+    <!-- Dialog strings -->
+    <string name="dialog_logout_confirmation_title">Sei sicuro di voler effettuare il logout?</string>
+    <string name="dialog_confirmation_back">Indietro</string>
+    <string name="dialog_logout_confirmation_yes">Logout</string>
+    <string name="dialog_book_ride_title">Procedere con la prenotazione?</string>
+    <string name="dialog_cancel_ride_title">Sei sicuro di voler annullare questo viaggio?</string>
+    <string name="dialog_cancel_booking_title">Sei sicuro di voler annullare la prenotazione?</string>
+    <string name="dialog_publish_title">Procedere con la pubblicazione?</string>
+    <string name="dialog_publish_yes">Pubblica</string>
+    <string name="dialog_book_ride_yes">Prenota</string>
+    <string name="dialog_cancel_booking_yes">Cancella prenotazione</string>
+    <string name="dialog_cancel_ride_yes">Cancella il viaggio</string>
+    <string name="dialog_send_feedback_title">Inviare la recensione?</string>
+    <string name="dialog_send_feedback_yes">Invia</string>
+
+    <!-- Channel strings -->
+    <string name="channel_new_booking">Nuove prenotazioni</string>
+    <string name="channel_new_cancel">Nuove cancellazioni</string>
+    <string name="channel_delete_ride">Viaggi annullati</string>
+    <string name="channel_new_booking_desc">Questo canale ti notifica le nuove prenotazioni per i viaggi che hai pubblicato</string>
+    <string name="channel_new_cancel_desc">Questo canale ti notifica le prenotazioni annullate per i viaggi che hai pubblicato</string>
+    <string name="channel_delete_ride_desc">Questo canale ti notifica i viaggi prenotati che sono stati cancellati</string>
+
+    <!-- Notifications strings -->
+    <string name="notif_new_booking_title">C\'è una nuova prenotazione</string>
+    <string name="notif_new_booking_desc">Un utente ha effettuato una prenotazione per un viaggio che hai pubblicato</string>
+    <string name="notif_new_cancel_title">Prenotazione cancellata</string>
+    <string name="notif_new_cancel_desc">Un utente ha cancellato la sua prenotazione per un viaggio che hai pubblicato</string>
+    <string name="notif_delete_ride_title">Viaggio cancellato</string>
+    <string name="notif_delete_ride_desc">Un viaggio che avevi prenotato è stato cancellato</string>
+
+    <!-- Permissions strings -->
+    <string name="location_permission_required">Per ricercare con la propria posizione sono necessari i permessi.</string>
+    <string name="location_permission_granted">Ora puoi effettuare ricerche usando la tua posizione.</string>
+    <string name="use_current_location">Usa la tua posizione attuale</string>
+
+    <!-- Others strings -->
+    <string name="descStartFragment">Viaggiare insieme ai tuoi colleghi con facilità</string>
+    <string name="from">Partenza da</string>
+    <string name="to">Arrivo a</string>
+    <string name="price">Prezzo</string>
     <string name="departure_time">Ora di partenza</string>
     <string name="arrival_time">Ora di arrivo</string>
     <string name="notes">Note aggiuntive</string>
@@ -84,70 +158,7 @@
     <string name="driver">Autista</string>
     <string name="passengers">Passeggeri</string>
     <string name="you">Tu</string>
-    <string name="btnSearch">Cerca</string>
-    <string name="btnDate">Data</string>
-    <string name="btnTime">Ora</string>
     <string name="luggage">Bagagli</string>
     <string name="silent">Silenzio</string>
     <string name="smoking">Fumatori</string>
-    <string name="title_search_results">Risultati della ricerca</string>
-    <string name="field_search_query_datetime_format">Il giorno %1$s dalle ore %2$s</string>
-    <string name="activeRideTitle">Riepilogo viaggio</string>
-    <string name="btnBook">Prenota</string>
-    <string name="bookRideTitle">Prenota</string>
-    <string name="successBookingTitle">Prenotazione effettuata con successo</string>
-    <string name="labelBookingConfirmation">Procedere con la prenotazione?</string>
-    <string name="hintFieldPublishPrice">Per esempio 5,50</string>
-
-    <!-- Profile -->
-    <string name="titleProfile">Profilo</string>
-    <string name="labelProfileUsername">Username</string>
-    <string name="email">Email</string>
-    <string name="driverRating">Voto Guidatore</string>
-    <string name="passengerRating">Voto Passeggero</string>
-    <string name="labelProfileBio">Biografia</string>
-    <string name="btnLogout">Logout</string>
-    <string name="btnModifyProfile">Modifica profilo</string>
-    <string name="btnHistory">Cronologia</string>
-    <string name="btnSettings">Impostazioni</string>
-    <string name="btnStartLogin">Accedi</string>
-    <string name="titleCarpooling">CARPOOLING</string>
-    <string name="titleModifyProfile">Modifica profilo</string>
-    <string name="labelModifyBio">Bio</string>
-    <string name="btnModify">Modifica</string>
-    <string name="titleModifyProfileSuccess">Profilo modificato con successo</string>
-
-    <!-- History -->
-    <string name="btnReceivedFeedbacks">Recensioni ricevute</string>
-    <string name="btnMyFeedbacks">Recensioni inviate</string>
-    <string name="titleReceivedFeedbacks">Recensioni ricevute</string>
-    <string name="titleSentFeedbacks">Recensioni inviate</string>
-    <string name="btnAddFeedback">Aggiungi recensione</string>
-    <string name="titleSendFeedback">Aggiungi recensione</string>
-    <string name="labelFeedbackText">Inserisci il testo</string>
-    <string name="labelFeedbackRecipient">Destinatario</string>
-    <string name="labelFeedbackRating">Valutazione</string>
-    <string name="btnSendFeedback">Invia</string>
-    <string name="titleWriteFeedbackSuccess">Recensione inviata con successo</string>
-
-    <!-- Notifications -->
-    <string name="channelNewBooking">Nuove prenotazioni</string>
-    <string name="channelNewCancel">Nuove cancellazioni</string>
-    <string name="channelDeleteRide">Viaggi annullati</string>
-    <string name="channelNewBookingDesc">Questo canale ti notifica le nuove prenotazioni per i viaggi che hai pubblicato</string>
-    <string name="channelNewCancelDesc">Questo canale ti notifica le prenotazioni annullate per i viaggi che hai pubblicato</string>
-    <string name="channelDeleteRideDesc">Questo canale ti notifica i viaggi prenotati che sono stati cancellati</string>
-
-    <string name="notifyNewBookingTitle">C\'è una nuova prenotazione</string>
-    <string name="notifyNewBookingDesc">Un utente ha effettuato una prenotazione per un viaggio che hai pubblicato</string>
-    <string name="notifyNewCancelTitle">Prenotazione cancellata</string>
-    <string name="notifyNewCancelDesc">Un utente ha cancellato la sua prenotazione per un viaggio che hai pubblicato</string>
-    <string name="notifyDeleteRideTitle">Viaggio cancellato</string>
-    <string name="notifyDeleteRideDesc">Un viaggio che avevi prenotato è stato cancellato</string>
-
-    <!-- Permissions -->
-    <string name="location_permission_required">Per ricercare con la propria posizione sono necessari i permessi.</string>
-    <string name="snackbar_ok">OK</string>
-    <string name="location_permission_granted">Ora puoi effettuare ricerche usando la tua posizione.</string>
-    <string name="use_current_location">Usa la tua posizione attuale</string>
 </resources>

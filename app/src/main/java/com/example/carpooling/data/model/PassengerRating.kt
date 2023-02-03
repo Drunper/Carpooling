@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class PassengerRating(
-    @SerializedName("participant_rating")
-    val passengerRating : Double
+    @SerializedName("passenger_rating")
+    val passengerRating : Float
 ) : Serializable

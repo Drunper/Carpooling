@@ -38,15 +38,15 @@ object NotificationHandler {
             .createPendingIntent()
 
         val contentTitle = when (channel) {
-            Channel.NEW_BOOKING -> context.getString(R.string.notifyNewBookingTitle)
-            Channel.NEW_CANCEL -> context.getString(R.string.notifyNewCancelTitle)
-            Channel.DELETE_RIDE -> context.getString(R.string.notifyDeleteRideTitle)
+            Channel.NEW_BOOKING -> context.getString(R.string.notif_new_booking_title)
+            Channel.NEW_CANCEL -> context.getString(R.string.notif_new_cancel_title)
+            Channel.DELETE_RIDE -> context.getString(R.string.notif_delete_ride_title)
         }
 
         val contentText = when (channel) {
-            Channel.NEW_BOOKING -> context.getString(R.string.notifyNewBookingDesc)
-            Channel.NEW_CANCEL -> context.getString(R.string.notifyNewCancelDesc)
-            Channel.DELETE_RIDE -> context.getString(R.string.notifyDeleteRideDesc)
+            Channel.NEW_BOOKING -> context.getString(R.string.notif_new_booking_desc)
+            Channel.NEW_CANCEL -> context.getString(R.string.notif_new_cancel_desc)
+            Channel.DELETE_RIDE -> context.getString(R.string.notif_delete_ride_desc)
         }
 
         createNotificationChannels(context)
@@ -69,14 +69,14 @@ object NotificationHandler {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create the NotificationChannels
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channelNewBooking = NotificationChannel(Channel.NEW_BOOKING.channelName, context.getString(R.string.channelNewBooking), importance)
-            channelNewBooking.description = context.getString(R.string.channelNewBookingDesc)
+            val channelNewBooking = NotificationChannel(Channel.NEW_BOOKING.channelName, context.getString(R.string.channel_new_booking), importance)
+            channelNewBooking.description = context.getString(R.string.channel_new_booking_desc)
 
-            val channelNewCancel = NotificationChannel(Channel.NEW_CANCEL.channelName, context.getString(R.string.channelNewCancel), importance)
-            channelNewCancel.description = context.getString(R.string.channelNewCancelDesc)
+            val channelNewCancel = NotificationChannel(Channel.NEW_CANCEL.channelName, context.getString(R.string.channel_new_cancel), importance)
+            channelNewCancel.description = context.getString(R.string.channel_new_cancel_desc)
 
-            val channelDeleteRide = NotificationChannel(Channel.DELETE_RIDE.channelName, context.getString(R.string.channelDeleteRide), importance)
-            channelDeleteRide.description = context.getString(R.string.channelDeleteRideDesc)
+            val channelDeleteRide = NotificationChannel(Channel.DELETE_RIDE.channelName, context.getString(R.string.channel_delete_ride), importance)
+            channelDeleteRide.description = context.getString(R.string.channel_delete_ride_desc)
 
             val channels = listOf(channelNewBooking, channelNewCancel, channelDeleteRide)
 

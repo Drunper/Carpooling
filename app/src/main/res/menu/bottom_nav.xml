@@ -3,21 +3,21 @@
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/baseline_search_white_24dp"
-        android:title="@string/bottomBarTitleSearch" />
+        android:title="@string/bottom_bar_search" />
     <item
         android:id="@+id/publish"
         android:icon="@drawable/baseline_publish_white_24dp"
-        android:title="@string/bottomBarTitlePublish" />
+        android:title="@string/bottom_bar_publish" />
     <item
         android:id="@+id/myRides"
         android:icon="@drawable/baseline_directions_car_white_24dp"
-        android:title="@string/bottomBarTitleRides" />
+        android:title="@string/bottom_bar_myrides" />
     <item
         android:id="@+id/historyFragment"
         android:icon="@drawable/ic_baseline_history_24"
-        android:title="@string/bottomBarTitleHistory" />
+        android:title="@string/bottom_bar_history" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/baseline_account_circle_white_24dp"
-        android:title="@string/bottomBarTitleProfile" />
+        android:title="@string/bottom_bar_profile" />
 </menu>

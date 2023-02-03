@@ -68,7 +68,7 @@
                 app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
                 app:layout_constraintTop_toBottomOf="@id/field_item_ride_arrival_time"
                 app:shapeAppearanceOverlay="@style/circleImageView"
-                app:srcCompat="@mipmap/ic_launcher" />
+                tools:src="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/field_item_ride_rider_name"

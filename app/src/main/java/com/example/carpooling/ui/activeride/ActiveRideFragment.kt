@@ -13,8 +13,11 @@ import com.bumptech.glide.Glide
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentActiveRideBinding
 import com.example.carpooling.utils.Geocoding
+import com.example.carpooling.utils.convertDate
+import com.example.carpooling.utils.showSnackbar
 import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import java.text.NumberFormat
 import java.util.*
 
@@ -55,7 +58,7 @@ class ActiveRideFragment : Fragment() {
                 Currency.getInstance("EUR") // TODO: bisogna usare la currency utilizzata di default dal sistema
 
             binding.basicInfo.apply {
-                fieldRideDate.text = ride.date
+                fieldRideDate.text = ride.date.convertDate("dd/MM/yyyy", "EEE dd MMM yyyy")
                 fieldRideDepartureTime.text = ride.departureTime
                 fieldRideArrivalTime.text = ride.arrivalTime
                 fieldRideFrom.text = fromAddressString
@@ -98,8 +101,20 @@ class ActiveRideFragment : Fragment() {
 
             val btnBook = binding.btnBook
             btnBook.setOnClickListener {
-                val action = ActiveRideFragmentDirections.bookRide(args.activeRideId)
+                val action = ActiveRideFragmentDirections.toBookRideDialog(args.activeRideId)
                 navController.navigate(action)
+            }
+
+            searchViewModel.bookRideResult.observe(viewLifecycleOwner) { success ->
+                if (success) {
+                    binding.root.showSnackbar(
+                        requireView(),
+                        getString(R.string.snackbar_booking_success),
+                        Snackbar.LENGTH_LONG,
+                        null
+                    ) {}
+                    navController.popBackStack()
+                }
             }
         }
     }

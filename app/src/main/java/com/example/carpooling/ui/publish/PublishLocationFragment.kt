@@ -26,7 +26,6 @@ import com.example.carpooling.ui.search.LocationFragmentArgs
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.utils.showSnackbar
 import com.example.carpooling.viewmodels.PublishViewModel
-import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -65,13 +64,9 @@ class PublishLocationFragment  : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO: controllo di correttezza sulla location, ovvero devo avere salvato un indirizzo valido
-
         val navController = findNavController()
         binding.btnCurrentPosition.setOnClickListener {
             getLocation()
-            if (currentLocationString != null) {
-            }
         }
 
         if (args.from)
@@ -84,11 +79,16 @@ class PublishLocationFragment  : Fragment() {
                 requireContext(),
                 binding.fieldLocation.editText!!.text.toString()
             )
-            if (args.from)
-                publishViewModel.setFrom(location)
-            else
-                publishViewModel.setTo(location)
-            navController.popBackStack()
+            if (location != null) {
+                binding.fieldLocation.error = null
+                if (args.from)
+                    publishViewModel.setFrom(location)
+                else
+                    publishViewModel.setTo(location)
+                navController.popBackStack()
+            } else {
+                binding.fieldLocation.error = getString(R.string.error_field_location)
+            }
         }
     }
 
@@ -103,6 +103,12 @@ class PublishLocationFragment  : Fragment() {
                         binding.fieldLocation.editText!!.setText(currentLocationString)
                     }
                     else {
+                        binding.root.showSnackbar(
+                            requireView(),
+                            getString(R.string.snackbar_get_location_error),
+                            Snackbar.LENGTH_LONG,
+                            null,
+                        ) {}
                         Log.d("locationDebug","permissions granted, location is null")
                     }
                 }

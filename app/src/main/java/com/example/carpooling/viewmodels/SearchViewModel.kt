@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.carpooling.data.RestRepository
 import com.example.carpooling.data.model.ActiveRide
+import com.example.carpooling.data.model.Success
 import com.example.carpooling.data.restful.RestError
 import com.example.carpooling.data.restful.RestException
 import com.example.carpooling.data.restful.RestSuccess
@@ -17,6 +18,9 @@ class SearchViewModel(private val restRepository: RestRepository) : ViewModel() 
 
     private val _searchQuery = MutableLiveData<ActiveRidesRequest>()
     val searchQuery: LiveData<ActiveRidesRequest> = _searchQuery
+
+    private val _bookRideResult = MutableLiveData<Boolean>()
+    val bookRideResult: LiveData<Boolean> = _bookRideResult
 
     private var job: Job? = null
 
@@ -60,7 +64,7 @@ class SearchViewModel(private val restRepository: RestRepository) : ViewModel() 
         return rides
     }
 
-    fun getActiveRideById(id: Long) : LiveData<ActiveRide> {
+    fun getActiveRideById(id: Int) : LiveData<ActiveRide> {
         val ride = liveData {
             when (val result = restRepository.getActiveRide(id)) {
                 is RestSuccess -> emit(result.data)
@@ -69,6 +73,19 @@ class SearchViewModel(private val restRepository: RestRepository) : ViewModel() 
             }
         }
         return ride
+    }
+
+    fun bookRide(id: Int) {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val success = when (val result = restRepository.bookRide(id)) {
+                is RestSuccess -> result.data
+                is RestError -> Success(success = false)
+                is RestException -> Success(success = false)
+            }
+            withContext(Dispatchers.Main) {
+                _bookRideResult.value = success.success
+            }
+        }
     }
 
     fun setDate(dateString: String) {

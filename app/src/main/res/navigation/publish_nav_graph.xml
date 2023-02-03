@@ -7,11 +7,11 @@
     <dialog
         android:id="@+id/publishDatePickerFragment"
         android:name="com.example.carpooling.ui.publish.PublishDatePickerFragment"
-        android:label="PublishDatePickerFragment" />
+        android:label="" />
     <dialog
         android:id="@+id/publishTimePickerFragment"
         android:name="com.example.carpooling.ui.publish.PublishTimePickerFragment"
-        android:label="PublishTimePickerFragment">
+        android:label="">
         <argument
             android:name="departure"
             android:defaultValue="false"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/publishPriceFragment"
         android:name="com.example.carpooling.ui.publish.PublishPriceFragment"
-        android:label="fragment_publish_price"
+        android:label=""
         tools:layout="@layout/fragment_publish_price">
         <action
             android:id="@+id/toPublishSummary"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/publishSeatsFragment"
         android:name="com.example.carpooling.ui.publish.PublishSeatsFragment"
-        android:label="fragment_publish_seats"
+        android:label=""
         tools:layout="@layout/fragment_publish_seats">
         <action
             android:id="@+id/toPublishOptions"
@@ -38,12 +38,16 @@
     <fragment
         android:id="@+id/publishSummaryFragment"
         android:name="com.example.carpooling.ui.publish.PublishSummaryFragment"
-        android:label="fragment_publish_summary"
-        tools:layout="@layout/fragment_publish_summary"/>
+        android:label=""
+        tools:layout="@layout/fragment_publish_summary">
+        <action
+            android:id="@+id/to_publish_submit_dialog"
+            app:destination="@id/publish_submit_dialog_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/publishFragment"
         android:name="com.example.carpooling.ui.publish.PublishFragment"
-        android:label="fragment_publish"
+        android:label="@string/label_fragment_publish"
         tools:layout="@layout/fragment_publish">
         <action
             android:id="@+id/toPublishDate"
@@ -59,7 +63,7 @@
     <fragment
         android:id="@+id/publishNotesFragment"
         android:name="com.example.carpooling.ui.publish.PublishNotesFragment"
-        android:label="fragment_publish_notes"
+        android:label=""
         tools:layout="@layout/fragment_publish_notes">
         <action
             android:id="@+id/toPublishPrice"
@@ -68,7 +72,7 @@
     <fragment
         android:id="@+id/publishDateFragment"
         android:name="com.example.carpooling.ui.publish.PublishDateFragment"
-        android:label="fragment_publish_date"
+        android:label=""
         tools:layout="@layout/fragment_publish_date">
         <action
             android:id="@+id/toPublishTime"
@@ -77,7 +81,7 @@
     <fragment
         android:id="@+id/publishOptionsFragment"
         android:name="com.example.carpooling.ui.publish.PublishOptionsFragment"
-        android:label="fragment_publish_options"
+        android:label=""
         tools:layout="@layout/fragment_publish_options">
         <action
             android:id="@+id/toPublishNotes"
@@ -86,7 +90,7 @@
     <fragment
         android:id="@+id/publishLocationFragment"
         android:name="com.example.carpooling.ui.publish.PublishLocationFragment"
-        android:label="PublishLocationFragment">
+        android:label="">
         <argument
             android:name="from"
             android:defaultValue="false"
@@ -95,7 +99,7 @@
     <fragment
         android:id="@+id/publishTimeFragment"
         android:name="com.example.carpooling.ui.publish.PublishTimeFragment"
-        android:label="fragment_publish_time"
+        android:label=""
         tools:layout="@layout/fragment_publish_time">
         <action
             android:id="@+id/insert_time"
@@ -108,4 +112,8 @@
             android:id="@+id/toPublishSeats"
             app:destination="@id/publishSeatsFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/publish_submit_dialog_fragment"
+        android:name="com.example.carpooling.ui.publish.PublishSubmitDialogFragment"
+        android:label="" />
 </navigation>

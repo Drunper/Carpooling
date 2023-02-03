@@ -9,15 +9,29 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize">
 
+        <TextView
+            android:id="@+id/title_received_feedbacks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/title_received_feedbacks"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toTopOf="@id/guideline_top" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_received_feedbacks"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             app:layoutManager="LinearLayoutManager"
             app:layout_constrainedHeight="true"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toTopOf="@id/guideline_top"
+            app:layout_constraintTop_toBottomOf="@id/title_received_feedbacks"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/feedback_item"/>
 

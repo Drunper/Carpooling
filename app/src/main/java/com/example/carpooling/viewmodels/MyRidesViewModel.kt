@@ -20,6 +20,11 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
     private val _cancelBookingResult = MutableLiveData<Boolean>()
     val cancelBookingResult: LiveData<Boolean> = _cancelBookingResult
 
+    private val _sendFeedbackResult = MutableLiveData<Boolean>()
+    val sendFeedbackResult: LiveData<Boolean> = _sendFeedbackResult
+
+    var feedbackRequest: SendFeedbackRequest? = null
+
     private var job: Job? = null
 
     fun getPassengerActiveRides() : LiveData<List<ActiveRide>> {
@@ -66,7 +71,7 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
         return rides
     }
 
-    fun getActiveRideByID(id: Long): LiveData<ActiveRide> {
+    fun getActiveRideByID(id: Int): LiveData<ActiveRide> {
         val ride = liveData {
             when (val result = restRepository.getActiveRideByID(id)) {
                 is RestSuccess -> emit(result.data)
@@ -77,7 +82,7 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
         return ride
     }
 
-    fun getOldRideByID(id: Long): LiveData<OldRide> {
+    fun getOldRideByID(id: Int): LiveData<OldRide> {
         val ride = liveData {
             when (val result = restRepository.getOldRideByID(id)) {
                 is RestSuccess -> emit(result.data)
@@ -88,7 +93,7 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
         return ride
     }
 
-    fun deleteRide(id: Long) {
+    fun deleteRide(id: Int) {
         job = CoroutineScope(Dispatchers.IO).launch {
             val value = when (val result = restRepository.deleteRide(id)) {
                 is RestSuccess -> result.data
@@ -101,7 +106,7 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
         }
     }
 
-    fun cancelBooking(id: Long) {
+    fun cancelBooking(id: Int) {
         job = CoroutineScope(Dispatchers.IO).launch {
             val value = when (val result = restRepository.cancelBooking(id)) {
                 is RestSuccess -> result.data
@@ -114,7 +119,7 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
         }
     }
 
-    fun oldRideReceivedFeedbacks(id: Long): LiveData<List<Feedback>> {
+    fun oldRideReceivedFeedbacks(id: Int): LiveData<List<Feedback>> {
         val feedbacks = liveData {
             when (val result = restRepository.getOldRideReceivedFeedbacks(id)) {
                 is RestSuccess -> emit(result.data)
@@ -125,7 +130,7 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
         return feedbacks
     }
 
-    fun oldRideSentFeedbacks(id: Long): LiveData<List<Feedback>> {
+    fun oldRideSentFeedbacks(id: Int): LiveData<List<Feedback>> {
         val feedbacks = liveData {
             when (val result = restRepository.getOldRideSentFeedbacks(id)) {
                 is RestSuccess -> emit(result.data)
@@ -136,18 +141,22 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
         return feedbacks
     }
 
-    fun sendFeedback(request: SendFeedbackRequest): LiveData<Boolean> {
-        val success = liveData {
-            when (val result = restRepository.sendFeedback(request)) {
-                is RestSuccess -> emit(result.data.success)
-                is RestError -> emit(false)
-                is RestException -> emit(false)
+    fun sendFeedback() {
+        if (feedbackRequest != null) {
+            job = CoroutineScope(Dispatchers.IO).launch {
+                val value = when (val result = restRepository.sendFeedback(feedbackRequest!!)) {
+                    is RestSuccess -> result.data.success
+                    is RestError -> false
+                    is RestException -> false
+                }
+                withContext(Dispatchers.Main) {
+                    _sendFeedbackResult.value = value
+                }
             }
         }
-        return success
     }
 
-    fun getMissingUserFeedbacks(id: Long): LiveData<List<User>> {
+    fun getMissingUserFeedbacks(id: Int): LiveData<List<User>> {
         val users = liveData {
             when (val result = restRepository.getMissingFeedbackUsers(id)) {
                 is RestSuccess -> emit(result.data)

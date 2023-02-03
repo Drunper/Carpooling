@@ -27,4 +27,12 @@
         <item name="colorControlNormal">@color/gray_200</item>
         <item name="colorControlActivated">@color/gold_700</item>
     </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">?attr/colorError</item>
+    </style>
 </resources>

@@ -96,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/btnDate"
+                android:text="@string/btn_date"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/field_ride_departure_time" />
@@ -106,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_45"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_65"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@id/label_ride_date"
                 app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"/>
@@ -118,7 +118,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/price"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/guideline_vertical_55"
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_75"
                 app:layout_constraintTop_toBottomOf="@id/field_ride_arrival_time" />
 
             <TextView
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@id/guideline_vertical_55"
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_75"
                 app:layout_constraintTop_toBottomOf="@id/label_ride_price"
                 app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"/>
 
@@ -137,6 +137,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_65"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.65" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_vertical_55"

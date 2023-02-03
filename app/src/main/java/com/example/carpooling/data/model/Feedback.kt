@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Feedback (
     @SerializedName("id")
-    val id: Long,
+    val id: Int,
     @SerializedName("date")
     val date: String,
     @SerializedName("recipient")

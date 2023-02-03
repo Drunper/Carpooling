@@ -8,7 +8,7 @@ import com.example.carpooling.data.model.ActiveRide
 import com.example.carpooling.databinding.DriverActiveRideItemBinding
 import com.example.carpooling.databinding.PassengerActiveRideItemBinding
 
-class MyPassengerActiveRidesAdapter(private val onClick: (Long) -> Unit) :
+class MyPassengerActiveRidesAdapter(private val onClick: (Int) -> Unit) :
     ListAdapter<ActiveRide, PassengerActiveRideViewHolder>(ActiveRideDiffCallback) {
 
     private lateinit var binding: PassengerActiveRideItemBinding
@@ -24,7 +24,7 @@ class MyPassengerActiveRidesAdapter(private val onClick: (Long) -> Unit) :
     }
 }
 
-class MyDriverActiveRidesAdapter(private val onClick: (Long) -> Unit) :
+class MyDriverActiveRidesAdapter(private val onClick: (Int) -> Unit) :
     ListAdapter<ActiveRide, DriverActiveRideViewHolder>(ActiveRideDiffCallback) {
 
     private lateinit var binding: DriverActiveRideItemBinding

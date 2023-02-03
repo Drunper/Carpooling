@@ -1,23 +1,24 @@
 package com.example.carpooling.ui.publish
 
-import android.location.Geocoder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
-import com.example.carpooling.data.model.Locations
-import com.example.carpooling.data.restful.requests.ActiveRidePublishRequest
 import com.example.carpooling.databinding.FragmentPublishSummaryBinding
+import com.example.carpooling.utils.convertDate
+import com.example.carpooling.utils.getString
+import com.example.carpooling.utils.showSnackbar
 import com.example.carpooling.viewmodels.PublishViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class PublishSummaryFragment : Fragment() {
@@ -40,18 +41,47 @@ class PublishSummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
-        publishViewModel.apply {
-            publishResult.observe(viewLifecycleOwner) { success ->
-                if (success) {
-                    val action = MainNavGraphDirections.toSuccessDialog(title = R.string.success_cancel_ride_title, message = R.string.success_cancel_ride_message)
-                    val navOptions = NavOptions.Builder().setPopUpTo(R.id.publishFragment, true).build()
-                    navController.navigate(action, navOptions)
-                }
+
+        publishViewModel.from.observe(viewLifecycleOwner) { from ->
+            binding.fieldRideTo.text = from.getString()
+        }
+
+        publishViewModel.to.observe(viewLifecycleOwner) { to ->
+            binding.fieldRideTo.text = to.getString()
+        }
+
+        publishViewModel.price.observe(viewLifecycleOwner) { price ->
+            val format: NumberFormat = NumberFormat.getCurrencyInstance()
+            format.maximumFractionDigits = 2
+            format.minimumFractionDigits = 2
+            format.currency =
+                Currency.getInstance("EUR") // TODO: bisogna usare la currency utilizzata di default dal sistema
+            binding.fieldRidePrice.text = format.format(price)
+        }
+
+        publishViewModel.date.observe(viewLifecycleOwner) { date ->
+            binding.fieldRideDate.text = date.convertDate("dd/MM/yyyy", "EEE dd MMM yyyy")
+        }
+
+        publishViewModel.publishResult.observe(viewLifecycleOwner) { success ->
+            if (success) {
+                binding.root.showSnackbar(
+                    requireView(),
+                    getString(R.string.snackbar_publish_success),
+                    Snackbar.LENGTH_LONG,
+                    null
+                ) {}
+                navController.popBackStack(R.id.publishFragment, true)
             }
         }
 
-        binding.btnPublish.setOnClickListener {
-            publishViewModel.publish()
+        binding.apply {
+            viewModel = publishViewModel
+            lifecycleOwner = viewLifecycleOwner
+            btnPublish.setOnClickListener {
+                val action = PublishSummaryFragmentDirections.toPublishSubmitDialog()
+                navController.navigate(action)
+            }
         }
     }
 }

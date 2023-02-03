@@ -9,7 +9,7 @@ import java.util.*
 
 class DriverActiveRideViewHolder (
     private val binding: DriverActiveRideItemBinding,
-    val onClick: (Long) -> Unit
+    val onClick: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root)  {
 
     private var currentActiveRide: ActiveRide? = null

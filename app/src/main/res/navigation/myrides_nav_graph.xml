@@ -8,74 +8,72 @@
         android:id="@+id/riderRideFragment"
         android:name="com.example.carpooling.ui.myrides.DriverActiveRideFragment"
         tools:layout="@layout/fragment_driver_active_ride"
-        android:label="fragment_rider_ride">
+        android:label="">
         <argument
             android:name="rideId"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <action
-            android:id="@+id/cancelRide"
-            app:destination="@id/cancelRideFragment">
+            android:id="@+id/to_cancel_ride_dialog"
+            app:destination="@id/cancel_ride_dialog">
             <argument
-                android:name="rideID"
-                android:defaultValue="-1L" />
+                android:name="ride_id"
+                android:defaultValue="-1" />
         </action>
     </fragment>
     <fragment
         android:id="@+id/myRidesFragment"
         android:name="com.example.carpooling.ui.myrides.MyRidesFragment"
         tools:layout="@layout/fragment_my_rides"
-        android:label="fragment_my_rides">
+        android:label="@string/label_fragment_myrides">
         <action
             android:id="@+id/toRiderRide"
             app:destination="@id/riderRideFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
         </action>
         <action
             android:id="@+id/toParticipantRide"
             app:destination="@id/participantRideFragment">
             <argument
                 android:name="rideId"
-                android:defaultValue="-1L" />
+                android:defaultValue="-1" />
         </action>
-    </fragment>
-    <fragment
-        android:id="@+id/cancelRideFragment"
-        android:name="com.example.carpooling.ui.myrides.CancelRideFragment"
-        tools:layout="@layout/fragment_cancel_active_ride"
-        android:label="fragment_cancel_ride">
-        <argument
-            android:name="rideID"
-            android:defaultValue="-1L"
-            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/participantRideFragment"
         android:name="com.example.carpooling.ui.myrides.PassengerActiveRideFragment"
         tools:layout="@layout/fragment_passenger_active_ride"
-        android:label="fragment_participant_ride">
+        android:label="">
         <argument
             android:name="rideId"
-            android:defaultValue="-1L"
-            app:argType="long" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <action
-            android:id="@+id/cancelBooking"
-            app:destination="@id/cancelBookingFragment">
+            android:id="@+id/to_cancel_booking_dialog"
+            app:destination="@id/cancel_booking_dialog">
             <argument
-                android:name="rideID"
-                android:defaultValue="-1L" />
+                android:name="ride_id"
+                android:defaultValue="-1" />
         </action>
     </fragment>
-    <fragment
-        android:id="@+id/cancelBookingFragment"
-        android:name="com.example.carpooling.ui.myrides.CancelBookingFragment"
-        tools:layout="@layout/fragment_cancel_booking"
-        android:label="fragment_cancel_booking">
+    <dialog
+        android:id="@+id/cancel_booking_dialog"
+        android:name="com.example.carpooling.ui.myrides.CancelBookingDialogFragment"
+        android:label="">
         <argument
-            android:name="rideID"
-            android:defaultValue="-1L"
-            app:argType="long" />
-    </fragment>
+            android:name="ride_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </dialog>
+    <dialog
+        android:id="@+id/cancel_ride_dialog"
+        android:name="com.example.carpooling.ui.myrides.CancelRideDialogFragment"
+        android:label="">
+        <argument
+            android:name="ride_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </dialog>
 </navigation>

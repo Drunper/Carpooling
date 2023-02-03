@@ -17,11 +17,11 @@ class RestRepository {
         return ApiClient.getApiService().publishActiveRide(request)
     }
 
-    suspend fun getActiveRide(id: Long) : RestResult<ActiveRide> {
+    suspend fun getActiveRide(id: Int) : RestResult<ActiveRide> {
         return ApiClient.getApiService().getActiveRide(id)
     }
 
-    suspend fun bookRide(id: Long) : RestResult<Success> {
+    suspend fun bookRide(id: Int) : RestResult<Success> {
         return ApiClient.getApiService().bookActiveRide(id)
     }
 
@@ -35,15 +35,15 @@ class RestRepository {
         return ApiClient.getApiService().getDriverActiveRides()
     }
 
-    suspend fun getActiveRideByID(id: Long) : RestResult<ActiveRide> {
+    suspend fun getActiveRideByID(id: Int) : RestResult<ActiveRide> {
         return ApiClient.getApiService().getActiveRide(id)
     }
 
-    suspend fun deleteRide(id: Long) : RestResult<Success> {
+    suspend fun deleteRide(id: Int) : RestResult<Success> {
         return ApiClient.getApiService().deleteActiveRide(id)
     }
 
-    suspend fun cancelBooking(id: Long) : RestResult<Success> {
+    suspend fun cancelBooking(id: Int) : RestResult<Success> {
         return ApiClient.getApiService().cancelBookingActiveRide(id)
     }
 
@@ -57,15 +57,15 @@ class RestRepository {
         return ApiClient.getApiService().getDriverOldRides()
     }
 
-    suspend fun getOldRideByID(id: Long) : RestResult<OldRide> {
+    suspend fun getOldRideByID(id: Int) : RestResult<OldRide> {
         return ApiClient.getApiService().getOldRide(id)
     }
 
-    suspend fun getOldRideReceivedFeedbacks(id: Long): RestResult<List<Feedback>> {
+    suspend fun getOldRideReceivedFeedbacks(id: Int): RestResult<List<Feedback>> {
         return ApiClient.getApiService().getOldRideReceivedFeedbacks(id)
     }
 
-    suspend fun getOldRideSentFeedbacks(id: Long): RestResult<List<Feedback>> {
+    suspend fun getOldRideSentFeedbacks(id: Int): RestResult<List<Feedback>> {
         return ApiClient.getApiService().getOldRideSentFeedbacks(id)
     }
 
@@ -73,7 +73,7 @@ class RestRepository {
         return ApiClient.getApiService().sendFeedback(request)
     }
 
-    suspend fun getMissingFeedbackUsers(id: Long) : RestResult<List<User>> {
+    suspend fun getMissingFeedbackUsers(id: Int) : RestResult<List<User>> {
         return ApiClient.getApiService().getMissingFeedbackUsers(id)
     }
 
@@ -99,15 +99,19 @@ class RestRepository {
         return ApiClient.getApiService().deletePushToken()
     }
 
-    suspend fun getDriverRating(): RestResult<RiderRating> {
-        return ApiClient.getApiService().getUserRiderRating()
+    suspend fun getDriverRating(id: Int): RestResult<DriverRating> {
+        return ApiClient.getApiService().getDriverRating(id)
     }
 
-    suspend fun getPassengerRating(): RestResult<PassengerRating> {
-        return ApiClient.getApiService().getUserPassengerRating()
+    suspend fun getPassengerRating(id: Int): RestResult<PassengerRating> {
+        return ApiClient.getApiService().getPassengerRating(id)
     }
 
     suspend fun updateProfile(request: UpdateProfileRequest): RestResult<Success> {
         return ApiClient.getApiService().updateProfile(request)
+    }
+
+    suspend fun getUserById(id: Int): RestResult<User> {
+        return ApiClient.getApiService().getUserById(id)
     }
 }

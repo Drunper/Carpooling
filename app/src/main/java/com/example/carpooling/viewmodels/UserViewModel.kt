@@ -24,14 +24,11 @@ class UserViewModel(private val restRepository: RestRepository) : ViewModel() {
     private val _user = MutableLiveData<User?>()
     val user: LiveData<User?> = _user
 
-    private val _driverRating = MutableLiveData<RiderRating>()
-    val driverRating: LiveData<RiderRating> = _driverRating
+    private val _driverRating = MutableLiveData<Float>()
+    val driverRating: LiveData<Float> = _driverRating
 
-    private val _passengerRating = MutableLiveData<PassengerRating>()
-    val passengerRating: LiveData<PassengerRating> = _passengerRating
-
-    private val _updateProfileResult = MutableLiveData<Success>()
-    val updateProfileResult: LiveData<Success> = _updateProfileResult
+    private val _passengerRating = MutableLiveData<Float>()
+    val passengerRating: LiveData<Float> = _passengerRating
 
     private var job: Job? = null
 
@@ -109,9 +106,9 @@ class UserViewModel(private val restRepository: RestRepository) : ViewModel() {
 
     fun loginDataChanged(email: String, password: String) {
         if (!isEmailValid(email)) {
-            _loginForm.value = LoginFormState(emailError = R.string.invalid_username)
+            _loginForm.value = LoginFormState(emailError = R.string.error_invalid_email)
         } else if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
+            _loginForm.value = LoginFormState(passwordError = R.string.error_invalid_password)
         } else {
             _loginForm.value = LoginFormState(isDataValid = true)
         }
@@ -121,59 +118,60 @@ class UserViewModel(private val restRepository: RestRepository) : ViewModel() {
         _user.value = user
     }
 
-    fun getUserDriverRating() {
+    fun getDriverRating(id: Int) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = restRepository.getDriverRating()) {
+            val value = when (val result = restRepository.getDriverRating(id)) {
                 is RestSuccess -> {
                     result.data
                 }
                 is RestError -> {
-                    RiderRating(0.0)
+                    DriverRating(0.0f)
                 }
                 is RestException -> {
-                    RiderRating(0.0)
+                    DriverRating(0.0f)
                 }
             }
             withContext(Dispatchers.Main) {
-                _driverRating.value = value
+                _driverRating.value = value.driverRating
             }
         }
     }
 
-    fun getUserPassengerRating() {
+    fun getPassengerRating(id: Int) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = restRepository.getPassengerRating()) {
+            val value = when (val result = restRepository.getPassengerRating(id)) {
                 is RestSuccess -> {
                     result.data
                 }
                 is RestError -> {
-                    PassengerRating(0.0)
+                    PassengerRating(0.0f)
                 }
                 is RestException -> {
-                    PassengerRating(0.0)
+                    PassengerRating(0.0f)
                 }
             }
             withContext(Dispatchers.Main) {
-                _passengerRating.value = value
+                _passengerRating.value = value.passengerRating
             }
         }
     }
 
-    fun updateProfile(request: UpdateProfileRequest) {
-        job = CoroutineScope(Dispatchers.IO).launch {
+    fun updateProfile(request: UpdateProfileRequest): LiveData<Boolean> {
+        val result = liveData {
             val value = when (val result = restRepository.updateProfile(request)) {
-                is RestSuccess -> result.data
-                is RestError -> Success(success = false)
-                is RestException -> Success(success = false)
+                is RestSuccess -> result.data.success
+                is RestError -> false
+                is RestException -> false
             }
             withContext(Dispatchers.Main) {
-                if (value.success) {
+                if (value) {
                     val updatedUser = _user.value!!.copy(username = request.username, bio = request.bio)
                     updateUser(updatedUser)
                 }
-                _updateProfileResult.value = value
             }
+            emit(value)
         }
+        return result
     }
 
     fun getProfilePicReference(): String {

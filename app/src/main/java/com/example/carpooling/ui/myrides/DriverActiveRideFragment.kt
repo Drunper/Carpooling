@@ -8,18 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentDriverActiveRideBinding
 import com.example.carpooling.ui.activeride.PassengerAdapter
 import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.utils.SessionManager
+import com.example.carpooling.utils.convertDate
+import com.example.carpooling.utils.showSnackbar
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import java.text.NumberFormat
 import java.util.*
@@ -81,7 +86,7 @@ class DriverActiveRideFragment : Fragment() {
                 Currency.getInstance("EUR") // TODO: bisogna usare la currency utilizzata di default dal sistema
 
             binding.basicInfo.apply {
-                fieldRideDate.text = ride.date
+                fieldRideDate.text = ride.date.convertDate("dd/MM/yyyy", "EEE dd MMM yyyy")
                 fieldRideDepartureTime.text = ride.departureTime
                 fieldRideArrivalTime.text = ride.arrivalTime
                 fieldRideFrom.text = fromAddressString
@@ -122,8 +127,20 @@ class DriverActiveRideFragment : Fragment() {
                 adapter.submitList(ride.passengers)
             }
 
+            myRidesViewModel.deleteRideResult.observe(viewLifecycleOwner) { success ->
+                if(success) {
+                    binding.root.showSnackbar(
+                        requireView(),
+                        getString(R.string.snackbar_cancel_ride_success),
+                        Snackbar.LENGTH_LONG,
+                        null
+                    ) {}
+                    navController.popBackStack()
+                }
+            }
+
             binding.btnDeleteRide.setOnClickListener{
-                val action = DriverActiveRideFragmentDirections.cancelRide(args.rideId)
+                val action = DriverActiveRideFragmentDirections.toCancelRideDialog(args.rideId)
                 navController.navigate(action)
             }
         }

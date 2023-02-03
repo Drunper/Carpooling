@@ -12,7 +12,7 @@ class Geocoding {
             val geocoder = Geocoder(context, Locale.getDefault())
             val address =
                 geocoder.getFromLocation(lat, lng, 1)[0]
-            return "${address.thoroughfare} ${address.subThoroughfare}, ${address.locality}"
+            return address.getString()
         }
 
         fun getLatLngFromAddresses(context: Context, from: String, to: String): Locations {
@@ -28,11 +28,14 @@ class Geocoding {
             return Locations(fromLat, fromLng, toLat, toLng)
         }
 
-        fun getLatLngFromAddress(context: Context, location: String): Address {
+        fun getLatLngFromAddress(context: Context, location: String): Address? {
             val geocoder = Geocoder(context, Locale.getDefault())
             val address = geocoder.getFromLocationName(location, 1)
 
-            return address[0]
+            return if (address.size >= 1)
+                address[0]
+            else
+                null
         }
     }
 }

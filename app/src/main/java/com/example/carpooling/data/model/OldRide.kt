@@ -5,7 +5,7 @@ import java.io.Serializable
 
 data class OldRide (
     @SerializedName("id")
-    val id: Long,
+    val id: Int,
     @SerializedName("from_lat")
     val from_lat: Double,
     @SerializedName("from_lng")
