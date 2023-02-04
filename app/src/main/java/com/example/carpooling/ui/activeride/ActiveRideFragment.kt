@@ -64,6 +64,7 @@ class ActiveRideFragment : Fragment() {
             }
 
             binding.activeRideInfo.apply {
+                fieldAvailableSeats.text = getString(R.string.format_field_available_seats, ride.availableSeats)
                 fieldActiveRideNotes.text = ride.notes
                 val smoking = if (ride.smokingAllowed) {
                     R.drawable.smoking_icon

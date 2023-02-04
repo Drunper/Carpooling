@@ -98,7 +98,7 @@
                         android:background="@drawable/text_view_round_corner"
                         android:clickable="true"
                         android:textSize="24sp"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_45"
+                        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_55"
                         app:layout_constraintStart_toStartOf="@id/guideline_left"
                         app:layout_constraintTop_toBottomOf="@+id/label_date" />
 
@@ -108,8 +108,8 @@
                         android:layout_height="50dp"
                         android:layout_marginTop="12dp"
                         android:background="#B39DDB"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_55"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_45"
+                        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_65"
+                        app:layout_constraintStart_toStartOf="@id/guideline_vertical_55"
                         app:layout_constraintTop_toBottomOf="@+id/field_to" />
 
                     <TextView
@@ -119,7 +119,7 @@
                         android:layout_marginTop="8dp"
                         android:text="@string/departure_time"
                         android:textSize="16sp"
-                        app:layout_constraintStart_toEndOf="@id/guideline_vertical_55"
+                        app:layout_constraintStart_toEndOf="@id/guideline_vertical_65"
                         app:layout_constraintTop_toBottomOf="@+id/field_to" />
 
                     <TextView
@@ -130,8 +130,18 @@
                         android:clickable="true"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_55"
+                        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_65"
                         app:layout_constraintTop_toBottomOf="@id/label_time" />
+
+                    <TextView
+                        android:id="@+id/label_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@id/guideline_left"
+                        app:layout_constraintTop_toBottomOf="@id/field_date" />
 
                     <com.google.android.material.slider.RangeSlider
                         android:id="@+id/field_price"
@@ -142,11 +152,10 @@
                         android:stepSize="1.0"
                         android:valueFrom="0.0"
                         android:valueTo="100.0"
-                        app:labelBehavior="visible"
                         app:layout_constraintBottom_toTopOf="@+id/divider_price_options"
                         app:layout_constraintEnd_toEndOf="@id/guideline_right"
                         app:layout_constraintStart_toStartOf="@id/guideline_left"
-                        app:layout_constraintTop_toBottomOf="@+id/field_date"
+                        app:layout_constraintTop_toBottomOf="@id/label_price"
                         app:layout_constraintVertical_bias="0.5"
                         app:tickVisible="false"
                         app:values="@array/price_initial_range_values" />
@@ -222,18 +231,18 @@
                         app:layout_constraintGuide_percent="0.95" />
 
                     <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_vertical_45"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.45" />
-
-                    <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline_vertical_55"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layout_constraintGuide_percent="0.55" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline_vertical_65"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.65" />
 
                     <androidx.constraintlayout.widget.Barrier
                         android:id="@+id/barrier3"

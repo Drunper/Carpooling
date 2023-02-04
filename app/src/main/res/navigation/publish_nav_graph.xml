@@ -4,19 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/publish"
     app:startDestination="@id/publishFragment">
-    <dialog
-        android:id="@+id/publishDatePickerFragment"
-        android:name="com.example.carpooling.ui.publish.PublishDatePickerFragment"
-        android:label="" />
-    <dialog
-        android:id="@+id/publishTimePickerFragment"
-        android:name="com.example.carpooling.ui.publish.PublishTimePickerFragment"
-        android:label="">
-        <argument
-            android:name="departure"
-            android:defaultValue="false"
-            app:argType="boolean" />
-    </dialog>
+
     <fragment
         android:id="@+id/publishPriceFragment"
         android:name="com.example.carpooling.ui.publish.PublishPriceFragment"
@@ -101,13 +89,6 @@
         android:name="com.example.carpooling.ui.publish.PublishTimeFragment"
         android:label=""
         tools:layout="@layout/fragment_publish_time">
-        <action
-            android:id="@+id/insert_time"
-            app:destination="@id/publishTimePickerFragment">
-            <argument
-                android:name="departure"
-                android:defaultValue="false" />
-        </action>
         <action
             android:id="@+id/toPublishSeats"
             app:destination="@id/publishSeatsFragment" />

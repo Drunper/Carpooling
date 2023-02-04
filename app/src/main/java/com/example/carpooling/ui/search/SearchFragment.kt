@@ -1,7 +1,6 @@
 package com.example.carpooling.ui.search
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +12,20 @@ import androidx.preference.PreferenceManager
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentSearchBinding
 import com.example.carpooling.utils.SessionManager
-import com.example.carpooling.utils.formatCurrency
+import com.example.carpooling.utils.convertDate
 import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.google.firebase.messaging.FirebaseMessaging
 import java.text.NumberFormat
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class SearchFragment : Fragment() {
@@ -82,7 +88,7 @@ class SearchFragment : Fragment() {
         }
 
         searchViewModel.date.observe(viewLifecycleOwner) { date ->
-            binding.fieldDate.text = date
+            binding.fieldDate.text = date.convertDate("dd/MM/yyyy", "EEE dd MMM yyyy")
         }
 
         searchViewModel.time.observe(viewLifecycleOwner) { time ->
@@ -100,11 +106,34 @@ class SearchFragment : Fragment() {
         }
 
         binding.fieldDate.setOnClickListener {
-            navController.navigate(R.id.datePickerFragment)
+            val picker = MaterialDatePicker.Builder
+                .datePicker()
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+
+            picker.addOnPositiveButtonClickListener { selection ->
+                val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(selection), TimeZone.getDefault().toZoneId())
+                val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                searchViewModel.setDate(date.format(dtf))
+            }
+
+            picker.show(parentFragmentManager, "datepicker")
         }
 
         binding.fieldTime.setOnClickListener {
-            navController.navigate(R.id.timePickerFragment)
+            val picker =
+                MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_24H)
+                    .setHour(12)
+                    .setMinute(0)
+                    .build()
+
+            picker.addOnPositiveButtonClickListener {
+                val time = LocalTime.of(picker.hour, picker.minute)
+                val dtf = DateTimeFormatter.ofPattern("HH:mm")
+                searchViewModel.setTime(time.format(dtf))
+            }
+            picker.show(parentFragmentManager, "timepicker")
         }
 
         binding.fieldFrom.setOnClickListener {

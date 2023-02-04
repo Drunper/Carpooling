@@ -36,7 +36,8 @@ class PassengerViewHolder(
     init {
         itemView.setOnClickListener {
             currentPassenger?.let {
-                onClick(it.id)
+                if (it.username != binding.root.context.getString(R.string.you))
+                    onClick(it.id)
             }
         }
     }

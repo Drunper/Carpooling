@@ -19,6 +19,7 @@ import com.example.carpooling.utils.convertDate
 import com.example.carpooling.utils.formatCurrency
 import com.example.carpooling.utils.showSnackbar
 import com.example.carpooling.viewmodels.MyRidesViewModel
+import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import java.text.NumberFormat
@@ -29,6 +30,9 @@ class PassengerActiveRideFragment : Fragment() {
     private lateinit var binding: FragmentPassengerActiveRideBinding
     private val args: PassengerActiveRideFragmentArgs by navArgs()
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
+        ViewModelFactory()
+    }
+    private val userViewModel: UserViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -67,6 +71,7 @@ class PassengerActiveRideFragment : Fragment() {
             }
 
             binding.activeRideInfo.apply {
+                fieldAvailableSeats.text = getString(R.string.format_field_available_seats, ride.availableSeats)
                 fieldActiveRideNotes.text = ride.notes
                 val smoking = if (ride.smokingAllowed) {
                     R.drawable.smoking_icon
@@ -102,7 +107,13 @@ class PassengerActiveRideFragment : Fragment() {
                     navController.navigate(action)
                 }
                 passengersRecyclerView.adapter = adapter
-                adapter.submitList(ride.passengers)
+                val passengerList = ride.passengers.map { passenger ->
+                    if (passenger.id == userViewModel.user.value?.id)
+                        passenger.copy(username = getString(R.string.you))
+                    else
+                        passenger
+                }
+                adapter.submitList(passengerList)
 
                 layoutRider.setOnClickListener {
                     val action = MainNavGraphDirections.toProfile(ride.rider.id)

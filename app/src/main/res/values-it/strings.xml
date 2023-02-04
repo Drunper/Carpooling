@@ -157,4 +157,5 @@
     <string name="settings_action_notifications">Abilita le notifiche</string>
     <string name="settings_currency_title">Valuta</string>
     <string name="settings_title_currency_category">Opzioni per la valuta</string>
+    <string name="format_field_available_seats">Posti disponibili: %1$i</string>
 </resources>

@@ -11,13 +11,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPublishBinding
+import com.example.carpooling.utils.getString
 import com.example.carpooling.viewmodels.PublishViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
 class PublishFragment : Fragment() {
 
     private lateinit var binding: FragmentPublishBinding
-    private val publishViewModel: PublishViewModel by activityViewModels{
+    private val publishViewModel: PublishViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -34,14 +35,22 @@ class PublishFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
 
-        publishViewModel.locationFormState.observe(viewLifecycleOwner) {
-            if (it)
-                binding.btnToPublishDate.isEnabled = true
+        publishViewModel.apply {
+            locationFormState.observe(viewLifecycleOwner) {
+                if (it)
+                    binding.btnToPublishDate.isEnabled = true
+            }
+
+            from.observe(viewLifecycleOwner) {
+                binding.fieldFrom.text = it.getString()
+            }
+
+            to.observe(viewLifecycleOwner) {
+                binding.fieldTo.text = it.getString()
+            }
         }
 
         binding.apply {
-            lifecycleOwner = viewLifecycleOwner
-            viewModel = publishViewModel
             fieldFrom.setOnClickListener {
                 val action = PublishFragmentDirections.insertLocation(true)
                 navController.navigate(action)

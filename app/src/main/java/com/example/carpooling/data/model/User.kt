@@ -13,5 +13,5 @@ data class User(
     @SerializedName("profile_pic_reference")
     val profilePicReference: String,
     @SerializedName("bio")
-    val bio: String
+    val bio: String?
 ) : Serializable

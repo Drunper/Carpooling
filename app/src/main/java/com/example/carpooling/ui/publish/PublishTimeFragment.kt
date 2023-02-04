@@ -12,6 +12,10 @@ import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPublishTimeBinding
 import com.example.carpooling.viewmodels.PublishViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class PublishTimeFragment : Fragment() {
     private lateinit var binding: FragmentPublishTimeBinding
@@ -42,13 +46,38 @@ class PublishTimeFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
 
             fieldDepartureTime.setOnClickListener {
-                val action = PublishTimeFragmentDirections.insertTime(true)
-                navController.navigate(action)
+                val picker =
+                    MaterialTimePicker.Builder()
+                        .setTimeFormat(TimeFormat.CLOCK_24H)
+                        .setHour(12)
+                        .setMinute(0)
+                        .build()
+
+                picker.addOnPositiveButtonClickListener {
+                    val time = LocalTime.of(picker.hour, picker.minute)
+                    val dtf = DateTimeFormatter.ofPattern("HH:mm")
+                    publishViewModel.setDepartureTime(time.format(dtf))
+                }
+                picker.show(parentFragmentManager, "timepicker")
+
+                /*val action = PublishTimeFragmentDirections.insertTime(true)
+                navController.navigate(action)*/
             }
 
             fieldArrivalTime.setOnClickListener {
-                val action = PublishTimeFragmentDirections.insertTime(false)
-                navController.navigate(action)
+                val picker =
+                    MaterialTimePicker.Builder()
+                        .setTimeFormat(TimeFormat.CLOCK_24H)
+                        .setHour(12)
+                        .setMinute(0)
+                        .build()
+
+                picker.addOnPositiveButtonClickListener {
+                    val time = LocalTime.of(picker.hour, picker.minute)
+                    val dtf = DateTimeFormatter.ofPattern("HH:mm")
+                    publishViewModel.setArrivalTime(time.format(dtf))
+                }
+                picker.show(parentFragmentManager, "timepicker")
             }
 
             btnToPublishSeats.setOnClickListener {

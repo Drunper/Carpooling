@@ -241,6 +241,16 @@
             android:defaultValue="false"
             app:argType="boolean" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.carpooling.ui.profile.ProfileFragment"
+        android:label=""
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="user_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
     <dialog
         android:id="@+id/bookRideDialog"
         android:name="com.example.carpooling.ui.activeride.BookRideDialogFragment"
@@ -254,22 +264,4 @@
         android:id="@+id/submitFeedbackDialog"
         android:name="com.example.carpooling.ui.history.SubmitFeedbackDialogFragment"
         android:label="Invia" />
-    <dialog
-        android:id="@+id/datePickerFragment"
-        android:name="com.example.carpooling.ui.search.DatePickerFragment"
-        android:label="" />
-    <dialog
-        android:id="@+id/timePickerFragment"
-        android:name="com.example.carpooling.ui.search.TimePickerFragment"
-        android:label="" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.carpooling.ui.profile.ProfileFragment"
-        android:label=""
-        tools:layout="@layout/fragment_profile">
-        <argument
-            android:name="user_id"
-            android:defaultValue="-1"
-            app:argType="integer" />
-    </fragment>
 </navigation>

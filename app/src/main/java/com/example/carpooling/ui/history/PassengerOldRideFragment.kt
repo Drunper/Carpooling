@@ -19,6 +19,7 @@ import com.example.carpooling.utils.Geocoding
 import com.example.carpooling.utils.convertDate
 import com.example.carpooling.utils.formatCurrency
 import com.example.carpooling.viewmodels.MyRidesViewModel
+import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 import java.text.NumberFormat
 import java.util.*
@@ -27,6 +28,9 @@ class PassengerOldRideFragment : Fragment() {
     private lateinit var binding: FragmentPassengerOldRideBinding
     private val args: PassengerOldRideFragmentArgs by navArgs()
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
+        ViewModelFactory()
+    }
+    private val userViewModel: UserViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -76,7 +80,13 @@ class PassengerOldRideFragment : Fragment() {
                     navController.navigate(action)
                 }
                 passengersRecyclerView.adapter = adapter
-                adapter.submitList(ride.passengers)
+                val passengerList = ride.passengers.map { passenger ->
+                    if (passenger.id == userViewModel.user.value?.id)
+                        passenger.copy(username = getString(R.string.you))
+                    else
+                        passenger
+                }
+                adapter.submitList(passengerList)
 
                 layoutRider.setOnClickListener {
                     val action = MainNavGraphDirections.toProfile(ride.rider.id)

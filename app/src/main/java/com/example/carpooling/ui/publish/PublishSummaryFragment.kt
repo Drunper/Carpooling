@@ -44,7 +44,7 @@ class PublishSummaryFragment : Fragment() {
         val navController = findNavController()
 
         publishViewModel.from.observe(viewLifecycleOwner) { from ->
-            binding.fieldRideTo.text = from.getString()
+            binding.fieldRideFrom.text = from.getString()
         }
 
         publishViewModel.to.observe(viewLifecycleOwner) { to ->

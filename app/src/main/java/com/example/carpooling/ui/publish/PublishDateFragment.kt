@@ -12,6 +12,11 @@ import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPublishDateBinding
 import com.example.carpooling.viewmodels.PublishViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class PublishDateFragment : Fragment() {
 
@@ -44,7 +49,18 @@ class PublishDateFragment : Fragment() {
             viewModel = publishViewModel
 
             fieldDate.setOnClickListener {
-                navController.navigate(R.id.publishDatePickerFragment)
+                val picker = MaterialDatePicker.Builder
+                    .datePicker()
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build()
+
+                picker.addOnPositiveButtonClickListener { selection ->
+                    val date = LocalDateTime.ofInstant(Instant.ofEpochMilli(selection), TimeZone.getDefault().toZoneId())
+                    val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                    publishViewModel.setDate(date.format(dtf))
+                }
+
+                picker.show(parentFragmentManager, "datepicker")
             }
 
             btnToPublishTime.setOnClickListener {
