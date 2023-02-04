@@ -22,8 +22,8 @@ data class OldRide (
     val arrivalTime: String,
     @SerializedName("price")
     val price: Double,
-    @SerializedName("rider")
-    val rider: User,
-    @SerializedName("participants")
+    @SerializedName("driver")
+    val driver: User,
+    @SerializedName("passengers")
     val passengers: List<User>
 ) : Serializable

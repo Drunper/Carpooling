@@ -96,12 +96,12 @@ class PassengerActiveRideFragment : Fragment() {
             }
 
             binding.ridePassengersInfo.apply {
-                fieldRideRiderName.text = ride.rider.username
-                val picReference = ride.rider.profilePicReference
+                fieldRideDriverName.text = ride.driver.username
+                val picReference = ride.driver.profilePicReference
                 Glide.with(requireContext())
                     .load("http://10.0.2.2:8080/carpooling_images/$picReference")
                     .error(R.drawable.ic_user)
-                    .into(imageRideRider)
+                    .into(imageRideDriver)
                 val adapter = PassengerAdapter { userID ->
                     val action = MainNavGraphDirections.toProfile(userID)
                     navController.navigate(action)
@@ -115,8 +115,8 @@ class PassengerActiveRideFragment : Fragment() {
                 }
                 adapter.submitList(passengerList)
 
-                layoutRider.setOnClickListener {
-                    val action = MainNavGraphDirections.toProfile(ride.rider.id)
+                layoutDriver.setOnClickListener {
+                    val action = MainNavGraphDirections.toProfile(ride.driver.id)
                     navController.navigate(action)
                 }
             }

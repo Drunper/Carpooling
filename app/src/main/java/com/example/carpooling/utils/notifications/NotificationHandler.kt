@@ -21,7 +21,7 @@ object NotificationHandler {
     fun sendNotification(context: Context, channel: Channel, rideId: Long?) {
         val destination = when (channel) {
             Channel.DELETE_RIDE -> R.id.myRidesFragment
-            else -> R.id.riderRideFragment
+            else -> R.id.driverRideFragment
         }
 
         var deepLinkBuilder = NavDeepLinkBuilder(context)

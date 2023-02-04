@@ -65,12 +65,12 @@ class MyRidesFragment : Fragment() {
         }
 
         passengerActiveRidesAdapter = MyPassengerActiveRidesAdapter { rideID ->
-            val action = MyRidesFragmentDirections.toParticipantRide(rideID)
+            val action = MyRidesFragmentDirections.toPassengerRide(rideID)
             navController.navigate(action)
         }
 
         driverActiveRidesAdapter = MyDriverActiveRidesAdapter { rideID ->
-            val action = MyRidesFragmentDirections.toRiderRide(rideID)
+            val action = MyRidesFragmentDirections.toDriverRide(rideID)
             navController.navigate(action)
         }
 

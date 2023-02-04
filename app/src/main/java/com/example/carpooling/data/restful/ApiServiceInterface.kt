@@ -26,19 +26,19 @@ interface ApiServiceInterface {
     @POST("api/active_rides")
     suspend fun getActiveRides(@Body requestBody: ActiveRidesRequest): RestResult<List<ActiveRide>>
 
-    @GET("api/active_rides/{id}/participants")
-    suspend fun getActiveRideParticipants(@Path("id") id: Int) : RestResult<List<User>>
+    @GET("api/active_rides/{id}/passengers")
+    suspend fun getActiveRidePassengers(@Path("id") id: Int) : RestResult<List<User>>
 
-    @GET("api/rider/old_rides")
+    @GET("api/driver/old_rides")
     suspend fun getDriverOldRides() : RestResult<List<OldRide>>
 
-    @GET("api/rider/active_rides")
+    @GET("api/driver/active_rides")
     suspend fun getDriverActiveRides() : RestResult<List<ActiveRide>>
 
-    @GET("api/participant/active_rides")
+    @GET("api/passenger/active_rides")
     suspend fun getPassengerActiveRides() : RestResult<List<ActiveRide>>
 
-    @GET("api/participant/old_rides")
+    @GET("api/passenger/old_rides")
     suspend fun getPassengerOldRides() : RestResult<List<OldRide>>
 
     @GET("api/user/feedbacks/received")
@@ -75,16 +75,16 @@ interface ApiServiceInterface {
     suspend fun sendFeedback(@Body requestBody: SendFeedbackRequest) : RestResult<Success>
 
     @GET("api/driver/{id}/feedbacks/amount")
-    suspend fun getNumberOfRiderFeedbacks(@Path("id") id: Int) : RestResult<Amount>
+    suspend fun getNumberOfDriverFeedbacks(@Path("id") id: Int) : RestResult<Amount>
 
     @GET("api/passenger/{id}/feedbacks/amount")
-    suspend fun getNumberOfParticipantFeedbacks(@Path("id") id: Int) : RestResult<Amount>
+    suspend fun getNumberOfPassengerFeedbacks(@Path("id") id: Int) : RestResult<Amount>
 
-    @GET("api/rider/old_rides/amount")
-    suspend fun getNumberOfRiderOldRides() : RestResult<Amount>
+    @GET("api/driver/old_rides/amount")
+    suspend fun getNumberOfDriverOldRides() : RestResult<Amount>
 
-    @GET("api/participant/old_rides/amount")
-    suspend fun getNumberOfParticipantOldRides() : RestResult<Amount>
+    @GET("api/passenger/old_rides/amount")
+    suspend fun getNumberOfPassengerOldRides() : RestResult<Amount>
 
     @PATCH("api/user/update")
     suspend fun updateProfile(@Body requestBody: UpdateProfileRequest) : RestResult<Success>

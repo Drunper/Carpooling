@@ -133,5 +133,5 @@
     <string name="settings_currency_title">Currency</string>
     <string name="settings_title_currency_category">Currency options</string>
     <string name="title_app" translatable="false">CARPOOLING</string>
-    <string name="format_field_available_seats">Available seats: %1$i</string>
+    <string name="format_field_available_seats">Available seats: %1$d</string>
 </resources>

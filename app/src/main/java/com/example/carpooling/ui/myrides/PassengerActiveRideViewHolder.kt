@@ -31,7 +31,7 @@ class PassengerActiveRideViewHolder(
         binding.fieldItemRideDepartureTime.text = activeRide.departureTime
         binding.fieldItemRideArrivalTime.text = activeRide.arrivalTime
         binding.fieldItemRidePrice.text = activeRide.price.formatCurrency(binding.root.context)
-        binding.fieldItemRideRiderName.text = activeRide.rider.username
+        binding.fieldItemRideDriverName.text = activeRide.driver.username
 
         val from = Geocoding.getAddressFromLatLng(
             binding.root.context,
@@ -47,11 +47,11 @@ class PassengerActiveRideViewHolder(
         binding.fieldItemRideFrom.text = from
         binding.fieldItemRideTo.text = to
 
-        val picReference = activeRide.rider.profilePicReference
+        val picReference = activeRide.driver.profilePicReference
 
         Glide.with(binding.root.context)
             .load("http://10.0.2.2:8080/carpooling_images/$picReference")
             .error(R.drawable.ic_user)
-            .into(binding.imageItemRideRider)
+            .into(binding.imageItemRideDriver)
     }
 }

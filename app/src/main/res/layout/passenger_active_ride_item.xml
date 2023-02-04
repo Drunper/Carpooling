@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_item_ride_rider"
+                android:id="@+id/image_item_ride_driver"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="24dp"
@@ -71,14 +71,14 @@
                 tools:src="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/field_item_ride_rider_name"
+                android:id="@+id/field_item_ride_driver_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="24dp"
                 android:text="Mattia Viola"
                 app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
-                app:layout_constraintStart_toEndOf="@id/image_item_ride_rider"
+                app:layout_constraintStart_toEndOf="@id/image_item_ride_driver"
                 app:layout_constraintTop_toBottomOf="@id/field_item_ride_arrival_time" />
 
             <androidx.constraintlayout.widget.Guideline
