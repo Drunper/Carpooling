@@ -19,14 +19,36 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:id="@+id/btn_received_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_received_feedback"
+            app:icon="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/profile_base_info"/>
+
+        <Button
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:id="@+id/btn_sent_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/btn_my_feedback"
+            app:icon="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/btn_received_feedback"/>
+
+        <Button
             android:id="@+id/btn_modify_profile"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:text="@string/btn_modify_profile"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/profile_base_info" />
+            app:layout_constraintTop_toBottomOf="@id/btn_sent_feedback" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"

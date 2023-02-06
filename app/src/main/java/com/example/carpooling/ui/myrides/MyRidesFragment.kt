@@ -1,7 +1,6 @@
 package com.example.carpooling.ui.myrides
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentMyRidesBinding
 import com.example.carpooling.utils.SessionManager
@@ -81,9 +79,9 @@ class MyRidesFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             viewPager.setCurrentItem(tab.position, true)
             if (position == 1)
-                tab.text = "Pubblicati"
+                tab.text = getString(R.string.tab_title_booked)
             if (position == 0)
-                tab.text = "Prenotati"
+                tab.text = getString(R.string.tab_title_published)
         }.attach()
 
         myRidesViewModel.getPassengerActiveRides().observe(viewLifecycleOwner) { rides ->

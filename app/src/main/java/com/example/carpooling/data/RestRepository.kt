@@ -99,19 +99,31 @@ class RestRepository {
         return ApiClient.getApiService().deletePushToken()
     }
 
-    suspend fun getDriverRating(id: Int): RestResult<DriverRating> {
-        return ApiClient.getApiService().getDriverRating(id)
-    }
-
-    suspend fun getPassengerRating(id: Int): RestResult<PassengerRating> {
-        return ApiClient.getApiService().getPassengerRating(id)
-    }
-
     suspend fun updateProfile(request: UpdateProfileRequest): RestResult<Success> {
         return ApiClient.getApiService().updateProfile(request)
     }
 
     suspend fun getUserById(id: Int): RestResult<User> {
         return ApiClient.getApiService().getUserById(id)
+    }
+
+    suspend fun getUserStats(id: Int): RestResult<UserStats> {
+        return ApiClient.getApiService().getUserStats(id)
+    }
+
+    suspend fun getDriverReceivedFeedback(id: Int): RestResult<List<Feedback>> {
+        return ApiClient.getApiService().getDriverReceivedFeedback(id)
+    }
+
+    suspend fun getDriverSentFeedback(id: Int): RestResult<List<Feedback>> {
+        return ApiClient.getApiService().getDriverSentFeedback(id)
+    }
+
+    suspend fun getPassengerReceivedFeedback(id: Int): RestResult<List<Feedback>> {
+        return ApiClient.getApiService().getPassengerReceivedFeedback(id)
+    }
+
+    suspend fun getPassengerSentFeedback(id: Int): RestResult<List<Feedback>> {
+        return ApiClient.getApiService().getPassengerSentFeedback(id)
     }
 }

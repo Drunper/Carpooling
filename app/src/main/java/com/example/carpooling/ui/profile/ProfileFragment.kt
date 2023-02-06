@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.carpooling.R
@@ -33,7 +34,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val navController = findNavController()
         userViewModel.apply {
             getUserById(args.userId).observe(viewLifecycleOwner) { profileUser ->
                 binding.profileBaseInfo.apply {
@@ -49,16 +50,21 @@ class ProfileFragment : Fragment() {
                     .into(imageView)
             }
 
-            driverRating.observe(viewLifecycleOwner) { rating ->
-                binding.profileBaseInfo.profileDriverRating.rating = rating
+            getUserStats(user.value!!.id).observe(viewLifecycleOwner) { userStats ->
+                binding.profileBaseInfo.apply {
+                    profileDriverRating.rating = userStats.driverRating
+                    profilePassengerRating.rating = userStats.passengerRating
+                    fieldProfileDriverRideCount.text = userStats.driverRideCount.toString()
+                    fieldProfilePassengerRideCount.text = userStats.passengerRideCount.toString()
+                    fieldProfileDriverFeedbackCount.text = userStats.driverFeedbackCount.toString()
+                    fieldProfilePassengerFeedbackCount.text = userStats.passengerFeedbackCount.toString()
+                }
             }
+        }
 
-            passengerRating.observe(viewLifecycleOwner) { rating ->
-                binding.profileBaseInfo.profilePassengerRating.rating = rating
-            }
-
-            getDriverRating(args.userId)
-            getPassengerRating(args.userId)
+        binding.btnFeedback.setOnClickListener {
+            val action = ProfileFragmentDirections.toFeedback(userViewModel.user.value!!.id, reviewer = false)
+            navController.navigate(action)
         }
     }
 }

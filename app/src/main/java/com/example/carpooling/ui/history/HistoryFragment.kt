@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.carpooling.R
-import com.example.carpooling.data.model.OldRide
 import com.example.carpooling.databinding.FragmentHistoryBinding
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
@@ -43,7 +41,6 @@ class HistoryFragment : Fragment() {
         val navController = findNavController()
         val tabLayout = binding.tabLayoutHistory
         val viewPager = binding.viewPagerHistory
-        Log.d("historyLifecycle", "onViewCreated")
         passengerOldRidesAdapter = MyPassengerOldRidesAdapter { rideID ->
             val action = HistoryFragmentDirections.toPassengerOldRide(rideID)
             navController.navigate(action)
@@ -59,9 +56,9 @@ class HistoryFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             viewPager.setCurrentItem(tab.position, true)
             if (position == 0)
-                tab.text = "Prenotati"
+                tab.text = getString(R.string.tab_title_booked)
             if (position == 1)
-                tab.text = "Pubblicati"
+                tab.text = getString(R.string.tab_title_published)
         }.attach()
 
         myRidesViewModel.getPassengerOldRides().observe(viewLifecycleOwner) { rides ->

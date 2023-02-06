@@ -118,44 +118,6 @@ class UserViewModel(private val restRepository: RestRepository) : ViewModel() {
         _user.value = user
     }
 
-    fun getDriverRating(id: Int) {
-        job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = restRepository.getDriverRating(id)) {
-                is RestSuccess -> {
-                    result.data
-                }
-                is RestError -> {
-                    DriverRating(0.0f)
-                }
-                is RestException -> {
-                    DriverRating(0.0f)
-                }
-            }
-            withContext(Dispatchers.Main) {
-                _driverRating.value = value.driverRating
-            }
-        }
-    }
-
-    fun getPassengerRating(id: Int) {
-        job = CoroutineScope(Dispatchers.IO).launch {
-            val value = when (val result = restRepository.getPassengerRating(id)) {
-                is RestSuccess -> {
-                    result.data
-                }
-                is RestError -> {
-                    PassengerRating(0.0f)
-                }
-                is RestException -> {
-                    PassengerRating(0.0f)
-                }
-            }
-            withContext(Dispatchers.Main) {
-                _passengerRating.value = value.passengerRating
-            }
-        }
-    }
-
     fun updateProfile(request: UpdateProfileRequest): LiveData<Boolean> {
         val result = liveData {
             val value = when (val result = restRepository.updateProfile(request)) {
@@ -180,6 +142,61 @@ class UserViewModel(private val restRepository: RestRepository) : ViewModel() {
                 is RestSuccess -> emit(result.data)
                 is RestError -> {}
                 is RestException -> {}
+            }
+        }
+        return value
+    }
+
+    fun getUserStats(id: Int): LiveData<UserStats> {
+        val value = liveData {
+            when (val result = restRepository.getUserStats(id)) {
+                is RestSuccess -> emit(result.data)
+                is RestError -> {}
+                is RestException -> {}
+            }
+        }
+        return value
+    }
+
+    fun getDriverReceivedFeedback(id: Int): LiveData<List<Feedback>> {
+        val value = liveData {
+            when (val result = restRepository.getDriverReceivedFeedback(id)) {
+                is RestSuccess -> emit(result.data)
+                is RestError -> emit(listOf())
+                is RestException -> emit(listOf())
+            }
+        }
+        return value
+    }
+
+    fun getDriverSentFeedback(id: Int): LiveData<List<Feedback>> {
+        val value = liveData {
+            when (val result = restRepository.getDriverSentFeedback(id)) {
+                is RestSuccess -> emit(result.data)
+                is RestError -> emit(listOf())
+                is RestException -> emit(listOf())
+            }
+        }
+        return value
+    }
+
+    fun getPassengerReceivedFeedback(id: Int): LiveData<List<Feedback>> {
+        val value = liveData {
+            when (val result = restRepository.getPassengerReceivedFeedback(id)) {
+                is RestSuccess -> emit(result.data)
+                is RestError -> emit(listOf())
+                is RestException -> emit(listOf())
+            }
+        }
+        return value
+    }
+
+    fun getPassengerSentFeedback(id: Int): LiveData<List<Feedback>> {
+        val value = liveData {
+            when (val result = restRepository.getPassengerSentFeedback(id)) {
+                is RestSuccess -> emit(result.data)
+                is RestError -> emit(listOf())
+                is RestException -> emit(listOf())
             }
         }
         return value

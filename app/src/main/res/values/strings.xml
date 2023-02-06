@@ -16,8 +16,8 @@
     <string name="label_fragment_history">History</string>
     <string name="label_fragment_publish">Publish</string>
     <string name="label_fragment_myrides">Rides</string>
-    <string name="title_received_feedbacks">Received feedbacks</string>
-    <string name="title_sent_feedbacks">Sent feedbacks</string>
+    <string name="title_received_feedback">Received feedback</string>
+    <string name="title_sent_feedback">Sent feedback</string>
     <string name="title_publish_start">Where do you depart from and where do you arrive?</string>
     <string name="title_publish_date">Insert the departure date</string>
     <string name="title_publish_time">What are the departure and arrival times?</string>
@@ -80,8 +80,8 @@
     <string name="btn_book">Book</string>
     <string name="btn_add_feedback">Add a review</string>
     <string name="btn_send_feedback">Send</string>
-    <string name="btn_received_feedbacks">Received feedbacks</string>
-    <string name="btn_my_feedbacks">Sent feedbacks</string>
+    <string name="btn_received_feedback">Received feedback</string>
+    <string name="btn_my_feedback">Sent feedback</string>
     <string name="btn_modify">Modify</string>
     <string name="btn_modify_profile">Modify</string>
     <string name="btn_start_login">Sign in</string>
@@ -134,4 +134,13 @@
     <string name="settings_title_currency_category">Currency options</string>
     <string name="title_app" translatable="false">CARPOOLING</string>
     <string name="format_field_available_seats">Available seats: %1$d</string>
+    <string name="label_profile_passenger_ride_count">Total rides as passenger:</string>
+    <string name="label_profile_driver_ride_count">Total rides as driver:</string>
+    <string name="label_profile_passenger_feedback_count">Passenger feedback received:</string>
+    <string name="label_profile_driver_feedback_count">Driver feedback received:</string>
+    <string name="label_fragment_profile_feedback">Feedback</string>
+    <string name="tab_title_published">Published</string>
+    <string name="tab_title_booked">Booked</string>
+    <string name="tab_title_passenger">Passenger</string>
+    <string name="tab_title_driver">Driver</string>
 </resources>

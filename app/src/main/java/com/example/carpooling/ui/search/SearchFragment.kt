@@ -13,6 +13,7 @@ import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentSearchBinding
 import com.example.carpooling.utils.SessionManager
 import com.example.carpooling.utils.convertDate
+import com.example.carpooling.utils.getString
 import com.example.carpooling.viewmodels.UserViewModel
 import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
@@ -96,13 +97,11 @@ class SearchFragment : Fragment() {
         }
 
         searchViewModel.from.observe(viewLifecycleOwner) { from ->
-            val string = "${from.thoroughfare} ${from.subThoroughfare}, ${from.locality}"
-            binding.fieldFrom.text = string
+            binding.fieldFrom.text = from.getString()
         }
 
         searchViewModel.to.observe(viewLifecycleOwner) { to ->
-            val string = "${to.thoroughfare} ${to.subThoroughfare}, ${to.locality}"
-            binding.fieldTo.text = string
+            binding.fieldTo.text = to.getString()
         }
 
         binding.fieldDate.setOnClickListener {

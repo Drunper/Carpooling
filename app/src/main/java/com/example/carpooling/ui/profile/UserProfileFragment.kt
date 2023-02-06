@@ -50,10 +50,18 @@ class UserProfileFragment : Fragment() {
             passengerRating.observe(viewLifecycleOwner) { rating ->
                 binding.profileBaseInfo.profilePassengerRating.rating = rating
             }
-        }
 
-        userViewModel.getDriverRating(userViewModel.user.value!!.id)
-        userViewModel.getPassengerRating(userViewModel.user.value!!.id)
+            getUserStats(user.value!!.id).observe(viewLifecycleOwner) { userStats ->
+                binding.profileBaseInfo.apply {
+                    profileDriverRating.rating = userStats.driverRating
+                    profilePassengerRating.rating = userStats.passengerRating
+                    fieldProfileDriverRideCount.text = userStats.driverRideCount.toString()
+                    fieldProfilePassengerRideCount.text = userStats.passengerRideCount.toString()
+                    fieldProfileDriverFeedbackCount.text = userStats.driverFeedbackCount.toString()
+                    fieldProfilePassengerFeedbackCount.text = userStats.passengerFeedbackCount.toString()
+                }
+            }
+        }
 
         val picReference = userViewModel.getProfilePicReference()
         val imageView = binding.profileBaseInfo.imageProfilePic
@@ -62,6 +70,16 @@ class UserProfileFragment : Fragment() {
             .load("http://10.0.2.2:8080/carpooling_images/$picReference")
             .error(R.drawable.ic_user)
             .into(imageView)
+
+        binding.btnReceivedFeedback.setOnClickListener {
+            val action = UserProfileFragmentDirections.toUserFeedback(userViewModel.user.value!!.id, reviewer = false)
+            navController.navigate(action)
+        }
+
+        binding.btnSentFeedback.setOnClickListener {
+            val action = UserProfileFragmentDirections.toUserFeedback(userViewModel.user.value!!.id, reviewer = true)
+            navController.navigate(action)
+        }
 
         binding.btnModifyProfile.setOnClickListener {
             val action = UserProfileFragmentDirections.modifyProfile()

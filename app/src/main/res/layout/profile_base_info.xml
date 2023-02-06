@@ -92,16 +92,15 @@
             android:id="@+id/profile_driver_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="-3dp"
             android:isIndicator="true"
             android:numStars="5"
             android:scaleX=".6"
             android:scaleY=".6"
             android:theme="@style/RatingBar"
-            android:transformPivotX="0dp"
+            android:transformPivotX="230dp"
             android:transformPivotY="0dp"
-            app:layout_constraintStart_toEndOf="@id/barrier8"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintTop_toTopOf="@id/label_profile_driver_rating" />
 
         <TextView
@@ -118,17 +117,101 @@
             android:id="@+id/profile_passenger_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="-3dp"
             android:isIndicator="true"
             android:numStars="5"
             android:scaleX=".6"
             android:scaleY=".6"
             android:theme="@style/RatingBar"
-            android:transformPivotX="0dp"
+            android:transformPivotX="230dp"
             android:transformPivotY="0dp"
-            app:layout_constraintStart_toEndOf="@id/barrier8"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintTop_toTopOf="@id/label_profile_passenger_rating" />
+
+        <TextView
+            android:id="@+id/label_profile_driver_ride_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_profile_driver_ride_count"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/label_profile_passenger_rating" />
+
+        <TextView
+            android:id="@+id/field_profile_driver_ride_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            android:text="9"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/label_profile_passenger_rating" />
+
+        <TextView
+            android:id="@+id/label_profile_passenger_ride_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_profile_passenger_ride_count"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/label_profile_driver_ride_count" />
+
+        <TextView
+            android:id="@+id/field_profile_passenger_ride_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            android:text="9"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/label_profile_driver_ride_count" />
+
+        <TextView
+            android:id="@+id/label_profile_driver_feedback_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_profile_driver_feedback_count"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/label_profile_passenger_ride_count" />
+
+        <TextView
+            android:id="@+id/field_profile_driver_feedback_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            android:text="9"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/label_profile_passenger_ride_count" />
+
+        <TextView
+            android:id="@+id/label_profile_passenger_feedback_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_profile_passenger_feedback_count"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/label_profile_driver_feedback_count" />
+
+        <TextView
+            android:id="@+id/field_profile_passenger_feedback_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            android:text="9"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/label_profile_driver_feedback_count" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_left"
@@ -171,5 +254,13 @@
             android:layout_height="wrap_content"
             app:barrierDirection="right"
             app:constraint_referenced_ids="label_profile_driver_rating,label_profile_passenger_rating" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="right"
+            app:constraint_referenced_ids="label_profile_passenger_ride_count, label_profile_driver_ride_count, label_profile_passenger_feedback_count, label_profile_driver_feedback_count" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

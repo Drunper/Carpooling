@@ -10,8 +10,8 @@
     <string name="label_fragment_myrides">Viaggi</string>
 
     <!-- Title strings -->
-    <string name="title_received_feedbacks">Recensioni ricevute</string>
-    <string name="title_sent_feedbacks">Recensioni inviate</string>
+    <string name="title_received_feedback">Recensioni ricevute</string>
+    <string name="title_sent_feedback">Recensioni inviate</string>
     <string name="title_publish_start">Da dove parti e dove arrivi?</string>
     <string name="title_publish_date">Inserisci la data di partenza</string>
     <string name="title_publish_time">Qual è l\'ora di partenza e di arrivo? </string>
@@ -90,8 +90,8 @@
     <string name="btn_book">Prenota</string>
     <string name="btn_add_feedback">Aggiungi recensione</string>
     <string name="btn_send_feedback">Invia</string>
-    <string name="btn_received_feedbacks">Recensioni ricevute</string>
-    <string name="btn_my_feedbacks">Recensioni inviate</string>
+    <string name="btn_received_feedback">Recensioni ricevute</string>
+    <string name="btn_my_feedback">Recensioni inviate</string>
     <string name="btn_modify">Modifica</string>
     <string name="btn_modify_profile">Modifica</string>
     <string name="btn_start_login">Accedi</string>
@@ -158,4 +158,13 @@
     <string name="settings_currency_title">Valuta</string>
     <string name="settings_title_currency_category">Opzioni per la valuta</string>
     <string name="format_field_available_seats">Posti disponibili: %1$d</string>
+    <string name="label_profile_passenger_ride_count">Viaggi come passeggero:</string>
+    <string name="label_profile_driver_ride_count">Viaggio come autista:</string>
+    <string name="label_profile_passenger_feedback_count">Recensioni passeggero ricevute:</string>
+    <string name="label_profile_driver_feedback_count">Recensioni autista ricevute:</string>
+    <string name="label_fragment_profile_feedback">Recensioni</string>
+    <string name="tab_title_published">Pubblicati</string>
+    <string name="tab_title_booked">Prenotati</string>
+    <string name="tab_title_passenger">Passeggero</string>
+    <string name="tab_title_driver">Autista</string>
 </resources>

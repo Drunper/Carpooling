@@ -11,13 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.carpooling.MainNavGraphDirections
 import com.example.carpooling.R
-import com.example.carpooling.databinding.FragmentSentFeedbacksBinding
+import com.example.carpooling.databinding.FragmentSentFeedbackBinding
 import com.example.carpooling.viewmodels.MyRidesViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
 class SentFeedbacksFragment : Fragment() {
 
-    private lateinit var binding: FragmentSentFeedbacksBinding
+    private lateinit var binding: FragmentSentFeedbackBinding
     private val args: SentFeedbacksFragmentArgs by navArgs()
     private val myRidesViewModel: MyRidesViewModel by activityViewModels {
         ViewModelFactory()
@@ -28,7 +28,7 @@ class SentFeedbacksFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sent_feedbacks, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sent_feedback, container, false)
         return binding.root
     }
 
@@ -42,7 +42,7 @@ class SentFeedbacksFragment : Fragment() {
                 navController.navigate(action)
             })
 
-        binding.recyclerviewSentFeedbacks.adapter = adapter
+        binding.recyclerviewSentFeedback.adapter = adapter
 
         binding.btnAddFeedback.setOnClickListener {
             val action = SentFeedbacksFragmentDirections.toWriteFeedback(args.rideId)

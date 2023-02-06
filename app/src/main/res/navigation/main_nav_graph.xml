@@ -94,6 +94,9 @@
         <action
             android:id="@+id/modifyProfile"
             app:destination="@id/modifyProfileFragment" />
+        <action
+            android:id="@+id/to_user_feedback"
+            app:destination="@id/profileFeedbackFragment" />
     </fragment>
     <fragment
         android:id="@+id/startFragment"
@@ -196,7 +199,7 @@
         android:id="@+id/receivedFeedbacksFragment"
         android:name="com.example.carpooling.ui.history.ReceivedFeedbacksFragment"
         android:label=""
-        tools:layout="@layout/fragment_received_feedbacks">
+        tools:layout="@layout/fragment_received_feedback">
         <argument
             android:name="rideId"
             android:defaultValue="-1"
@@ -250,6 +253,9 @@
             android:name="user_id"
             android:defaultValue="-1"
             app:argType="integer" />
+        <action
+            android:id="@+id/to_feedback"
+            app:destination="@id/profileFeedbackFragment" />
     </fragment>
     <dialog
         android:id="@+id/bookRideDialog"
@@ -264,4 +270,18 @@
         android:id="@+id/submitFeedbackDialog"
         android:name="com.example.carpooling.ui.history.SubmitFeedbackDialogFragment"
         android:label="Invia" />
+    <fragment
+        android:id="@+id/profileFeedbackFragment"
+        android:name="com.example.carpooling.ui.profile.ProfileFeedbackFragment"
+        android:label="fragment_profile_feedback"
+        tools:layout="@layout/fragment_profile_feedback" >
+        <argument
+            android:name="user_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="reviewer"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
 </navigation>
