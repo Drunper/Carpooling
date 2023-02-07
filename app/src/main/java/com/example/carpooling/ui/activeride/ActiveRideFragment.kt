@@ -115,7 +115,7 @@ class ActiveRideFragment : Fragment() {
             }
 
             searchViewModel.bookRideResult.observe(viewLifecycleOwner) { success ->
-                if (success) {
+                if (success == true) {
                     binding.root.showSnackbar(
                         requireView(),
                         getString(R.string.snackbar_booking_success),

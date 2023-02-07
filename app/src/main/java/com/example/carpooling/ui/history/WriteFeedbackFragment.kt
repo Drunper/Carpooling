@@ -81,7 +81,7 @@ class WriteFeedbackFragment : Fragment() {
         }
 
         myRidesViewModel.sendFeedbackResult.observe(viewLifecycleOwner) { success ->
-            if (success) {
+            if (success == true) {
                 binding.root.showSnackbar(
                     requireView(),
                     getString(R.string.snackbar_send_feedback_success),

@@ -134,7 +134,7 @@ class DriverActiveRideFragment : Fragment() {
             }
 
             myRidesViewModel.deleteRideResult.observe(viewLifecycleOwner) { success ->
-                if (success) {
+                if (success == true) {
                     binding.root.showSnackbar(
                         requireView(),
                         getString(R.string.snackbar_cancel_ride_success),
