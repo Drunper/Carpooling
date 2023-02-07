@@ -19,8 +19,8 @@ class SearchViewModel(private val restRepository: RestRepository) : ViewModel() 
     private val _searchQuery = MutableLiveData<ActiveRidesRequest>()
     val searchQuery: LiveData<ActiveRidesRequest> = _searchQuery
 
-    private val _bookRideResult = MutableLiveData<Boolean>()
-    val bookRideResult: LiveData<Boolean> = _bookRideResult
+    private val _bookRideResult = MutableLiveData<Boolean?>()
+    val bookRideResult: LiveData<Boolean?> = _bookRideResult
 
     private var job: Job? = null
 
@@ -105,6 +105,6 @@ class SearchViewModel(private val restRepository: RestRepository) : ViewModel() 
     }
 
     fun resetBookRideResult() {
-        _bookRideResult.value = false
+        _bookRideResult.value = null
     }
 }

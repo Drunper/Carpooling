@@ -122,7 +122,7 @@ class PassengerActiveRideFragment : Fragment() {
             }
 
             myRidesViewModel.cancelBookingResult.observe(viewLifecycleOwner) { success ->
-                if (success) {
+                if (success == true) {
                     binding.root.showSnackbar(
                         requireView(),
                         getString(R.string.snackbar_cancel_booking_success),
@@ -130,6 +130,13 @@ class PassengerActiveRideFragment : Fragment() {
                         null
                     ) {}
                     navController.popBackStack()
+                } else if (success == false) {
+                    binding.root.showSnackbar(
+                        requireView(),
+                        getString(R.string.snackbar_processing_request_error),
+                        Snackbar.LENGTH_LONG,
+                        null
+                    ) {}
                 }
             }
 

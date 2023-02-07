@@ -142,6 +142,13 @@ class DriverActiveRideFragment : Fragment() {
                         null
                     ) {}
                     navController.popBackStack()
+                } else if (success == false) {
+                    binding.root.showSnackbar(
+                        requireView(),
+                        getString(R.string.snackbar_processing_request_error),
+                        Snackbar.LENGTH_LONG,
+                        null
+                    ) {}
                 }
             }
 

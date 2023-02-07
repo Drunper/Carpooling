@@ -55,6 +55,13 @@ class ModifyProfileFragment : Fragment() {
                         null,
                     ) {}
                     navController.popBackStack()
+                } else {
+                    binding.root.showSnackbar(
+                        requireView(),
+                        getString(R.string.snackbar_processing_request_error),
+                        Snackbar.LENGTH_LONG,
+                        null
+                    ) {}
                 }
             }
         }

@@ -14,14 +14,14 @@ import kotlinx.coroutines.*
 
 class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel() {
 
-    private val _deleteRideResult = MutableLiveData<Boolean>()
-    val deleteRideResult: LiveData<Boolean> = _deleteRideResult
+    private val _deleteRideResult = MutableLiveData<Boolean?>()
+    val deleteRideResult: LiveData<Boolean?> = _deleteRideResult
 
-    private val _cancelBookingResult = MutableLiveData<Boolean>()
-    val cancelBookingResult: LiveData<Boolean> = _cancelBookingResult
+    private val _cancelBookingResult = MutableLiveData<Boolean?>()
+    val cancelBookingResult: LiveData<Boolean?> = _cancelBookingResult
 
-    private val _sendFeedbackResult = MutableLiveData<Boolean>()
-    val sendFeedbackResult: LiveData<Boolean> = _sendFeedbackResult
+    private val _sendFeedbackResult = MutableLiveData<Boolean?>()
+    val sendFeedbackResult: LiveData<Boolean?> = _sendFeedbackResult
 
     var feedbackRequest: SendFeedbackRequest? = null
 
@@ -168,14 +168,14 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
     }
 
     fun resetDeleteRideResult() {
-        _deleteRideResult.value = false
+        _deleteRideResult.value = null
     }
 
     fun resetCancelBookingResult() {
-        _cancelBookingResult.value = false
+        _cancelBookingResult.value = null
     }
 
     fun resetSendFeedbackResult() {
-        _sendFeedbackResult.value = false
+        _sendFeedbackResult.value = null
     }
 }

@@ -144,4 +144,5 @@
     <string name="tab_title_passenger">Passenger</string>
     <string name="tab_title_driver">Driver</string>
     <string name="label_search_results_empty">No rides were found for the given query.</string>
+    <string name="snackbar_processing_request_error">Something went wrong, try again later</string>
 </resources>
