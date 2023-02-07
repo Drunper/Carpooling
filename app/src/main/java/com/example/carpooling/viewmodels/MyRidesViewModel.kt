@@ -167,6 +167,7 @@ class MyRidesViewModel(private val restRepository: RestRepository) : ViewModel()
         return users
     }
 
+
     fun resetDeleteRideResult() {
         _deleteRideResult.value = null
     }
