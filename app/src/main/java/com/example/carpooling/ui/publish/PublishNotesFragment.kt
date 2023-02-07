@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPublishNotesBinding
 import com.example.carpooling.viewmodels.PublishViewModel
@@ -16,9 +17,10 @@ import com.example.carpooling.viewmodels.ViewModelFactory
 class PublishNotesFragment : Fragment() {
 
     private lateinit var binding: FragmentPublishNotesBinding
-    private val publishViewModel: PublishViewModel by activityViewModels{
+    private val publishViewModel: PublishViewModel by navGraphViewModels(R.id.publish_nav_graph){
         ViewModelFactory()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -44,6 +44,8 @@ class SentFeedbacksFragment : Fragment() {
 
         binding.recyclerviewSentFeedback.adapter = adapter
 
+        myRidesViewModel.resetSendFeedbackResult()
+
         binding.btnAddFeedback.setOnClickListener {
             val action = SentFeedbacksFragmentDirections.toWriteFeedback(args.rideId)
             navController.navigate(action)

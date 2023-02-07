@@ -62,6 +62,9 @@ class MyRidesFragment : Fragment() {
             })
         }
 
+        myRidesViewModel.resetDeleteRideResult()
+        myRidesViewModel.resetCancelBookingResult()
+
         passengerActiveRidesAdapter = MyPassengerActiveRidesAdapter { rideID ->
             val action = MyRidesFragmentDirections.toPassengerRide(rideID)
             navController.navigate(action)
@@ -78,9 +81,9 @@ class MyRidesFragment : Fragment() {
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             viewPager.setCurrentItem(tab.position, true)
-            if (position == 1)
-                tab.text = getString(R.string.tab_title_booked)
             if (position == 0)
+                tab.text = getString(R.string.tab_title_booked)
+            if (position == 1)
                 tab.text = getString(R.string.tab_title_published)
         }.attach()
 

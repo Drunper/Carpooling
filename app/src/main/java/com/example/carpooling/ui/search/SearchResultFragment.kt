@@ -12,6 +12,7 @@ import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentSearchResultBinding
 import com.example.carpooling.ui.myrides.MyPassengerActiveRidesAdapter
 import com.example.carpooling.utils.Geocoding
+import com.example.carpooling.utils.getString
 import com.example.carpooling.viewmodels.SearchViewModel
 import com.example.carpooling.viewmodels.ViewModelFactory
 
@@ -43,20 +44,30 @@ class SearchResultFragment : Fragment() {
                 navController.navigate(action)
             }
 
-        searchViewModel.searchQuery.value!!.let {
-            val fromLat = it.fromLat
-            val fromLng = it.fromLng
-            val toLat = it.toLat
-            val toLng = it.toLng
+        searchViewModel.resetBookRideResult()
 
-            binding.fieldSearchQueryFrom.text = Geocoding.getAddressFromLatLng(requireContext(), fromLat, fromLng)
-            binding.fieldSearchQueryTo.text = Geocoding.getAddressFromLatLng(requireContext(), toLat, toLng)
+        searchViewModel.searchQuery.value!!.let {
             binding.fieldSearchQueryDatetime.text = getString(R.string.field_search_query_datetime_format, it.date, it.time)
+        }
+
+        searchViewModel.from.observe(viewLifecycleOwner) { from ->
+            binding.fieldSearchQueryFrom.text = from.getString()
+        }
+
+        searchViewModel.to.observe(viewLifecycleOwner) { to ->
+            binding.fieldSearchQueryTo.text = to.getString()
         }
 
         binding.recyclerView.adapter = adapter
         searchViewModel.executeQuery().observe(viewLifecycleOwner) { rides ->
-            adapter.submitList(rides)
+            if (rides.isEmpty()) {
+                binding.labelSearchResultsEmpty.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.GONE
+            } else {
+                binding.labelSearchResultsEmpty.visibility = View.GONE
+                binding.recyclerView.visibility = View.VISIBLE
+                adapter.submitList(rides)
+            }
         }
     }
 }

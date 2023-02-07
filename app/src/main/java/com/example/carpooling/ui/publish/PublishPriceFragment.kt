@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.preference.PreferenceManager
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPublishPriceBinding
@@ -20,9 +21,10 @@ import java.util.*
 class PublishPriceFragment : Fragment() {
 
     private lateinit var binding: FragmentPublishPriceBinding
-    private val publishViewModel: PublishViewModel by activityViewModels {
+    private val publishViewModel: PublishViewModel by navGraphViewModels(R.id.publish_nav_graph){
         ViewModelFactory()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -8,7 +8,6 @@ class ViewModelFactory : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T = when(modelClass) {
         UserViewModel::class.java -> UserViewModel(restRepository = RestRepository())
-        BookingViewModel::class.java -> BookingViewModel(restRepository = RestRepository())
         SearchViewModel::class.java -> SearchViewModel(restRepository = RestRepository())
         PublishViewModel::class.java -> PublishViewModel(restRepository = RestRepository())
         MyRidesViewModel::class.java -> MyRidesViewModel(restRepository = RestRepository())

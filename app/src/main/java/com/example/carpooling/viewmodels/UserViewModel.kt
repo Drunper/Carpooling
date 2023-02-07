@@ -24,13 +24,8 @@ class UserViewModel(private val restRepository: RestRepository) : ViewModel() {
     private val _user = MutableLiveData<User?>()
     val user: LiveData<User?> = _user
 
-    private val _driverRating = MutableLiveData<Float>()
-    val driverRating: LiveData<Float> = _driverRating
-
-    private val _passengerRating = MutableLiveData<Float>()
-    val passengerRating: LiveData<Float> = _passengerRating
-
     private var job: Job? = null
+    var rememberMe: Boolean = false
 
     fun login(email: String, password: String): LiveData<LoginResult> {
         val loginResult = liveData {

@@ -18,7 +18,7 @@ class CancelRideDialogFragment : DialogFragment() {
     private val args: CancelRideDialogFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext())
+        return MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_App_MaterialAlertDialog)
             .setTitle(R.string.dialog_cancel_ride_title)
             .setNegativeButton(resources.getString(R.string.dialog_confirmation_back)) { _, _ ->
             }

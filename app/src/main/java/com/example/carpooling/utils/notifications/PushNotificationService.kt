@@ -37,7 +37,7 @@ class PushNotificationService : FirebaseMessagingService() {
             if (message.data.isNotEmpty()) {
                 when (message.data["channel"]) {
                     Channel.NEW_BOOKING.channelName -> {
-                        val rideId = message.data["ride_id"]!!.toLong()
+                        val rideId = message.data["ride_id"]!!.toInt()
                         NotificationHandler.sendNotification(
                             applicationContext,
                             Channel.NEW_BOOKING,
@@ -45,7 +45,7 @@ class PushNotificationService : FirebaseMessagingService() {
                         )
                     }
                     Channel.NEW_CANCEL.channelName -> {
-                        val rideId = message.data["ride_id"]!!.toLong()
+                        val rideId = message.data["ride_id"]!!.toInt()
                         NotificationHandler.sendNotification(
                             applicationContext,
                             Channel.NEW_CANCEL,

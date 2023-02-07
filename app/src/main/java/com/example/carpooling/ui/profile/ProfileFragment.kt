@@ -40,6 +40,7 @@ class ProfileFragment : Fragment() {
                 binding.profileBaseInfo.apply {
                     fieldProfileUsername.text = profileUser.username
                     fieldProfileEmail.text = profileUser.email
+                    fieldProfileBio.text = profileUser.bio
                 }
 
                 val imageView = binding.profileBaseInfo.imageProfilePic
@@ -50,7 +51,7 @@ class ProfileFragment : Fragment() {
                     .into(imageView)
             }
 
-            getUserStats(user.value!!.id).observe(viewLifecycleOwner) { userStats ->
+            getUserStats(args.userId).observe(viewLifecycleOwner) { userStats ->
                 binding.profileBaseInfo.apply {
                     profileDriverRating.rating = userStats.driverRating
                     profilePassengerRating.rating = userStats.passengerRating
@@ -63,7 +64,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnFeedback.setOnClickListener {
-            val action = ProfileFragmentDirections.toFeedback(userViewModel.user.value!!.id, reviewer = false)
+            val action = ProfileFragmentDirections.toFeedback(args.userId, reviewer = false)
             navController.navigate(action)
         }
     }

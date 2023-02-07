@@ -62,6 +62,16 @@ class SearchFragment : Fragment() {
             if (userViewModel.user.value == null) {
                 val action = SearchFragmentDirections.notLogged()
                 navController.navigate(action)
+            } else {
+                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        return@OnCompleteListener
+                    }
+
+                    // Get new FCM registration token
+                    val token = task.result
+                    userViewModel.sendPushToken(token)
+                })
             }
         } else {
             userViewModel.initUser(authToken)
@@ -75,8 +85,6 @@ class SearchFragment : Fragment() {
                 userViewModel.sendPushToken(token)
             })
         }
-
-        binding.scrollview
 
         binding.fieldPrice.setLabelFormatter { value: Float ->
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())

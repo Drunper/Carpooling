@@ -40,15 +40,8 @@ class UserProfileFragment : Fragment() {
                 binding.profileBaseInfo.apply {
                     fieldProfileUsername.text = profileUser!!.username
                     fieldProfileEmail.text = profileUser.email
+                    fieldProfileBio.text = profileUser.bio
                 }
-            }
-
-            driverRating.observe(viewLifecycleOwner) { rating ->
-                binding.profileBaseInfo.profileDriverRating.rating = rating
-            }
-
-            passengerRating.observe(viewLifecycleOwner) { rating ->
-                binding.profileBaseInfo.profilePassengerRating.rating = rating
             }
 
             getUserStats(user.value!!.id).observe(viewLifecycleOwner) { userStats ->

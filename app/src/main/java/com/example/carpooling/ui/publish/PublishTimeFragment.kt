@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentPublishTimeBinding
 import com.example.carpooling.viewmodels.PublishViewModel
@@ -19,7 +20,7 @@ import java.time.format.DateTimeFormatter
 
 class PublishTimeFragment : Fragment() {
     private lateinit var binding: FragmentPublishTimeBinding
-    private val publishViewModel: PublishViewModel by activityViewModels{
+    private val publishViewModel: PublishViewModel by navGraphViewModels(R.id.publish_nav_graph){
         ViewModelFactory()
     }
 

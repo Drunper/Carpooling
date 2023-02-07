@@ -273,7 +273,7 @@
     <fragment
         android:id="@+id/profileFeedbackFragment"
         android:name="com.example.carpooling.ui.profile.ProfileFeedbackFragment"
-        android:label="fragment_profile_feedback"
+        android:label="@string/label_fragment_profile_feedback"
         tools:layout="@layout/fragment_profile_feedback" >
         <argument
             android:name="user_id"

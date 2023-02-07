@@ -103,4 +103,8 @@ class SearchViewModel(private val restRepository: RestRepository) : ViewModel() 
     fun setTo(location: Address) {
         _to.value = location
     }
+
+    fun resetBookRideResult() {
+        _bookRideResult.value = false
+    }
 }

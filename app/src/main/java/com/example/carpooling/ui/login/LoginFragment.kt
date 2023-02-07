@@ -108,6 +108,7 @@ class LoginFragment : Fragment() {
                 showLoginFailed(R.string.error_login_failed)
             } else {
                 val sessionManager = SessionManager(requireContext())
+                userViewModel.rememberMe = rememberMe
                 if (rememberMe) {
                     sessionManager.saveAuthToken(result.token)
                 } else {

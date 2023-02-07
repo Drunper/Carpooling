@@ -63,7 +63,6 @@ class DriverActiveRideFragment : Fragment() {
             userViewModel.initUser(authToken)
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    Log.w("heya", "Fetching FCM registration token failed", task.exception)
                     return@OnCompleteListener
                 }
 
@@ -71,7 +70,6 @@ class DriverActiveRideFragment : Fragment() {
                 val token = task.result
                 userViewModel.sendPushToken(token)
 
-                Log.d("heyaToken", token)
             })
         }
 

@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.navGraphViewModels
 import com.example.carpooling.R
 import com.example.carpooling.databinding.FragmentLocationBinding
 import com.example.carpooling.ui.search.LocationFragmentArgs
@@ -47,9 +48,10 @@ class PublishLocationFragment  : Fragment() {
     private var currentLocation: Location? = null
     private var currentLocationString: String? = null
 
-    private val publishViewModel: PublishViewModel by activityViewModels {
+    private val publishViewModel: PublishViewModel by navGraphViewModels(R.id.publish_nav_graph){
         ViewModelFactory()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

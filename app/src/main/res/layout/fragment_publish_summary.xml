@@ -112,7 +112,7 @@
                         android:layout_marginTop="8dp"
                         android:text="@string/arrival_time"
                         android:textSize="16sp"
-                        app:layout_constraintStart_toEndOf="@id/guideline_vertical_55"
+                        app:layout_constraintStart_toEndOf="@id/guideline_vertical_75"
                         app:layout_constraintTop_toBottomOf="@+id/field_ride_to" />
 
                     <TextView
@@ -122,7 +122,7 @@
                         android:textSize="24sp"
                         android:text="@{viewModel.arrivalTime}"
                         app:layout_constraintEnd_toEndOf="@id/guideline_basic_right"
-                        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_55"
+                        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_75"
                         app:layout_constraintTop_toBottomOf="@id/label_ride_arrival_time" />
 
                     <TextView
@@ -184,14 +184,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.65" />
+                        app:layout_constraintGuide_percent="0.55" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline_vertical_75"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.75" />
+                        app:layout_constraintGuide_percent="0.65" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline_basic_top"
@@ -256,7 +256,8 @@
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="@id/guideline_active_left"
-                        app:layout_constraintTop_toBottomOf="@id/field_available_seats" />
+                        app:layout_constraintTop_toBottomOf="@id/field_available_seats"
+                        app:tint="?attr/colorOnBackground"/>
 
                     <ImageView
                         android:id="@+id/image_active_ride_luggage"
@@ -267,7 +268,8 @@
                         app:layout_constraintEnd_toStartOf="@+id/image_active_ride_silent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/image_active_ride_smoking"
-                        app:layout_constraintTop_toBottomOf="@id/field_available_seats" />
+                        app:layout_constraintTop_toBottomOf="@id/field_available_seats"
+                        app:tint="?attr/colorOnBackground"/>
 
                     <ImageView
                         android:id="@+id/image_active_ride_silent"
@@ -278,7 +280,8 @@
                         app:layout_constraintEnd_toEndOf="@id/guideline_active_right"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/image_active_ride_luggage"
-                        app:layout_constraintTop_toBottomOf="@id/field_available_seats" />
+                        app:layout_constraintTop_toBottomOf="@id/field_available_seats"
+                        app:tint="?attr/colorOnBackground" />
 
                     <TextView
                         android:id="@+id/label_active_rides_notes"

@@ -35,7 +35,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/field_available_seats" />
+                app:layout_constraintTop_toBottomOf="@id/field_available_seats"
+                app:tint="?attr/colorOnBackground" />
 
             <ImageView
                 android:id="@+id/image_active_ride_luggage"
@@ -46,7 +47,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/image_active_ride_silent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/image_active_ride_smoking"
-                app:layout_constraintTop_toBottomOf="@id/field_available_seats" />
+                app:layout_constraintTop_toBottomOf="@id/field_available_seats"
+                app:tint="?attr/colorOnBackground" />
 
             <ImageView
                 android:id="@+id/image_active_ride_silent"
@@ -57,7 +59,8 @@
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/image_active_ride_luggage"
-                app:layout_constraintTop_toBottomOf="@id/field_available_seats" />
+                app:layout_constraintTop_toBottomOf="@id/field_available_seats"
+                app:tint="?attr/colorOnBackground" />
 
             <TextView
                 android:id="@+id/label_active_rides_notes"

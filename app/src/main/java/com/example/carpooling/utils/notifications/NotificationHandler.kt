@@ -18,7 +18,7 @@ enum class Channel(val channelName: String) {
 }
 
 object NotificationHandler {
-    fun sendNotification(context: Context, channel: Channel, rideId: Long?) {
+    fun sendNotification(context: Context, channel: Channel, rideId: Int?) {
         val destination = when (channel) {
             Channel.DELETE_RIDE -> R.id.myRidesFragment
             else -> R.id.driverRideFragment
@@ -30,7 +30,7 @@ object NotificationHandler {
 
         if (rideId != null && (channel == Channel.NEW_BOOKING || channel == Channel.NEW_CANCEL)) {
             val args = Bundle()
-            args.putLong("rideId", rideId)
+            args.putInt("rideId", rideId)
             deepLinkBuilder = deepLinkBuilder.setArguments(args)
         }
 

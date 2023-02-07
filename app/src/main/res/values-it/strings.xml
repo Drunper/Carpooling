@@ -159,7 +159,7 @@
     <string name="settings_title_currency_category">Opzioni per la valuta</string>
     <string name="format_field_available_seats">Posti disponibili: %1$d</string>
     <string name="label_profile_passenger_ride_count">Viaggi come passeggero:</string>
-    <string name="label_profile_driver_ride_count">Viaggio come autista:</string>
+    <string name="label_profile_driver_ride_count">Viaggi come autista:</string>
     <string name="label_profile_passenger_feedback_count">Recensioni passeggero ricevute:</string>
     <string name="label_profile_driver_feedback_count">Recensioni autista ricevute:</string>
     <string name="label_fragment_profile_feedback">Recensioni</string>
@@ -167,4 +167,5 @@
     <string name="tab_title_booked">Prenotati</string>
     <string name="tab_title_passenger">Passeggero</string>
     <string name="tab_title_driver">Autista</string>
+    <string name="label_search_results_empty">Non è stato trovato nessun viaggio che soddisfi i criteri specificati.</string>
 </resources>
